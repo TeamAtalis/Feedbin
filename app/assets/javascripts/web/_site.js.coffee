@@ -239,16 +239,22 @@ $.extend feedbin,
       localStorage.setItem(feedbin.data.visibility_key, JSON.stringify(values))
       values
     else
+      console.log(JSON.parse(localStorage.getItem(feedbin.data.visibility_key)))
       JSON.parse(localStorage.getItem(feedbin.data.visibility_key)) || {}
 
   setTagVisibility: ->
     visibility = feedbin.tagVisibility()
     if Object.keys(visibility).length == 0
       visibility = feedbin.tagVisibility(feedbin.data.tag_visibility)
+
     for id, open of visibility
-      tag = $(".feeds [data-tag-id=#{id}]")
-      if open
-        tag.addClass('open')
+      console.warn(id)
+      tag = $(".feeds [data-tag-id='#{id}']")
+      if tag.length > 0
+        if open
+          tag.addClass('open')
+        else
+          tag.removeClass('open')
 
   reselect: ->
     if feedbin.selectedSource && feedbin.selectedTag

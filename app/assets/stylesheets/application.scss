@@ -19,14 +19,24 @@ $audio-player-height-minimized: 54px;
 $base-button-position: 10px;
 
 /*-- Colors --*/
+// $theme-color-base: white;
+// $theme-color-100: #f5f5f7;
+// $theme-color-200: #e9e9eb;
+// $theme-color-300: #b2c9d9; // blue
+// $theme-color-400: #8eb7d3; // blue
+// $theme-color-500: #6ea5cd; // blue
+// $theme-color-600: #3b82b9; // blue
+// $theme-color-700: #0f5ea5; // blue
+
 $theme-color-base: white;
 $theme-color-100: #f5f5f7;
 $theme-color-200: #e9e9eb;
-$theme-color-300: #b2c9d9; // blue
-$theme-color-400: #8eb7d3; // blue
-$theme-color-500: #6ea5cd; // blue
-$theme-color-600: #3b82b9; // blue
-$theme-color-700: #0f5ea5; // blue
+$theme-color-300: #9db9cc; // Blue, slightly darker
+$theme-color-400: #789cab; // Blue, slightly darker
+$theme-color-500: #57758a; // Blue, slightly darker
+$theme-color-600: #1f5277; // Blue, slightly darker
+$theme-color-700: #114069; // Blue, slightly darker
+
 
 $theme-color-sunset-base: #1d2738;
 $theme-color-sunset-100: #35405e;
@@ -568,6 +578,49 @@ table {
 /*------------------------------------------------------------------------------
 Structure
 ------------------------------------------------------------------------------*/
+.profile-list{
+  margin-right: 8px;
+  margin-left: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  .profile-item {
+    @include color($theme-color-base);
+    @include background-color($color-selected);  
+    @include font-size(12);
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: min-content;
+    height: min-content;
+    white-space: nowrap;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      @include background-color($color-selected-hover);
+    }
+    
+    .add-icon{
+      font-weight: bolder;
+      @include font-size(14);
+    }
+  }
+}
+
+.no-content-message {
+  @include font-size(14);
+  @include color($color-contrast-500);
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
 .container {
   margin-right: auto;
   margin-left: auto;
@@ -1266,20 +1319,14 @@ $hamburger-dot: 4px;
           position: relative;
           left: -3px;
         }
-        &.open {
+        &[open]{
           .drawer {
             height: auto;
             opacity: 1;
-          }
-          .icon-caret {
-            transform: rotate(0deg);
-          }
-        }
-        &.animate {
-          .drawer {
             transition: opacity 0.3s linear;
           }
           .icon-caret {
+            transform: rotate(0deg);
             transition: transform 0.15s linear;
           }
         }
@@ -1288,6 +1335,28 @@ $hamburger-dot: 4px;
         .drawer {
           height: 0;
           opacity: 0;
+        }
+        .icon-arrow {
+          @include fill($color-contrast-500);
+          transform: rotate(180deg);
+          position: relative;
+          left: -3px;
+        }&.open {
+          .drawer {
+            height: auto;
+            opacity: 1;
+          }
+          .icon-arrow {
+            transform: rotate(270deg);
+          }
+        }
+        &.animate {
+          .drawer {
+            transition: opacity 0.3s linear;
+          }
+          .icon-arrow {
+            transition: transform 0.15s linear;
+          }
         }
         .icon-caret {
           @include fill($color-contrast-500);
@@ -1317,24 +1386,6 @@ $hamburger-dot: 4px;
         padding: 0;
         margin: 0;
         .feed-action-expand {
-          padding: 0;
-          position: absolute;
-          top: 0;
-          left: 0;
-          bottom: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          appearance: none;
-          background: none;
-          border: none;
-          margin: 0;
-        }
-      }
-      .profile-visibility-control {
-        padding: 0;
-        margin: 0;
-        .tag-action-expand {
           padding: 0;
           position: absolute;
           top: 0;
@@ -1468,6 +1519,9 @@ $hamburger-dot: 4px;
         margin-right: 6px;
         flex-shrink: 0;
       }
+      .profile-label-color{
+        @include color($theme-color-base);
+      }
       .collection-label-wrap {
         min-width: 0;
         flex: 1 1 auto;
@@ -1514,6 +1568,8 @@ $hamburger-dot: 4px;
 
   $outer-padding: 8px;
   $inner-padding: 8px;
+  $tag-left-margin: 8px;
+  $tag-bottom-margin: 8px;
   $favicon-width: 26px; /* width + margin */
   $favicon-padding: 2px;
 
@@ -1523,6 +1579,47 @@ $hamburger-dot: 4px;
     &.selected .link-inner {
       color: white !important;
     }
+  }
+  .profile {
+    .profile-link {
+      cursor: pointer;
+      transition: max-height 0.3s ease;
+      .link-inner {
+        @include background-color($color-selected);  
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        min-height: 32px;
+        height: min-content;
+        width: 100%;
+        border-radius: 5px;
+        padding-left: 0 !important;
+      }
+    }
+  }
+    // Transición para el dropdown
+  details.profile[open] {
+    transition: height 0.3s ease;
+  }
+
+  // Estilo para el contenido del dropdown
+  details.profile > div {
+    overflow: hidden;
+  }
+
+  // Transición de desvanecimiento
+  details.profile:not([open]) > div {
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .tag-link {
+    margin-bottom: $tag-bottom-margin !important;
+  }
+
+  .tag-link-padding {
+    margin-left: $tag-left-margin;
   }
   .source-section {
     padding-left: $outer-padding + $inner-padding + $favicon-padding;
