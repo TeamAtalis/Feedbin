@@ -38,4 +38,3 @@ namespace :feeds do
       end
     end
   end
-end
