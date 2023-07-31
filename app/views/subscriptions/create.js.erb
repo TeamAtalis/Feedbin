@@ -10,5 +10,8 @@ feedbin.hideSubscribe();
 
 var feed = $('[data-feed-id=<%= @click_feed %>] a')
 feedbin.reveal(feed);
+<%# $('.modal-purpose-subscribe').modal('hide') %>
+setTimeout(()  => {
+    window.location.reload()
+}, 2000);
 
-$('.modal-purpose-subscribe').modal('hide')
