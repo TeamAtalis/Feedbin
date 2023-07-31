@@ -1594,25 +1594,24 @@ $hamburger-dot: 4px;
         width: 100%;
         border-radius: 5px;
         padding-left: 0 !important;
+        .count-wrap {
+          margin-left: auto;
+        }
+        .tag-visibility-control {
+          .icon-caret {
+            fill: $theme-color-base !important;
+            transform: rotate(-90deg);
+            transition: all 0.3s ease;
+          }
+        }
       }
     }
-  }
-    // Transición para el dropdown
-  details.profile[open] {
-    transition: height 0.3s ease;
-  }
-
-  // Estilo para el contenido del dropdown
-  details.profile > div {
-    overflow: hidden;
+  } 
+  
+  .profile-open {
+    transform: rotate(0deg) !important;
   }
 
-  // Transición de desvanecimiento
-  details.profile:not([open]) > div {
-    height: 0;
-    opacity: 0;
-    visibility: hidden;
-  }
 
   .tag-link {
     margin-bottom: $tag-bottom-margin !important;

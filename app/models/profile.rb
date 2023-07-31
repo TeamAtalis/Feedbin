@@ -17,28 +17,25 @@ class Profile < ApplicationRecord
     #
     def assign_profile_to_user(user_id)
         if RUsersProfile.new(user_id: user_id, profile_id: self.id).save
-            #byebug
             self.tags.each do |tag|
-                tag.assign_new_feeds(user_id)
+                tag.assign_new_feeds(user_id, tag.id)
                 Entry.mark_unread_entries_from_tag(tag.id, user_id)
             end
         else
             "Profile already assigned to user"
         end
-            
-        
     end
 
     # Desc: This method is used to assign a profile to users.
     #       First, try to find out if the user has the profile.
     #           -If the user has the profile, it will do nothing.
-    #           -If the relationship between user and profile 
+    #           -If the relationship between user and profile
     #            is not found, then do insert
     #
     # input parameters: 
     #       @params[:tag_id] [int]: id of Tag
     #
-    def assign_tag_to_profile(tag_id)
-        RProfilesTag.new(profile_id: self.id, tag_id: tag_id).save ? "Tag assigned to profile" : "Tag already assigned to profile"
-    end
+    # def assign_profile_to_user(tag_id)
+    #     RProfilesTag.new(profile_id: self.id, tag_id: tag_id).save ? "Tag assigned to profile" : "Tag already assigned to profile"
+    # end
 end

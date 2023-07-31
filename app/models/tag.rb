@@ -32,12 +32,11 @@ class Tag < ApplicationRecord
     )
   end
 
-  def assign_new_feeds(user_id)
+  def assign_new_feeds(user_id, tag_id)
     # Insert operations
     self.feeds.pluck(:id).each do |feed_id|
       Subscription.new(user_id: user_id, feed_id: feed_id).save # Subcribe to all new feeds
-      Tagging.new(feed_id: feed_id, user_id: user_id, tag_id: tag_id).save # Insert new feed to the folder
-    end
+      Tagging.new(feed_id: feed_id, user_id: user_id, tag_id: tag_id).save
+    end  
   end
-
 end
