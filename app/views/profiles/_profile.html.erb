@@ -14,7 +14,7 @@
                 </span>
             </span>
         </summary>
-        <div class="drawer feed-drawer">
+        <div class="drawer-profile feed-drawer">
             <ul>
                 <%= render partial: "tags/tag", collection: profile.tags %>
             </ul>
@@ -23,22 +23,25 @@
 <% end %>
 
 <script>
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     const profiles = document.querySelectorAll('.profile')
+    document.addEventListener('DOMContentLoaded', () => {
+        const profiles = document.querySelectorAll('.profile')
 
-    //     profiles.forEach(profile => {
-    //         profile.addEventListener('click', function(event) {
-    //             event.stopPropagation(); // Evita la propagación del evento
+        profiles.forEach(profile => {
+
+            profile.addEventListener('toggle', (e) => {
+                e.preventDefault()
                 
-    //             const iconCaret = profile.querySelector('.icon-caret')
+                const iconCaret = profile.querySelector('.icon-caret')
+                const drawer = profile.querySelector('.drawer-profile') || profile.querySelector('.drawer-open')
                 
-                
-    //             if(!iconCaret.classList.contains('profile-open')) {
-    //                 iconCaret.classList.add('profile-open')
-    //             } else {
-    //                 iconCaret.classList.remove('profile-open')
-    //             }
-    //         });
-    //     });
-    // })
+                if (profile.open) {
+                    iconCaret.classList.add('profile-open')
+                    drawer.classList.replace('drawer-profile','drawer-open')
+                } else {
+                    iconCaret.classList.remove('profile-open')
+                    drawer.classList.replace('drawer-open', 'drawer-profile')
+                }
+            });
+        });
+    })
 </script>
