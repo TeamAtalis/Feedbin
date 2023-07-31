@@ -32,13 +32,6 @@
     <%= render partial: "profiles/profile", collection: profiles  %>
 <% end %>
 
-<% if tags.present? %>
-    <li class="source-section section-tags">
-        Tags
-    </li>
-    <%= render partial: "tags/tag", collection: tags  %>
-<% end %>
-
 <% if profile_list.present? %>
     <li class="source-section">
         Suggested profiles
@@ -48,9 +41,3 @@
     </section>
 <% end %>
 
-<% if feeds.present? %>
-    <li class="source-section section-feeds">
-        Feeds
-    </li>
-    <%= render partial: "feeds/feed", collection: feeds, cached: -> (feed) { [feed, feed.favicon, "v2"] } %>
-<% end %>

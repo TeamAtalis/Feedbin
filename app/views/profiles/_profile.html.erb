@@ -4,7 +4,7 @@
             <span class="link-inner">
                 <div style="height: 20px; width: 0;"></div>
                 <div class="tag-visibility-control">
-                    <%= svg_tag "icon-caret", class: "feed-action-button feed-action-expand", size: "12x7", style: "fill: white !important" %>
+                    <%= svg_tag "icon-caret" ,class: "feed-action-button feed-action-expand", size: "12x7" %>
                 </div>
                 <span class="collection-label-wrap profile-label-color">
                     <span class="collection-label" ><%= profile.profile_name %></span>
@@ -21,3 +21,24 @@
         </div>
     </details>
 <% end %>
+
+<script>
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     const profiles = document.querySelectorAll('.profile')
+
+    //     profiles.forEach(profile => {
+    //         profile.addEventListener('click', function(event) {
+    //             event.stopPropagation(); // Evita la propagación del evento
+                
+    //             const iconCaret = profile.querySelector('.icon-caret')
+                
+                
+    //             if(!iconCaret.classList.contains('profile-open')) {
+    //                 iconCaret.classList.add('profile-open')
+    //             } else {
+    //                 iconCaret.classList.remove('profile-open')
+    //             }
+    //         });
+    //     });
+    // })
+</script>
