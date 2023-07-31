@@ -22,8 +22,8 @@ class Profile < ApplicationRecord
                 Entry.mark_unread_entries_from_tag(tag.id, user_id)
             end
         else
-            "Profile already assigned to user"
-        end
+            raise "Profile already assigned to user"
+        end  
     end
 
     # Desc: This method is used to assign a profile to users.

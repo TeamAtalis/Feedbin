@@ -134,14 +134,38 @@ Subscription.create!(
   view_mode: "article"
 )
 
-Tagging.create!(
+Subscription.create!(
+  user_id: 2,
   feed_id: 1,
-  user_id: 1,
   created_at: Time.now,
   updated_at: Time.now,
-  tag_id: 1
+  title: "RCD Mallorca",
+  view_inline: false,
+  active: true,
+  push: false,
+  show_updates: true,
+  muted: false,
+  show_retweets: true,
+  media_only: nil,
+  kind: "default",
+  view_mode: "article"
 )
 
+Tagging.create!(
+  feed_id: 1
+  user_id: 1,
+  tag_id: 1,
+  created_at: Time.now,
+  updated_at: Time.now
+)
+
+Tagging.create!(
+  feed_id: 1,
+  user_id: 2,
+  tag_id: 1,
+  created_at: Time.now,
+  updated_at: Time.now
+)
 
 Profile.create!(profile_name: "Biotech")
 Profile.create!(profile_name: "Cancer")
