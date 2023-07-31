@@ -151,9 +151,10 @@ Subscription.create!(
   view_mode: "article"
 )
 
-Subscription.create!(
-  user_id: 2,
-  feed_id: 1,
+Tagging.create!(
+  feed_id: 1
+  user_id: 1,
+  tag_id: 1,
   created_at: Time.now,
   updated_at: Time.now,
   tag_id: 1
