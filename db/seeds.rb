@@ -170,6 +170,8 @@ Tagging.create!(
 
 Tagging.create!(
   feed_id: 1
+=======
+>>>>>>> c1053035 (Error detected on seeds.rb. Now is correct)
   user_id: 1,
   tag_id: 1,
   created_at: Time.now,
