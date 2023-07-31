@@ -8,8 +8,10 @@ feedbin.hideSubscribe();
     <% end %>
 <% end %>
 
-var feed = $('[data-feed-id=<%= @click_feed %>] a')
-feedbin.reveal(feed);
+<%# are the same line but multiline comments are ... %>
+<%# var feed = $('[data-feed-id=<%= @click_feed %>
+<%# ] a') %>
+<%# feedbin.reveal(feed); %>
 <%# $('.modal-purpose-subscribe').modal('hide') %>
 setTimeout(()  => {
     window.location.reload()
