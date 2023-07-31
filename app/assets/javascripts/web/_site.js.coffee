@@ -239,7 +239,6 @@ $.extend feedbin,
       localStorage.setItem(feedbin.data.visibility_key, JSON.stringify(values))
       values
     else
-      console.log(JSON.parse(localStorage.getItem(feedbin.data.visibility_key)))
       JSON.parse(localStorage.getItem(feedbin.data.visibility_key)) || {}
 
   setTagVisibility: ->
@@ -248,7 +247,6 @@ $.extend feedbin,
       visibility = feedbin.tagVisibility(feedbin.data.tag_visibility)
 
     for id, open of visibility
-      console.warn(id)
       tag = $(".feeds [data-tag-id='#{id}']")
       if tag.length > 0
         if open
