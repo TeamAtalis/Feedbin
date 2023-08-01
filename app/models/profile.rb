@@ -15,7 +15,7 @@ class Profile < ApplicationRecord
     # input parameters: 
     #       @params[:user_id] [int]: id of User
     #
-    def assing_profile_to_user(user_id)
+    def assign_profile_to_user(user_id)
         if RUsersProfile.new(user_id: user_id, profile_id: self.id).save
             self.tags.each do |tag|
                 tag.assign_new_feeds(user_id, tag.id)
