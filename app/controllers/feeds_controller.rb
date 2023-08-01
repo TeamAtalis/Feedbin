@@ -26,6 +26,8 @@ class FeedsController < ApplicationController
     @feeds = FeedFinder.feeds(params[:q], username: params[:username], password: params[:password])
     @feeds.map { |feed| feed.priority_refresh(@user) }
     @tag_editor = TagEditor.new(@user, nil)
+    # GET USER PROFILES
+    @user_profiles = @user.profiles
   rescue Feedkit::Unauthorized => exception
     @feeds = nil
     if exception.basic_auth?

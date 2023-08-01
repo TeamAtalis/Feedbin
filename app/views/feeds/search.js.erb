@@ -12,7 +12,7 @@
         <% else %>
             $('.modal-purpose-subscribe [data-behavior~=feeds_search_favicon_target]').html('<%= j favicon_with_host(@feeds.first.host) %>');
         <% end %>
-        $('.modal-purpose-subscribe [data-behavior~=subscribe_target]').html('<%= j render partial: "subscriptions/new", locals: {feeds: @feeds, tag_editor: @tag_editor} %>');
+        $('.modal-purpose-subscribe [data-behavior~=subscribe_target]').html('<%= j render partial: "subscriptions/new", locals: {feeds: @feeds, tag_editor: @tag_editor, user_profiles: @user_profiles} %>');
         feedbin.showSubscribeResults()
         window.history.replaceState({}, document.title, "/");
         feedbin.updateFeedSearchMessage();
