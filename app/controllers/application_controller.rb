@@ -203,6 +203,16 @@ class ApplicationController < ActionController::Base
     excluded_feeds += [@page_feed&.id]
     @feeds = @user.feeds.where.not(id: excluded_feeds).includes(:favicon)
 
+    # GET TAGS WITHOUT PROFILES
+    user_tags = []
+    @profiles.each do |profile|
+      profile.tags.each do |tag|
+        user_tags << tag.id
+      end
+    end
+   
+    @orphan_tags = Tag.where.not(id: user_tags)
+
     @count_data = {
       unread_entries: @user.unread_entries.pluck("feed_id, entry_id").each_slice(10_000).to_a,
       starred_entries: @user.starred_entries.pluck("feed_id, entry_id").each_slice(10_000).to_a,
@@ -218,6 +228,7 @@ class ApplicationController < ActionController::Base
       tags: @user.tag_group,
       profiles: @profiles,
       profile_list: @profile_list,
+      orphan_tags: @orphan_tags,
       saved_searches: @user.saved_searches.order(Arel.sql("lower(name)")),
       count_data: @count_data,
       feed_order: @user.feed_order
