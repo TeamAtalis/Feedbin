@@ -1,0 +1,35 @@
+<%= render Settings::ControlRowComponent.new do |row| %>
+  <% row.title do %>
+    <% if user.deleted? %>
+        <span class="line-through"><%= link_to user.email, user.stripe_url %></span>
+    <% else %>
+        <%= link_to user.email, user.stripe_url %>
+    <% end %>
+  <% end %>
+  <% row.control do %>
+    <% unless user.deleted? %>
+      <%= render Form::SelectInputComponent.new do |input| %>
+        <%= input.input do %>
+          <% options = [["User Profiles", ""]] + user_profiles.map { |profile| [profile.profile_name, profile.id] } %>
+            <%= select_tag(:sort,
+             options_for_select(options),
+             class: "peer",
+            ) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% row.second_control do %>
+    <% unless user.deleted? %>
+      <%= render Form::SelectInputComponent.new do |input| %>
+        <%= input.input do %>
+          <% options = [["Select Profile", ""]] + profiles.map { |profile| [profile.profile_name, profile.id] } %>
+            <%= select_tag(:sort,
+             options_for_select(options),
+             class: "peer",
+            ) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

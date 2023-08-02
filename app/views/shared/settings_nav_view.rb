@@ -70,13 +70,6 @@ module Shared
             selected: helpers.is_active?(["settings/subscriptions"], %w[index edit])
           ))
           render(::SettingsNav::NavComponent.new(
-            title: "Manage Profiles",
-            subtitle: "Manage profiles, tags and feeds",
-            url: helpers.profiles_path,
-            icon: "menu-icon-subscriptions",
-            selected: helpers.is_active?(["settings/profiles"], %w[index edit])
-          ))
-          render(::SettingsNav::NavComponent.new(
             title: "Actions",
             subtitle: "Filters & more",
             url: helpers.actions_path,
@@ -120,6 +113,13 @@ module Shared
 
       ul 
         if @user.try(:admin?)
+          render(::SettingsNav::NavComponent.new(
+            title: "Manage Profiles",
+            subtitle: "Manage profiles, tags and feeds",
+            url: helpers.settings_profiles_path,
+            icon: "menu-icon-subscriptions",
+            selected: helpers.is_active?(["settings/profiles"], %w[index edit])
+          ))
           render(::SettingsNav::NavComponent.new(
             title: "Customers",
             subtitle: "Manage customers",
