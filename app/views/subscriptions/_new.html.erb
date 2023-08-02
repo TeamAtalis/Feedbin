@@ -49,7 +49,7 @@
   <%= render Settings::H2Component.new do %>
     Tags
   <% end %>
-  <%= render partial: "shared/tag_fields", locals: {tag_editor: tag_editor, user_profiles: user_profiles} %>
+  <%= render partial: "shared/tag_fields", locals: {tag_editor: tag_editor, user_profiles: user_profiles, orphan_tags: orphan_tags} %>
   <%= submit_tag("Submit", class: "visually-hidden", tabindex: "-1", data: {behavior: "submit_add"}) %>
 
 <% end %>
