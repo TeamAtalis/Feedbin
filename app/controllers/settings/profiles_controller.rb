@@ -1,5 +1,14 @@
 class Settings::ProfilesController < ApplicationController
 
+  def new
+    @profile = Profile.all
+  end
+
+  def admin_subscribe
+    Profile.find(params[:profile_id]).assign_profile_to_user(@user.id)
+    render json: { success: true, message: "Profile assigned to user successfully" }
+  end
+
   def index
     @user = current_user
     @all_users = User.all

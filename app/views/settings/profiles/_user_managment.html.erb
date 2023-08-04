@@ -6,30 +6,79 @@
         <%= link_to user.email, user.stripe_url %>
     <% end %>
   <% end %>
-  <% row.control do %>
-    <% unless user.deleted? %>
-      <%= render Form::SelectInputComponent.new do |input| %>
-        <%= input.input do %>
-          <% options = [["User Profiles", ""]] + user_profiles.map { |profile| [profile.profile_name, profile.id] } %>
-            <%= select_tag(:sort,
-             options_for_select(options),
-             class: "peer",
-            ) %>
+  <% unless user.deleted? %>
+    <% row.control do %>
+        <%= render Form::SelectInputComponent.new do |input| %>
+          <%= input.input do %>
+            <% options = [["User Profiles", ""]] + user_profiles.map { |profile| [profile.profile_name, profile.id] } %>
+              <%= select_tag(:sort,
+              options_for_select(options),
+              class: "peer",
+              ) %>
+          <% end %>
+        <% end %>
+    <% end %>
+    <% row.second_control do %>
+      <% unless user.deleted? %>
+        <%= render Form::SelectInputComponent.new do |input| %>
+          <%= input.input do %>
+            <% options = [["Select Profile", "0"]] + profiles.map { |profile| [profile.profile_name, profile.id] } %>
+              <%= select_tag("profile-#{user.id}",
+              options_for_select(options),
+              class: "peer profile-select",
+              ) %>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>
-  <% end %>
-  <% row.second_control do %>
-    <% unless user.deleted? %>
-      <%= render Form::SelectInputComponent.new do |input| %>
-        <%= input.input do %>
-          <% options = [["Select Profile", ""]] + profiles.map { |profile| [profile.profile_name, profile.id] } %>
-            <%= select_tag(:sort,
-             options_for_select(options),
-             class: "peer",
-            ) %>
-        <% end %>
-      <% end %>
+    <% row.third_control do %>
+      <button id="button-<%= user.id %>" class="button button-submit">+ Add</button>
     <% end %>
   <% end %>
 <% end %>
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttonList = document.querySelectorAll('.button-submit');
+
+    buttonList.forEach(button => {
+      button.addEventListener('click', () => {
+         const selectList = document.querySelectorAll('.profile-select');
+         console.log(selectList);
+      })
+    })
+  });
+
+  // selectList.forEach(select => {
+  //   select.addEventListener('change',
+  //   function(){
+  //     const selectedOption = this.options[select.selectedIndex];
+  //     const profileId = selectedOption.value;
+
+
+  
+  //     if (Number(profileId)){
+  //       const URL = `settings/profiles/subscribe/${profileId}`
+  
+  //       fetch(URL, 
+  //         {
+  //           method: 'POST',
+  //           headers: {
+  //             'Content-Type': 'application/json',
+  //             'X-CSRF-Token': '<%= form_authenticity_token.to_s %>', // Agrega el token CSRF de Rails
+  //           },
+  //           body: JSON.stringify({ profile_id: profileId }),
+  //         }
+  //       )
+  //       .then(response => response.json())
+  //       .then(data => {
+  //         if(data.success){
+  //           console.warn(data);
+  //         }
+  //       })
+  //       .catch(error => console.log(error))
+  //     }
+  //   });
+  // }); 
+</script>

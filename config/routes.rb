@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get 'profiles/subscribe/:profile_id', to: 'profiles#subscribe', as: 'subscribe'
   resources :profiles
 
+  namespace :settings do
+    post 'profiles/subscribe/:profile_id', to: 'profiles#admin_subscribe', as: 'admin_subscribe'
+  end   
+
   root to: "site#index"
 
   mount StripeEvent::Engine, at: "/stripe"

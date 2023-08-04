@@ -1,0 +1,20 @@
+<%= render Settings::ControlRowComponent.new do |row| %>
+  <% row.title do %>
+    <%= form_with url: "/search", method: :get do |form| %>
+      <%= render Form::TextInputComponent.new do |input| %>
+        <%= input.input do %>
+          <%= text_field_tag(:search, nil, type: "text", class: "peer text-input", placeholder: "Type Profile name") %>
+        <% end %>
+        <% if @leading_accessory %>
+          <%= input.accessory_leading do %>
+            <%= render SvgComponent.new "icon-search", class: "fill-400 pg-focus:fill-blue-600" %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% row.control do %>
+        <%= form.submit "Create", class:"button" %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

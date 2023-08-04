@@ -10,6 +10,16 @@ module Settings
       def template
         form_tag helpers.settings_profiles_path, method: :get, remote: true, class: "feed-settings", data: {behavior: "spinner"} do
           render Settings::H1Component.new do
+            "Create Profile"
+          end
+          render(Settings::ControlGroupComponent.new(class: "mb-14")) do |group|
+            group.item do
+              div do
+                  render(partial: "settings/profiles/create_profile")
+              end
+            end
+          end          
+          render Settings::H1Component.new do
             "Manage Profiles"
           end
           render(Settings::ControlGroupComponent.new(class: "mb-14")) do |group|
