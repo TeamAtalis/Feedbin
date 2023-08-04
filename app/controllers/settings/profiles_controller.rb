@@ -1,14 +1,16 @@
 class Settings::ProfilesController < ApplicationController
 
-  def new
-    @profile = Profile.all
-  end
-
   def admin_subscribe
     Profile.find(params[:profile_id]).assign_profile_to_user(@user.id)
     render json: { success: true, message: "Profile assigned to user successfully" }
   end
 
+  def create_profile
+    Profile.new(profile_name: params[:profile_name]).save
+    redirect_to settings_profiles_path
+  end
+  
+  
   def index
     @user = current_user
     @all_users = User.all
@@ -26,11 +28,5 @@ class Settings::ProfilesController < ApplicationController
       # default index.js.erb
       format.js {}
     end  
-  end
-
-  def show
-  end
-
-  def edit
   end
 end
