@@ -1,8 +1,8 @@
 class Settings::ProfilesController < ApplicationController
 
-  def admin_subscribe
-    Profile.find(params[:profile_id]).assign_profile_to_user(@user.id)
-    render json: { success: true, message: "Profile assigned to user successfully" }
+  def add_profile_to_user
+    Profile.find(params[:profile_id]).assign_profile_to_user(params[:user_id])
+    redirect_to settings_profiles_path
   end
 
   def create_profile

@@ -157,7 +157,7 @@ Rails.application.routes.draw do
   namespace :settings do
     get 'profiles', to: 'profiles#index', as: 'profiles'
     post 'profiles/create_profile', to: 'profiles#create_profile', as: 'create_profile'
-    post 'profiles/subscribe/:profile_id', to: 'profiles#admin_subscribe', as: 'admin_subscribe'
+    post 'profiles/add_profile_to_user', to: 'profiles#add_profile_to_user', as: 'add_profile_to_user'
   end
   
 
