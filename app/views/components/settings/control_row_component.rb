@@ -1,7 +1,7 @@
 module Settings
   class ControlRowComponent < ApplicationComponent
 
-    slots :icon, :title, :description, :control
+    slots :icon, :title, :description, :control, :second_control, :third_control, :fourth_control, :fifth_control
 
     def template
       div class: "py-4 flex items-center gap-4 group group-data-[capsule=true]:px-4" do
@@ -15,6 +15,10 @@ module Settings
           end
         end
         div class: "items-center flex gap-4", &@control
+        div class: "items-center flex gap-4", &@second_control
+        div class: "items-center flex gap-4", &@third_control
+        div class: "items-center flex gap-4", &@fourth_control
+        div class: "items-center flex gap-4", &@fifth_control
       end
     end
   end

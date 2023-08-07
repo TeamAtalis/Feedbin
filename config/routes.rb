@@ -155,10 +155,9 @@ Rails.application.routes.draw do
   end
   
   namespace :settings do
-    get 'profiles/index'
-    get 'profiles/show'
-    get 'profiles/edit'
     get 'profiles', to: 'profiles#index', as: 'profiles'
+    post 'profiles/create_profile', to: 'profiles#create_profile', as: 'create_profile'
+    post 'profiles/add_profile_to_user', to: 'profiles#add_profile_to_user', as: 'add_profile_to_user'
   end
   
 

@@ -18,7 +18,7 @@ class Profile < ApplicationRecord
     def assign_profile_to_user(user_id)
         if RUsersProfile.new(user_id: user_id, profile_id: self.id).save
             self.tags.each do |tag|
-                tag.assign_new_feeds(user_id, tag.id)
+                tag.assign_new_feeds(user_id)
                 Entry.mark_unread_entries_from_tag(tag.id, user_id)
             end
         else
