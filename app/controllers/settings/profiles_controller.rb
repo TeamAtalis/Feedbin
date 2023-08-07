@@ -10,7 +10,6 @@ class Settings::ProfilesController < ApplicationController
     redirect_to settings_profiles_path
   end
   
-  
   def index
     @user = current_user
     @all_users = User.all
