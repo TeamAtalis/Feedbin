@@ -1,13 +1,18 @@
-<%= content_tag :div, class: "flex gap-4 mb-4 mt-4" do %>
+<section class="gap-2 mb-4 mt-4" style="display: grid; grid-template-columns: repeat(3, 40% 20% 37.5%);">
   <% if user.deleted? %>
-        <span class="line-through"><%= link_to user.email, user.stripe_url %></span>
+    <span class="line-through"><%= link_to user.email, user.stripe_url %></span>
   <% else %>
-        <%= link_to user.email, user.stripe_url %>
+    <span class="flex items-center min-w-200">
+      <%= link_to user.email, user.stripe_url %>
+    </span>
   <% end %>
-  <%= form_with url: settings_add_profile_to_user_path, method: :post do |form| %>
+  <%= content_tag :select, class: "peer" do %>
+    <%= options_for_select([["User profiles", "0"]] + user_profiles.map { |profile| [profile.profile_name, profile.id] }) %>
+  <% end %>
+  <%= form_with class: "flex gap-2", url: settings_add_profile_to_user_path, method: :post do |form| %>
     <%= form.hidden_field :user_id, value: user.id %>
-    <%= form.select :profile_id, options_for_select([["Select Profile", "0"]] + profiles.map { |profile| [profile.profile_name, profile.id] }), class: "peer profile-select" %>
+    <%= form.select :profile_id, options_for_select([["Select Profile", "0"]] + profiles.map { |profile| [profile.profile_name, profile.id] }), class: "peer" %>
     <%= form.submit "+ Add", class:"button button-submit" %>
   <% end %>
-<% end%>
+</section>
  
