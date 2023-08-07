@@ -31,9 +31,11 @@
             </span>
         <% end %>
         <div class="drawer feed-drawer" data-behavior="feed_drawer expandable">
+        <% current_user.taggings.where(tag_id: tag.id).each do |tagging| %>
             <ul>
-                <%= render partial: "feeds/feed", collection: [current_user.taggings.first.feed]  %>
+                <%= render partial: "feeds/feed", collection: [tagging.feed]  %>
             </ul>
+        <% end %> 
         </div>
     </li>
 <% end %>
