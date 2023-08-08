@@ -17,8 +17,9 @@ class Settings::ProfilesController < ApplicationController
   
   def index
     @user = current_user
-    @all_users = User.all
-    @profiles = Profile.all
+    @all_users = User.all.order("email")
+    @profiles = Profile.all.order("profile_name")
+    
     store_location
 
     respond_to do |format|

@@ -18,8 +18,8 @@ class Settings::TagsController < ApplicationController
     end
     
     def index
-      @tags = Tag.all
-      @profiles = Profile.all
+      @tags = Tag.all.order("name")
+      @profiles = Profile.all.order("profile_name")
 
       store_location
   
