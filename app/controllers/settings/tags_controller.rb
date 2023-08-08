@@ -13,8 +13,10 @@ class Settings::TagsController < ApplicationController
     end
   
     def create_tag
-      Tag.new(name: params[:tag_name]).save
-      redirect_to settings_tags_path
+      if(!helpers.input_is_empty?(params[:tag_name].strip))
+        Tag.new(name: params[:tag_name]).save
+        redirect_to settings_tags_path
+      end
     end
     
     def index

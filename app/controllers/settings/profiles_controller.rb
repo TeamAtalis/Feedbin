@@ -11,8 +11,10 @@ class Settings::ProfilesController < ApplicationController
   end
 
   def create_profile
-    Profile.new(profile_name: params[:profile_name]).save
-    redirect_to settings_profiles_path
+    if(!helpers.input_is_empty?(params[:profile_name].strip))
+      Profile.new(profile_name: params[:profile_name]).save
+      redirect_to settings_profiles_path
+    end
   end
   
   def index
