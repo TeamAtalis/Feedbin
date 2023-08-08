@@ -12,11 +12,11 @@ module Settings
             render Settings::H1Component.new do
               "Create Tag"
             end
-            # render(Settings::ControlGroupComponent.new(class: "mb-14")) do |group|
-            #   group.item do
-            #     render(partial: "settings/profiles/create_profile")
-            #   end
-            # end          
+            render(Settings::ControlGroupComponent.new(class: "mb-14")) do |group|
+              group.item do
+                render(partial: "settings/tags/create_tag")
+              end
+            end          
             render Settings::H1Component.new do
               "Manage Tags"
             end

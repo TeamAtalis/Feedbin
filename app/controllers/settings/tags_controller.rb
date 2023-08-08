@@ -13,8 +13,8 @@ class Settings::TagsController < ApplicationController
     end
   
     def create_tag
-    #   Profile.new(profile_name: params[:profile_name]).save
-    #   redirect_to settings_profiles_path
+      Tag.new(name: params[:tag_name]).save
+      redirect_to settings_tags_path
     end
     
     def index
