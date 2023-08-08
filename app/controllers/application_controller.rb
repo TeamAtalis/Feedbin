@@ -203,15 +203,8 @@ class ApplicationController < ActionController::Base
     excluded_feeds += [@page_feed&.id]
     @feeds = @user.feeds.where.not(id: excluded_feeds).includes(:favicon)
 
-    # GET TAGS WITHOUT PROFILES
-    user_tags = []
-    @profiles.each do |profile|
-      profile.tags.each do |tag|
-        user_tags << tag.id
-      end
-    end
-   
-    @orphan_tags = Tag.where.not(id: user_tags)
+    # get tags without profiles
+    @orphan_tags = @user.tags.left_outer_joins(:r_profiles_tags).where(r_profiles_tags: {tag_id: nil})
 
     @count_data = {
       unread_entries: @user.unread_entries.pluck("feed_id, entry_id").each_slice(10_000).to_a,
