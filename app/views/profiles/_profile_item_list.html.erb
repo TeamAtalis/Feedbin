@@ -3,16 +3,14 @@
     <%= link_to subscribe_path(profile_id: profile_item_list.id), method: :get, class: "profile-item" do %>
         <p class="add-icon">+</p>
         <%= profile_item_list.profile_name %>
-        <span class="tooltipText">
             <% if profile_item_list.tags.present? %>
-                <ul>
-                <% profile_item_list.tags.each do |tag| %>
-                    <li class="long-text" ><%= tag.name %></li>
-                <% end %>
-                </ul>    
-            <% else %>
-                <p>No tags</p>
-            <% end %>    
-        </span>
+                <span class="tooltipText">
+                    <ul>
+                        <% profile_item_list.tags.each do |tag| %>
+                            <li class="long-text" ><%= tag.name %></li>
+                        <% end %>
+                    </ul>    
+                </span>
+            <% end %>   
     <% end %>
 <% end %>
