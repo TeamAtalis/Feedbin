@@ -579,8 +579,10 @@ table {
 Structure
 ------------------------------------------------------------------------------*/
 .profile-list{
+  margin-top: 6px;
+  margin-bottom: 8px;
   margin-right: 8px;
-  margin-left: 8px;
+  margin-left: 18px;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
@@ -589,6 +591,7 @@ Structure
     @include background-color($color-selected);  
     @include font-size(12);
     cursor: pointer;
+    position: relative;
     text-decoration: none;
     display: flex;
     flex-wrap: nowrap;
@@ -604,11 +607,38 @@ Structure
 
     &:hover {
       @include background-color($color-selected-hover);
+      .tooltipText {
+        visibility: visible;
+        opacity: 1;
+      }
     }
     
     .add-icon{
       font-weight: bolder;
       @include font-size(14);
+    }
+
+    .tooltipText {
+      visibility: hidden;
+      width: min-content;
+      background-color: #333;
+      @include color($theme-color-base);
+      text-align: left;
+      border-radius: 4px;
+      padding: 10px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+    .long-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 85px;
     }
   }
 }
