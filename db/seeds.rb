@@ -156,8 +156,7 @@ Tagging.create!(
   user_id: 1,
   tag_id: 1,
   created_at: Time.now,
-  updated_at: Time.now,
-  tag_id: 1
+  updated_at: Time.now
 )
 
 Tagging.create!(
