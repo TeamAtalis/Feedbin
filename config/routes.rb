@@ -159,6 +159,12 @@ Rails.application.routes.draw do
     post 'profiles/create_profile', to: 'profiles#create_profile', as: 'create_profile'
     post 'profiles/add_profile_to_user', to: 'profiles#add_profile_to_user', as: 'add_profile_to_user'
   end
+
+  namespace :settings do
+    get 'tags', to: 'tags#index', as: 'tags'
+    post 'tags/create_tag', to: 'tags#create_tag', as: 'create_tag'
+    post 'tags/add_tag_to_profile', to: 'tags#add_tag_to_profile', as: 'add_tag_to_profile'
+  end
   
 
   get :settings, to: "settings#index"

@@ -23,7 +23,7 @@ module Settings
           render(Settings::ControlGroupComponent.new(class: "mb-14")) do |group|
             @all_users.each do |user|
               group.item do
-                render(partial: "settings/profiles/user_managment", locals: { user: user, user_profiles: user.profiles, profiles: @profiles.where.not(id: user.profiles.ids) })
+                render(partial: "settings/profiles/user_managment", locals: { user: user, user_profiles: user.profiles.order("profile_name"), profiles: @profiles.where.not(id: user.profiles.ids) })
               end
             end
           end          

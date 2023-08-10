@@ -1,0 +1,4 @@
+<%= form_with class: "flex gap-4 mb-4 mt-4" , url: settings_create_tag_path, method: :post do |form| %>
+  <%= form.text_field :tag_name, class: "peer text-input", placeholder: "Type Tag name" %>
+  <%= form.submit "Create", class:"button" %>
+<% end %>

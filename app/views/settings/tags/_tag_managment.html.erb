@@ -1,0 +1,8 @@
+<section class="mb-4 mt-4">
+  <%= form_with class: "flex gap-2", url: settings_add_tag_to_profile_path, method: :post do |form| %>
+    <%= form.select :profile_id, options_for_select([["Select profile", "0"]] + profiles.map { |profile| [profile.profile_name, profile.id] }), class: "peer" %>
+    <%= form.select :tag_id, options_for_select([["Select tag", "0"]] + tags.map { |tag| [tag.name, tag.id] }), class: "peer" %>
+    <%= form.submit "+ Add", class:"button button-submit" %>
+  <% end %>
+</section>
+ 

@@ -29,16 +29,8 @@ class FeedsController < ApplicationController
 
     # GET USER PROFILES
     @user_profiles = @user.profiles.order("created_at DESC")
-
-    # GET TAGS WITHOUT PROFILES
-    user_tags = []
-    @user_profiles.each do |profile|
-      profile.tags.each do |tag|
-        user_tags << tag.id
-      end
-    end
    
-    @orphan_tags = Tag.where.not(id: user_tags)
+    @orphan_tags = @user.tags.left_outer_joins(:r_profiles_tags).where(r_profiles_tags: {tag_id: nil})
 
   rescue Feedkit::Unauthorized => exception
     @feeds = nil
