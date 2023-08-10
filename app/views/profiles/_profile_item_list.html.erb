@@ -1,17 +1,16 @@
 <% cache [profile_item_list, "v7"] do %>
-    
     <div class="profile-item">
         <%= link_to subscribe_path(profile_id: profile_item_list.id), method: :get, class: "link-item" do %>
             <b>+</b> <%= profile_item_list.profile_name %>
         <% end %>
-            <% if profile_item_list.tags.present? %>
-                <span class="tooltipText">
-                    <ul>
-                        <% profile_item_list.tags.each do |tag| %>
-                            <li class="long-text" ><%= tag.name %></li>
-                        <% end %>
-                    </ul>    
-                </span>
-            <% end %>   
+        <% if profile_item_list.tags.present? %>
+            <span class="tooltipText">
+                <ul>
+                    <% profile_item_list.tags.each do |tag| %>
+                        <li class="long-text" ><%= tag.name %></li>
+                    <% end %>                   
+                </ul>    
+            </span>
+        <% end %>   
     </div>
 <% end %>
