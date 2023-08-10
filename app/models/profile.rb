@@ -35,7 +35,12 @@ class Profile < ApplicationRecord
     # input parameters: 
     #       @params[:tag_id] [int]: id of Tag
     #
-    # def assign_profile_to_user(tag_id)
-    #     RProfilesTag.new(profile_id: self.id, tag_id: tag_id).save ? "Tag assigned to profile" : "Tag already assigned to profile"
-    # end
+    def assign_profile_to_tag(tag_id, user_id)
+        if RProfilesTag.new(profile_id: self.id, tag_id: tag_id).save
+            Tag.find(tag_id).assign_new_feeds(user_id)
+            Entry.mark_unread_entries_from_tag(tag_id, user_id)
+        else
+            raise "Profile already assigned to user"
+        end
+    end  
 end

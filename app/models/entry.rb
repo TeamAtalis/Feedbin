@@ -307,7 +307,6 @@ class Entry < ApplicationRecord
   end
 
   def self.mark_unread_entries_from_tag(tag_id, user_id)
-    
     # Mark all this new entries like unread
     Entry.where(feed_id: Tag.find(tag_id).feeds.pluck(:id)).pluck(:id, :feed_id).each do |entry_id, feed_id|
       UnreadEntry.new(user_id: user_id, feed_id: feed_id, entry_id: entry_id, published: Time.now, entry_created_at: Time.now ).save

@@ -1,0 +1,17 @@
+tag_1:
+  id: 1 
+  name: Marca 
+  created_at: <%= Time.now %> 
+  updated_at: <%= Time.now %>
+
+tag_2:
+  id: 2 
+  name: Diario de Mallorca 
+  created_at: <%= Time.now %> 
+  updated_at: <%= Time.now %>
+
+tag_3:
+  id: 3 
+  name: El mundo 
+  created_at: <%= Time.now %> 
+  updated_at: <%= Time.now %>
