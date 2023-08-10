@@ -2,7 +2,7 @@
     
     <div class="profile-item">
         <%= link_to subscribe_path(profile_id: profile_item_list.id), method: :get, class: "link-item" do %>
-            <%= profile_item_list.profile_name %>
+            <b>+</b> <%= profile_item_list.profile_name %>
         <% end %>
             <% if profile_item_list.tags.present? %>
                 <span class="tooltipText">
