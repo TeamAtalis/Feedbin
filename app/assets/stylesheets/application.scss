@@ -587,7 +587,6 @@ Structure
   flex-wrap: wrap;
   gap: 5px;
   .profile-item {
-    @include color($theme-color-base);
     @include background-color($color-selected);  
     @include font-size(12);
     cursor: pointer;
@@ -613,6 +612,7 @@ Structure
     }
 
     .link-item {
+      @include color($theme-color-base);
       text-decoration: none;
     }
     
