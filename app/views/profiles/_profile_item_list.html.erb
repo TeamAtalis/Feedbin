@@ -1,8 +1,9 @@
 <% cache [profile_item_list, "v7"] do %>
     
-    <%= link_to subscribe_path(profile_id: profile_item_list.id), method: :get, class: "profile-item" do %>
-        <p class="add-icon">+</p>
-        <%= profile_item_list.profile_name %>
+    <div class="profile-item">
+        <%= link_to subscribe_path(profile_id: profile_item_list.id), method: :get, class: "link-item" do %>
+            <%= profile_item_list.profile_name %>
+        <% end %>
             <% if profile_item_list.tags.present? %>
                 <span class="tooltipText">
                     <ul>
@@ -12,5 +13,5 @@
                     </ul>    
                 </span>
             <% end %>   
-    <% end %>
+    </div>
 <% end %>
