@@ -9,6 +9,7 @@ class ProfilesController < ApplicationController
 
     def subscribe
         Profile.find(params[:profile_id]).assign_profile_to_user(@user.id)
+        flash[:notice] = "Profile subscribed successfully"
         redirect_to root_path
     end
 end
