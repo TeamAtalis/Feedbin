@@ -4,19 +4,26 @@ class Settings::TagsController < ApplicationController
       profile_id = params[:profile_id]
       tag_id = params[:tag_id]
 
-      if(profile_id == "0" || tag_id == "0")
-        # To implement a funcion that allows admin to add a tag to profile
-        redirect_to settings_tags_path
-      end
-    #   Profile.find(params[:profile_id]).assign_profile_to_user(params[:user_id])
-    #   redirect_to settings_profiles_path
+      if(profile_id != "0" || tag_id != "0")
+        if(Profile.find(profile_id).assign_profile_to_tag(tag_id))
+          flash[:notice] = "Tag assigned to profile successfully"
+        else
+          flash[:alert] = "Tag already assigned to profile"
+        end
+      else
+        flash[:alert] = "You must select a profile and a tag"
+      end  
+      redirect_to settings_tags_path
     end
   
     def create_tag
       if(!helpers.input_is_empty?(params[:tag_name].strip))
         Tag.new(name: params[:tag_name]).save
-        redirect_to settings_tags_path
+        flash[:notice] = "Tag created successfully"
+      else
+        flash[:alert] = "Tag name cannot be empty"
       end
+      redirect_to settings_tags_path
     end
     
     def index
