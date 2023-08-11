@@ -87,9 +87,9 @@ group :development, :test do
   gem "minitest"
   gem "minitest-stub-const"
   gem "minitest-stub_any_instance"
-  gem "puma"
   gem "rails-controller-testing"
   gem "standard"
   gem "webmock", "= 3.8.0"
 end
 
+gem "puma"
