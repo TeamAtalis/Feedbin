@@ -15,3 +15,12 @@ test:
   username: <%= ENV['POSTGRES_USERNAME'] %>
   password: <%= ENV['POSTGRES_PASSWORD'] %>
   host: localhost
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: feedbin_development
+  pool: <%= ENV['DB_POOL'] || 5 %>
+  username: <%= ENV['POSTGRES_USERNAME'] %>
+  password:
+  host: localhost
