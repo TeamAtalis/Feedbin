@@ -4,6 +4,8 @@ git_source(:github) { |name| "https://github.com/#{name}.git" }
 gem "rails", "= 7.0.6"
 gem "will_paginate"
 
+gem "puma"
+
 gem "http",                github: "feedbin/http",                branch: "feedbin"
 gem "carrierwave",         github: "feedbin/carrierwave",         branch: "feedbin"
 gem "sax-machine",         github: "feedbin/sax-machine",         branch: "feedbin"
@@ -86,7 +88,6 @@ group :development, :test do
   gem "minitest"
   gem "minitest-stub-const"
   gem "minitest-stub_any_instance"
-  gem "puma"
   gem "rails-controller-testing"
   gem "selenium-webdriver"
   gem "standard"
