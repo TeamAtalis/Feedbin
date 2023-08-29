@@ -32,10 +32,19 @@ class Tag < ApplicationRecord
     )
   end
 
+  # Desc: This method is used to assign all tags feeds
+  #       to user.
+  #       The user may already be subscribed to the feed.
+  #       If he is suscribed, it will do nothing.
+  #       Finally the feed is inserted into the folder.
+  #
+  # input parameters:
+  #       @params[:user_id] [int]: id of User
+  #
   def assign_new_feeds(user_id)
     # Insert operations
     self.feeds.pluck(:id).each do |feed_id|
-      Subscription.new(user_id: user_id, feed_id: feed_id).save # Subcribe to all new feeds
+      Subscription.find_or_create_by(user_id: user_id, feed_id: feed_id).save # Subcribe to all new feeds
       Tagging.new(feed_id: feed_id, user_id: user_id, tag_id: self.id).save # Insert new feed to the folder
     end
   end
