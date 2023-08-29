@@ -29,13 +29,10 @@
         profiles.forEach(profile => {
 
             profile.addEventListener('toggle', (e) => {
-                console.log('click')
-                
                 const iconCaret = profile.querySelector('.icon-caret')
                 const drawer = profile.querySelector('.drawer-profile') || profile.querySelector('.drawer-open')
                 
                 if (profile.open) {
-                    console.log('open')
                     iconCaret.classList.add('profile-open')
                     drawer.classList.replace('drawer-profile','drawer-open')
                 } else {
