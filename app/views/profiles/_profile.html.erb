@@ -23,7 +23,7 @@
 <% end %>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    (function(){
         const profiles = document.querySelectorAll('.profile')
 
         profiles.forEach(profile => {
@@ -41,5 +41,5 @@
                 }
             })
         })
-    })
+    })()
 </script>
