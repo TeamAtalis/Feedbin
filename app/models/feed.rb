@@ -49,7 +49,7 @@ class Feed < ApplicationRecord
     tags.concat params[:tag_id].values if params[:tag_id]
     tags.concat params[:tag_name] if params[:tag_name]
     tags = tags.join(",")
-    tag(tags, user)
+    tag(tags, user, delete_existing = false)
   end
 
   def tag(names, user, delete_existing = true)
