@@ -654,6 +654,11 @@ Structure
   margin-bottom: 8px;
 }
 
+.disabled-state {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .container {
   margin-right: auto;
   margin-left: auto;
