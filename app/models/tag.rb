@@ -6,6 +6,7 @@ class Tag < ApplicationRecord
   has_many :taggings
   has_many :feeds, through: :taggings
 
+  # OLD FEATURE
   def self.rename(user, old_tag, new_name)
     new_name = new_name.strip.delete(",")
 
@@ -15,6 +16,16 @@ class Tag < ApplicationRecord
     Search::ActionTags.perform_async(user.id, new_tag.id, old_tag.id)
 
     new_tag
+  end
+
+  # NEW FEATURE
+  def self.rename_tag(user, old_tag, new_name)
+    new_name = new_name.strip.delete(",")
+
+    Tag.where(name: old_tag.name).update_all(name: new_name)
+    updated_tag = Tag.where(id: old_tag.id).first
+
+    updated_tag
   end
 
   def self.destroy(user, tag)

@@ -30,17 +30,35 @@ class TagsController < ApplicationController
     end
   end
 
+  # OLD FEATURE
+  # def update
+  #   @new_tag = nil
+
+  #   user = current_user
+
+  #   tag = Tag.find(params[:id])
+  #   @new_tag = Tag.rename(user, tag, params[:tag][:name])
+
+  #   if @new_tag
+  #     visibility = user.tag_visibility[tag.id.to_s] || false
+  #     user.update_tag_visibility(@new_tag.id.to_s, visibility)
+  #   end
+
+  #   get_feeds_list
+  # end
+
+  # NEW FEATURE
   def update
     @new_tag = nil
 
     user = current_user
-
     tag = Tag.find(params[:id])
-    @new_tag = Tag.rename(user, tag, params[:tag][:name])
 
-    if @new_tag
+    @updated_tag = Tag.rename_tag(user, tag, params[:tag][:name])
+    
+    if @updated_tag
       visibility = user.tag_visibility[tag.id.to_s] || false
-      user.update_tag_visibility(@new_tag.id.to_s, visibility)
+      user.update_tag_visibility(@updated_tag.id.to_s, visibility)
     end
 
     get_feeds_list
