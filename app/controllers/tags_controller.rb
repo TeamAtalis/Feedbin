@@ -50,12 +50,12 @@ class TagsController < ApplicationController
     @user = current_user
     tag = Tag.find(params[:id])
 
-
-    if Tag.destroy(@user, tag)
-      flash[:notice] = "Tag deleted successfully"
-    else
-      flash[:alert] = "Tag could not be deleted"
-    end
+    Tag.destroy(@user, tag)
+    # if Tag.destroy(@user, tag)
+    #   flash[:notice] = "Tag deleted successfully"
+    # else
+    #   flash[:alert] = "Tag could not be deleted"
+    # end
 
     get_feeds_list
 
