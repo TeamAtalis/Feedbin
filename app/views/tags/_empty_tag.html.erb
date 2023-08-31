@@ -1,0 +1,12 @@
+<% cache [tag, "v4"] do %>
+    <li class="tag" data-tag-id="<%= tag.id %>" data-feed-id="<%= tag.id %>" data-count-type="tag">
+        <span class="feed-link tag-link tag-link-padding">
+            <span class="link-inner">
+                <div style="height: 20px; width: 0;"></div>
+                <span class="collection-label-wrap"  style="color: grey !important;" data-input-name="tag[name]" data-title="<%= tag.name %>", data-original-title="<%= tag.name %>">
+                    <span class="collection-label"><%= tag.name %> (no feeds yet)</span>
+                </span>
+            </span>
+        </span>
+    </li>
+<% end %>

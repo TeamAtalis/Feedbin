@@ -21,6 +21,12 @@
                         <%= render partial: "tags/tag", locals: { tag: tag } %>
                     </ul>
                 </div>
+            <% else %>
+                <div class="drawer-profile feed-drawer">
+                    <ul>
+                        <%= render partial: "tags/empty_tag", locals: { tag: tag } %>
+                    </ul>
+                </div>
             <% end %>    
         <% end %>
     </details>
