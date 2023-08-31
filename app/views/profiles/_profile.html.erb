@@ -14,11 +14,15 @@
                 </span>
             </span>
         </summary>
-        <div class="drawer-profile feed-drawer">
-            <ul>
-                <%= render partial: "tags/tag", collection: profile.tags %>
-            </ul>
-        </div>
+        <% profile.tags.each do |tag|%>
+            <% if tag.feeds.size > 0 %>
+                <div class="drawer-profile feed-drawer">
+                    <ul>
+                        <%= render partial: "tags/tag", locals: { tag: tag } %>
+                    </ul>
+                </div>
+            <% end %>    
+        <% end %>
     </details>
 <% end %>
 

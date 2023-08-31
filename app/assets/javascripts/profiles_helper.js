@@ -9,12 +9,12 @@
         profile.querySelector(".drawer-profile") ||
         profile.querySelector(".drawer-open")
 
-      if (profile.open) {
+      if (profile.open && drawer) {
         iconCaret.classList.add("profile-open")
         drawer.classList.replace("drawer-profile", "drawer-open")
       } else {
         iconCaret.classList.remove("profile-open")
-        drawer.classList.replace("drawer-open", "drawer-profile")
+        drawer && drawer.classList.replace("drawer-open", "drawer-profile")
       }
     })
   })
