@@ -38,7 +38,7 @@ class SubscriptionsController < ApplicationController
     #WE PASS ORPHAN TAGS TO FORM
     @orphan_tags = @user.tags.left_outer_joins(:r_profiles_tags).where(r_profiles_tags: {tag_id: nil})
   end
-
+  
   def update
     @user = current_user
     @subscription = @user.subscriptions.find(params[:id])
@@ -51,14 +51,14 @@ class SubscriptionsController < ApplicationController
       get_feeds_list
     end
   end
-
+  
   def destroy
     subscription = @user.subscriptions.find(params[:id])
     destroy_subscription(subscription.id)
   end
-
+  
   private
-
+  
   def destroy_subscription(subscription_id)
     @user = current_user
     @subscription = @user.subscriptions.find(subscription_id)
