@@ -35,6 +35,8 @@ class SubscriptionsController < ApplicationController
     @user = current_user
     @subscription = @user.subscriptions.find_by_feed_id(params[:id])
     @tag_editor = TagEditor.new(@user, @subscription.feed)
+    #WE PASS ORPHAN TAGS TO FORM
+    @orphan_tags = @user.tags.left_outer_joins(:r_profiles_tags).where(r_profiles_tags: {tag_id: nil})
   end
 
   def update
