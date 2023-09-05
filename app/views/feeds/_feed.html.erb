@@ -4,9 +4,15 @@
             <%= feed_presenter.feed_link(link: nil, behavior: nil, has_profile: has_profile) do %>
                 <span class="link-inner">
                     <%= feed_presenter.favicon(feed) %>
-                    <span class="collection-label-wrap" data-input-name="feed[title]" data-title="<%= feed.title %>" data-original-title="<%= feed.original_title %>" data-feed-id="<%= feed.id %>">
-                        <span class="collection-label"  data-feed-id="<%= feed.id %>"><%= feed.title %></span>
-                    </span>
+                    <% if current_user.try(:admin?) || !has_profile %>
+                        <span class="collection-label-wrap" data-behavior="rename_target user_title" data-form-action="<%= feed_rename_path(feed.id) %>" data-input-name="feed[title]" data-title="<%= feed.title %>" data-original-title="<%= feed.original_title %>" data-feed-id="<%= feed.id %>">
+                            <span class="collection-label" data-behavior="user_title rename_title" data-feed-id="<%= feed.id %>"><%= feed.title %></span>
+                        </span>
+                    <% else %>
+                        <span class="collection-label-wrap" data-input-name="feed[title]" data-title="<%= feed.title %>" data-original-title="<%= feed.original_title %>" data-feed-id="<%= feed.id %>">
+                            <span class="collection-label"  data-feed-id="<%= feed.id %>"><%= feed.title %></span>
+                        </span>
+                    <% end %>
                     <span class="count-wrap">
                         <%= content_tag :span, '', class: 'count', data: {behavior: 'needs_count', count_group: 'byFeed', count_group_id: feed.id} %>
                     </span>
