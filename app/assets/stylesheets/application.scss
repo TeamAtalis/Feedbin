@@ -656,7 +656,7 @@ Structure
 
 .disabled-state {
   opacity: 0.5;
-  pointer-events: none;
+  pointer-events: none !important;
 }
 
 .container {

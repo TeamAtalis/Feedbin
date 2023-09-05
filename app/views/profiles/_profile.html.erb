@@ -1,35 +1,39 @@
 <% cache ["profile_#{profile.id}_#{profile.profile_name}", "v4"] do %>
-    <details class="profile">
-        <summary class="feed-link profile-link tag-link" >
-            <span class="link-inner">
-                <div style="height: 20px; width: 0;"></div>
-                <div class="tag-visibility-control">
-                    <%= svg_tag "icon-caret" ,class: "feed-action-button feed-action-expand", size: "12x7" %>
-                </div>
-                <span class="collection-label-wrap profile-label-color">
-                    <span class="collection-label" ><%= profile.profile_name %></span>
+    <% if profile.tags.size > 0 %>
+        <details class="profile">
+            <summary class="feed-link profile-link tag-link" >
+                <span class="link-inner">
+                    <div style="height: 20px; width: 0;"></div>
+                    <div class="tag-visibility-control">
+                        <%= svg_tag "icon-caret" ,class: "feed-action-button feed-action-expand", size: "12x7" %>
+                    </div>
+                    <span class="collection-label-wrap profile-label-color">
+                        <span class="collection-label" ><%= profile.profile_name %></span>
+                    </span>
+                    <span class="count-wrap">
+                        <%= content_tag :span, '', class: 'count', data: {behavior: 'needs_count', count_group: 'byTag', count_group_id: profile.id } %>
+                    </span>
                 </span>
-                <span class="count-wrap">
-                    <%= content_tag :span, '', class: 'count', data: {behavior: 'needs_count', count_group: 'byTag', count_group_id: profile.id } %>
-                </span>
-            </span>
-        </summary>
-        <% profile.tags.each do |tag|%>
-            <% if tag.feeds.size > 0 %>
-                <div class="drawer-profile feed-drawer">
-                    <ul>
-                        <%= render partial: "tags/profile_tag", locals: { tag: tag } %>
-                    </ul>
-                </div>
-            <% else %>
-                <div class="drawer-profile feed-drawer">
-                    <ul>
-                        <%= render partial: "tags/empty_tag", locals: { tag: tag } %>
-                    </ul>
-                </div>
-            <% end %>    
-        <% end %>
-    </details>
+            </summary>
+            <% profile.tags.each do |tag|%>
+                <% if tag.feeds.size > 0 %>
+                    <div class="drawer-profile feed-drawer">
+                        <ul>
+                            <%= render partial: "tags/profile_tag", locals: { tag: tag } %>
+                        </ul>
+                    </div>
+                <% else %>
+                    <div class="drawer-profile feed-drawer">
+                        <ul>
+                            <%= render partial: "tags/empty_tag", locals: { tag: tag } %>
+                        </ul>
+                    </div>
+                <% end %>    
+            <% end %>
+        </details>
+    <% else %>
+        <%= render partial: "profiles/disabled_profile", locals: { profile: profile }%>
+    <% end %>    
 <% end %>
 
 <%= javascript_include_tag 'profiles_helper' %>
