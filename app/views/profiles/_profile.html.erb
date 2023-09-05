@@ -15,7 +15,7 @@
                     </span>
                 </span>
             </summary>
-            <% profile.tags.each do |tag|%>
+            <% profile.tags.order(:name).each do |tag|%>
                 <% if tag.feeds.size > 0 %>
                     <div class="drawer-profile feed-drawer">
                         <ul>

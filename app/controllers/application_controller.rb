@@ -195,8 +195,8 @@ class ApplicationController < ActionController::Base
     # we obtain the profile ids of the user
     assigned_profile_ids = @user.profiles.pluck(:id)
 
-    @profiles = @user.profiles.order("created_at DESC")
-    @profile_list = Profile.where.not(id: assigned_profile_ids).order("created_at DESC")
+    @profiles = @user.profiles.order(:profile_name)
+    @profile_list = Profile.where.not(id: assigned_profile_ids).order(:profile_name)
 
 
     excluded_feeds = @user.taggings.distinct.pluck(:feed_id)
@@ -204,7 +204,7 @@ class ApplicationController < ActionController::Base
     @feeds = @user.feeds.where.not(id: excluded_feeds).includes(:favicon)
 
     # get tags without profiles
-    @orphan_tags = @user.tags.left_outer_joins(:r_profiles_tags).where(r_profiles_tags: {tag_id: nil}).distinct
+    @orphan_tags = @user.tags.left_outer_joins(:r_profiles_tags).where(r_profiles_tags: {tag_id: nil}).distinct.order(:name)
 
     @count_data = {
       unread_entries: @user.unread_entries.pluck("feed_id, entry_id").each_slice(10_000).to_a,

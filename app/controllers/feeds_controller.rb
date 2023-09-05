@@ -28,9 +28,9 @@ class FeedsController < ApplicationController
     @tag_editor = TagEditor.new(@user, nil)
 
     # GET USER PROFILES
-    @user_profiles = @user.profiles.order("created_at DESC")
+    @user_profiles = @user.profiles.order(:profile_name)
    
-    @orphan_tags = @user.tags.left_outer_joins(:r_profiles_tags).where(r_profiles_tags: {tag_id: nil}).distinct
+    @orphan_tags = @user.tags.left_outer_joins(:r_profiles_tags).where(r_profiles_tags: {tag_id: nil}).distinct.order(:name)
 
   rescue Feedkit::Unauthorized => exception
     @feeds = nil
