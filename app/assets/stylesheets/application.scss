@@ -578,7 +578,7 @@ table {
 /*------------------------------------------------------------------------------
 Structure
 ------------------------------------------------------------------------------*/
-.profile-list{
+.profile-list {
   margin-top: 6px;
   margin-bottom: 8px;
   margin-right: 8px;
@@ -616,7 +616,7 @@ Structure
       text-decoration: none;
     }
     
-    .add-icon{
+    .add-icon {
       font-weight: bolder;
       @include font-size(14);
     }
@@ -644,6 +644,13 @@ Structure
       max-width: 85px;
     }
   }
+}
+
+.settings-menu-main-page {
+  overflow-y: auto;
+  display: flex; 
+  flex-direction: column; 
+  height: 90vh;
 }
 
 .no-content-message {

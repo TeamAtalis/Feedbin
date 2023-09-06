@@ -11,7 +11,7 @@
         <button class="reset entry-button" data-behavior="toggle_dropdown" title="Settings" data-toggle="tooltip">
             <%= svg_tag "icon-menu" %>
         </button>
-        <div class="dropdown-content group" data-nav="dropdown">
+        <div class="dropdown-content group settings-menu-main-page " data-nav="dropdown">
             <%= render Shared::SettingsNavView.new(user: current_user) %>
         </div>
     </div>
