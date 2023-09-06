@@ -62,10 +62,10 @@ Rails.application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  config.assets.debug = true
+  #config.assets.debug = true
 
   # Suppress logger output for asset requests.
-  config.assets.quiet = true
+  #config.assets.quiet = true
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
@@ -77,6 +77,12 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # Compress CSS using a preprocessor.
+  config.assets.js_compressor = nil
+
+  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = false
 
   config.action_mailer.default_url_options = {host: ENV.fetch("DEFAULT_URL_OPTIONS_HOST", "feedbin.dev")}
 end
