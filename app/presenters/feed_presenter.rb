@@ -1,9 +1,9 @@
 class FeedPresenter < BasePresenter
   presents :feed
 
-  def feed_link(link: nil, behavior: nil, has_profile: nil, &block)
+  def feed_link(link: nil, behavior: nil, has_profile: nil, user: nil, &block)
     default_behavior = "selectable show_entries open_item feed_link renamable user_title"
-    behavior_suffix = @user.try(:admin?) || !has_profile ? " has_settings" : ""
+    behavior_suffix = user.try(:admin?) || !has_profile ? " has_settings" : ""
 
     args = [
       link || @template.feed_entries_path(feed),

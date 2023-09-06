@@ -1,7 +1,7 @@
 <% cache [feed, "v7"] do %>
     <% present feed do |feed_presenter| %>
         <%= content_tag :li, data: {feed_id: feed.id, behavior: 'draggable sort_feed', sort_id: feed.id, feed_path: feed_path(feed) } do %>
-            <%= feed_presenter.feed_link(link: nil, behavior: nil, has_profile: has_profile) do %>
+            <%= feed_presenter.feed_link(link: nil, behavior: nil, has_profile: has_profile, user: current_user) do %>
                 <span class="link-inner">
                     <%= feed_presenter.favicon(feed) %>
                         <span class="collection-label-wrap"
