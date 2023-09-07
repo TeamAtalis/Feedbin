@@ -2,6 +2,7 @@ source "https://rubygems.org"
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 gem "rails", "= 7.0.6"
+ruby "3.2.2"
 gem "will_paginate"
 
 gem "puma"
