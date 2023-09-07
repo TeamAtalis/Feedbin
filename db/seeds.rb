@@ -22,34 +22,11 @@ SuggestedCategory.create!(name: "Food")
 SuggestedCategory.create!(name: "News")
 SuggestedCategory.create!(name: "Gaming")
 
-if Rails.env.development?
-  u = User.new(email: "admin@atalisfunding.com", password: "admin", password_confirmation: "admin", admin: true)
-  u.plan = plan
-  u.update_auth_token = true
-  u.save
 
-  # migration = u.account_migrations.create!(api_token: "asdf")
-  # migration.account_migration_items.create!(data: {
-  #   title: "Daring Fireball",
-  #   feed_id: 290,
-  #   feed_url: "http://daringfireball.net/index.xml"
-  # })
-  # migration.account_migration_items.failed.create!(
-  # message: "404 Not Found",
-  # data: {
-  #   title: "Daring Fireball",
-  #   feed_id: 290,
-  #   feed_url: "http://daringfireball.net/index.xml"
-  # })
-  # migration.account_migration_items.complete.create!(
-  # message: "Feed imported. Matched 3 of 3 unread articles.",
-  # data: {
-  #   title: "Daring Fireball",
-  #   feed_id: 290,
-  #   feed_url: "http://daringfireball.net/index.xml"
-  # })
-
-end
+u = User.new(email: "admin@atalisfunding.com", password: "admin", password_confirmation: "admin", admin: true)
+u.plan = plan
+u.update_auth_token = true
+u.save
 
 u1 = User.new(email: "customer1@atalisfunding.com", password: "admin", password_confirmation: "admin", admin: false)
 plan1 = Plan.create!(stripe_id: "trial", name: "Trial", price: 0, price_tier: 3)
