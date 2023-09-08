@@ -1,13 +1,14 @@
 require "etc"
 
-if Rails.env.production?
+#if Rails.env.production?
+if false
   Rails.application.config.after_initialize do
     ActiveRecord::Base.connection_pool.disconnect!
     ActiveSupport.on_load(:active_record) do
       begin
         uri = URI.parse(ENV["DATABASE_URL"])
       rescue URI::InvalidURIError
-        raise "Invalid DATABASE_URL"
+        raise "Invalid DATABASE_URL test marc"
       end
 
       database = (uri.path || "").split("/")[1]
