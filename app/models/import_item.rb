@@ -22,7 +22,7 @@ class ImportItem < ApplicationRecord
   }
 
   def import_feed
-    FeedImporter.perform_async(id)
+    FeedImporter.perform_sync(id)
   end
 
   def host
