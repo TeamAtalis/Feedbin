@@ -39,6 +39,4 @@ source ~/.bashrc
 gem install rails
 
 # install all gems for the project
-bundle install 
-
-
+bundle install

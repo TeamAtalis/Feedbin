@@ -30,6 +30,3 @@ sudo apt-get purge libvips -y
 echo "${Green}Remove Node${Color_Off}"
 sudo apt-get remove nodejs
 sudo apt-get purge nodejs
-
-
-
