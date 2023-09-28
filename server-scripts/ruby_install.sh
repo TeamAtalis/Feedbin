@@ -1,9 +1,10 @@
 #!/bin/bash -i
 
+# Move to root folder
+cd ..
+
 # Install dependecys for ruby
 sudo apt install git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev
-
-# Install dependeces for rails
 sudo apt-get install nodejs
 
 # Install dependences of some gems
@@ -30,3 +31,6 @@ gem install bundler
 
 # Install rails
 gem install rails 
+
+# Reload the bash profile for find rbenv
+source ~/.bash_profile
