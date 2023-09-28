@@ -34,3 +34,9 @@ gem install rails
 
 # Reload the bash profile for find rbenv
 source ~/.bash_profile
+
+# Install gems for the project
+bundle install
+
+# Reboot the server
+reboot
