@@ -23,10 +23,10 @@ class Settings::ImportsController < ApplicationController
   end
 
   def create
-    if rate_limited?(3, 1.day)
-      redirect_to settings_import_export_url, alert: "Too many upload requests."
-      return
-    end
+    #if rate_limited?(3, 1.day)
+    #  redirect_to settings_import_export_url, alert: "Too many upload requests."
+    #  return
+    #end
 
     upload = params.dig(:import, :upload)
     if !upload.respond_to?(:tempfile)
