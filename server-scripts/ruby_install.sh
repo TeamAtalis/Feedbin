@@ -1,10 +1,14 @@
 #!/bin/bash -i
 
+# Define postgres user
+USER_PASSWORD_DB="CHANGE ME"
+USER_DB="postgres"
+
 # Define colors for the script
 Color_Off='\033[0m'       # Text Reset
 Green='\033[0;32m'        # Green
 Blue='\033[0;34m'         # Blue
-Red='\033[91m'		  # Red
+Red='\033[91m'		      # Red
 
 # Move to root folder
 cd ..
@@ -14,6 +18,10 @@ echo -e "${Green}Start installing postgres ${Blue} [sudo apt install postgresql 
 sudo apt install postgresql postgresql-contrib
 echo -e "${Green}Init the postgres service ${Blue} [sudo systemctl start postgresql.service] ${Color_Off}"
 sudo systemctl start postgresql.service
+
+# Change user database password
+echo -e "${Green}Change user=${Red}$USER_DB ${Green} database password=${Red}$USER_PASSWORD_DB ${Color_Off}"
+sudo -u postgres psql -c "ALTER ROLE $USER_DB WITH PASSWORD '$USER_PASSWORD_DB'"
 
 # Install dependecys for ruby
 echo -e "${Green}Install dependecys for ruby ${Blue} [sudo apt install git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev] ${Color_Off}"
