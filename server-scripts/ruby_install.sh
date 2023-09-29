@@ -1,7 +1,19 @@
 #!/bin/bash -i
 
+# Define colors for the script
+Color_Off='\033[0m'       # Text Reset
+Green='\033[0;32m'        # Green
+Blue='\033[0;34m'         # Blue
+Red='\033[91m'		  # Red
+
 # Move to root folder
 cd ..
+
+# Install postgres and start the service
+echo -e "${Green}Start installing postgres ${Blue} [sudo apt install postgresql postgresql-contrib] ${Color_Off}"
+sudo apt install postgresql postgresql-contrib
+echo -e "${Green}Init the postgres service ${Blue} [sudo systemctl start postgresql.service] ${Color_Off}"
+sudo systemctl start postgresql.service
 
 # Install dependecys for ruby
 sudo apt install git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev
