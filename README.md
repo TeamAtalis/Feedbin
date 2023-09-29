@@ -50,17 +50,27 @@ Requirements
 
 Installation
 -------------
-Ultimately, you'll need a Ruby environment and a Rack compatible application server.
-
-First, install the dependencies listed under requirements.
-
-Next clone the repository and install the application dependencies
+First 
 
     git clone https://github.com/feedbin/feedbin.git
     cd feedbin
     bundle
 
-If you encounter any errors after running `bundle` there is a problem installing one of the dependencies. You must find out how to get this dependency installed on your platform.
+Inside the server_scripts folder, there is a file that installs all the necessary dependencies for the project. Executing this command you will install, postgres (+ pasword user), ruby and ruby on rails. After this command, the server will reboot.
+
+    ./server-scripts/ruby_install.sh
+
+There are some credentials defined on the project. These are necesary to connect with the database. You can acces to this credentials using
+
+    EDITOR="vi" rails credentials:edit
+
+On this file you must put the same password defined on the ruby_install.sh: 
+
+    USER_PASSWORD_DB="CHANGE ME"
+
+Finally for acces to credentials:edit, you must create inside the folder config/ a master.key file. 
+
+Ask the admin to get this key.
 
 **Configure**
 
