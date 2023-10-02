@@ -54,9 +54,8 @@ First
 
     git clone https://github.com/feedbin/feedbin.git
     cd feedbin
-    bundle
 
-Inside the server_scripts folder, there is a file that installs all the necessary dependencies for the project. Executing this command you will install, postgres (+ pasword user), ruby and ruby on rails. After this command, the server will reboot.
+Inside the `server_scripts` folder, there is a file that installs all the necessary dependencies for the project. Executing this command you will install, postgres (+ pasword user), ruby and ruby on rails. After this command, the server will reboot.
 
     ./server-scripts/ruby_install.sh
 
@@ -64,11 +63,13 @@ There are some credentials defined on the project. These are necesary to connect
 
     EDITOR="vi" rails credentials:edit
 
-On this file you must put the same password defined on the ruby_install.sh: 
+On this file you must put the same password defined on the `ruby_install.sh`: 
 
     USER_PASSWORD_DB="CHANGE ME"
 
-Finally for acces to credentials:edit, you must create inside the folder config/ a master.key file. 
+Finally for acces to `credentials:edit`, you must create inside the folder `config/` a `master.key` file. 
+
+    touch master.key
 
 Ask the admin to get this key.
 
