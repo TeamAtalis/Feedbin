@@ -57,13 +57,13 @@ First
 
 Inside the `server_scripts` folder, there is a file that installs all the necessary dependencies for the project. Executing this command you will install, postgres (+ pasword user), ruby and ruby on rails. After this command, the server will reboot.
 
-    ./server-scripts/ruby_install.sh
+    ./server-scripts/pre-fligth.sh
 
 There are some credentials defined on the project. These are necesary to connect with the database. You can acces to this credentials using
 
     EDITOR="vi" rails credentials:edit
 
-On this file you must put the same password defined on the `ruby_install.sh`: 
+On this file you must put the same password defined on the `pre-fligth.sh`: 
 
     USER_PASSWORD_DB="CHANGE ME"
 
