@@ -1,0 +1,14 @@
+[Unit]
+Description=Feedbin Rails Server
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/Feedbin
+ExecStart=/usr/bin/bash -c "cd /home/ubuntu/Feedbin && /home/ubuntu/.rbenv/shims/rails s -b 0.0.0.0"
+# optional items below
+Restart=always
+RestartSec=3
+StartLimitInterval=0
+
+[Install]
+WantedBy=multi-user.target
