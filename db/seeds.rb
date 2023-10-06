@@ -81,7 +81,6 @@ Feed.create!(
   last_change_check: nil,
 )
 
-
 Feed.create!(title: "RCD Mallorca",
   feed_url: "https://e00-marca.uecdn.es/rss/futbol/mallorca.xml",
   site_url: "http://www.marca.com",
@@ -139,6 +138,40 @@ Feed.create!(
   last_change_check: nil
 )
 
+Entry.create!(
+  feed_id: Feed.find_by(title:"Fórmula 1 // marca").id,
+  title: "Monumental cabreo de Gasly por tener que dejar pasar a Ocon: surtido de peinetas al aire",
+  url: "https://www.marca.com/motor/formula1/gp-japon/2023/09/24/650ff7cc22601d017d8b458b.html",
+  author: "RAMÓN GARCÍA",
+  summary:
+   "Alpine pidió al piloto francés que intercambiara posición con su compañero y acabó la carrera totalmente desquiciado por la decisión Leer",
+  content:
+   "Alpine pidió al piloto francés que intercambiara posición con su compañero y acabó la carrera totalmente desquiciado por la decisión&nbsp;<a href=\"https://www.marca.com/motor/formula1/gp-japon/2023/09/24/650ff7cc22601d017d8b458b.html\"> Leer </a><img src=\"http://secure-uk.imrworldwide.com/cgi-bin/m?cid=es-widgetueditorial&amp;cg=rss-marca&amp;ci=es-widgetueditorial&amp;si=https://e00-marca.uecdn.es/rss/motor/formula1.xml\" alt=\"\"/>",
+  published: Time.now,
+  updated: nil,
+  created_at: Time.now,
+  updated_at: Time.now,
+  entry_id: "https://www.marca.com/motor/formula1/gp-japon/2023/09/24/650ff7cc22601d017d8b458b.html",
+  public_id: "a55ffa1646a095022d2bb97ae59f20cf21e89443",
+  old_public_id: nil,
+  starred_entries_count: 0,
+  data: {"public_id_alt"=>"830f0318bdf31aedf6014e1c2d2186c92e1107f3"},
+  original: nil,
+  source: nil,
+  image_url: nil,
+  processed_image_url: nil,
+  image: nil,
+  recently_played_entries_count: 0,
+  thread_id: nil,
+  settings: {},
+  main_tweet_id: nil,
+  queued_entries_count: 0,
+  fingerprint: "17ac4496-e1c9-ec43-2d37-d3faa82a66fc",
+  guid: "6f1c425d-9d41-503b-4313-e0b40ca250ae",
+  provider: nil,
+  provider_id: nil,
+  provider_parent_id: nil
+)
 
 Entry.create!(
   feed_id: Feed.find_by(title:"Albacete // marca").id,
@@ -202,6 +235,24 @@ Entry.create!(
 )
 
 Subscription.create!(
+ user_id: 1,
+ feed_id: Feed.find_by(title:"Fórmula 1 // marca").id,
+ created_at: Time.now,
+ updated_at: Time.now,
+ title: "Fórmula 1 // marca",
+ view_inline: false,
+ active: true,
+ push: false,
+ show_updates: true,
+ muted: false,
+ show_retweets: true,
+ media_only: nil,
+ kind: "default",
+ view_mode: "article",
+ show_status: "not_show"
+)
+
+Subscription.create!(
   user_id: 1,
   feed_id: Feed.find_by(title:"RCD Mallorca").id,
   created_at: Time.now,
@@ -237,23 +288,13 @@ Subscription.create!(
 )
 
 
-#Subscription.create!(
-#  user_id: 2,
-#  feed_id: Feed.find_by(title:"RCD Mallorca").id,
-#  created_at: Time.now,
-#  updated_at: Time.now,
-#  title: "RCD Mallorca",
-#  view_inline: false,
-#  active: true,
-#  push: false,
-#  show_updates: true,
-#  muted: false,
-#  show_retweets: true,
-#  media_only: nil,
-#  kind: "default",
-#  view_mode: "article"
-#)
-
+Tagging.create!(
+  feed_id: Feed.find_by(title:"Fórmula 1 // marca").id,
+  user_id: 1,
+  tag_id: Tag.find_by(name:"Motor").id,
+  created_at: Time.now,
+  updated_at: Time.now
+)
 
 Tagging.create!(
   feed_id: Feed.find_by(title:"RCD Mallorca").id,
