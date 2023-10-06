@@ -31,20 +31,58 @@ u.plan = plan
 u.update_auth_token = true
 u.save
 
-u1 = User.new(email: "customer1@atalisfunding.com", password: "admin", password_confirmation: "admin", admin: false)
-plan1 = Plan.create!(stripe_id: "trial", name: "Trial", price: 0, price_tier: 3)
-u1.plan = plan1
-u1.update_auth_token = true
-u1.save
+#u1 = User.new(email: "customer1@atalisfunding.com", password: "admin", password_confirmation: "admin", admin: false)
+#plan1 = Plan.create!(stripe_id: "trial", name: "Trial", price: 0, price_tier: 3)
+#u1.plan = plan1
+#u1.update_auth_token = true
+#u1.save
 
 Profile.create!(profile_name: "Periodista", created_at: Time.now, updated_at: Time.now)
-
 Tag.create!(name: "La liga", created_at: Time.now, updated_at: Time.now)
+#Tag.create!(name: "La liga 123", created_at: Time.now, updated_at: Time.now)
+Tag.create!(name: "Motor", created_at: Time.now, updated_at: Time.now)
+#Tag.create!(name: "Baloncesto", created_at: Time.now, updated_at: Time.now)
 
-RUsersProfile.create!(user_id: 2, profile_id: 1)
-RProfilesTag.create!(profile_id: 1, tag_id: 1)
+# subscriptions_controller create
+#RUsersProfile.create!(user_id: 2, profile_id: 1)
+RProfilesTag.create!(profile_id: Profile.find_by(profile_name:"Periodista").id, tag_id: Tag.find_by(name:"La liga").id)
+#RProfilesTag.create!(profile_id: Profile.find_by(profile_name:"Periodista").id, tag_id: Tag.find_by(name:"La liga 123").id)
+RProfilesTag.create!(profile_id: Profile.find_by(profile_name:"Periodista").id, tag_id: Tag.find_by(name:"Motor").id)
+#RProfilesTag.create!(profile_id: Profile.find_by(profile_name:"Periodista").id, tag_id: Tag.find_by(name:"Baloncesto").id)
 
-Feed.create!(title: "Mallorca // marca",
+Feed.create!(
+  title: "Fórmula 1 // marca",
+  feed_url: "https://e00-marca.uecdn.es/rss/motor/formula1.xml",
+  site_url: "http://www.marca.com",
+  created_at: Time.now,
+  updated_at: Time.now,
+  subscriptions_count: 1,
+  protected: false,
+  push_expiration: nil,
+  last_published_entry: Time.now,
+  host: "www.marca.com",
+  self_url: "https://e00-marca.uecdn.es/rss/motor/formula1.xml",
+  feed_type: "xml",
+  active: true,
+  options:
+   {"description"=>"Fórmula 1 // marca",
+    "itunes_categories"=>[],
+    "itunes_owners"=>[],
+    "image"=>
+     {"url"=>"http://estaticos.marca.com/imagen/canalima144.gif",
+      "description"=>"marca.com",
+      "height"=>"24",
+      "link"=>"https://www.marca.com",
+      "title"=>"Fórmula 1 // marca",
+      "width"=>"144"}},
+  hubs: [],
+  settings: {},
+  standalone_request_at: nil,
+  last_change_check: nil,
+)
+
+
+Feed.create!(title: "RCD Mallorca",
   feed_url: "https://e00-marca.uecdn.es/rss/futbol/mallorca.xml",
   site_url: "http://www.marca.com",
   created_at: Time.now,
@@ -70,8 +108,74 @@ Feed.create!(title: "Mallorca // marca",
       "width"=>"144"}}
   )
 
+Feed.create!(
+  title: "Albacete // marca",
+  feed_url: "https://e00-marca.uecdn.es/rss/futbol/albacete.xml",
+  site_url: "http://www.marca.com",
+  created_at: Time.now,
+  updated_at: Time.now,
+  subscriptions_count: 1,
+  protected: false,
+  push_expiration: nil,
+  last_published_entry: Time.now,
+  host: "www.marca.com",
+  self_url: "https://e00-marca.uecdn.es/rss/futbol/albacete.xml",
+  feed_type: "xml",
+  active: true,
+  options:
+   {"description"=>"Albacete // marca",
+    "itunes_categories"=>[],
+    "itunes_owners"=>[],
+    "image"=>
+     {"url"=>"http://estaticos.marca.com/imagen/canalima144.gif",
+      "description"=>"marca.com",
+      "height"=>"24",
+      "link"=>"https://www.marca.com",
+      "title"=>"Albacete // marca",
+      "width"=>"144"}},
+  hubs: [],
+  settings: {},
+  standalone_request_at: nil,
+  last_change_check: nil
+)
+
+
 Entry.create!(
-  feed_id: 1,
+  feed_id: Feed.find_by(title:"Albacete // marca").id,
+  title: "El Alba cede a Juan María al Mirandés y da la baja a Montes",
+  url: "https://www.marca.com/futbol/mirandes/2023/07/10/64abb52c22601de30f8b45b1.html",
+  author: "LUIS CASTELO",
+  summary: "El lateral zurdo del Alba refuerza al equipo burgalés Leer",
+  content:
+   "El lateral zurdo del Alba refuerza al equipo burgalés&nbsp;<a href=\"https://www.marca.com/futbol/mirandes/2023/07/10/64abb52c22601de30f8b45b1.html\"> Leer </a><img src=\"http://secure-uk.imrworldwide.com/cgi-bin/m?cid=es-widgetueditorial&amp;cg=rss-marca&amp;ci=es-widgetueditorial&amp;si=https://e00-marca.uecdn.es/rss/futbol/albacete.xml\" alt=\"\"/>",
+  published: Time.now,
+  updated: nil,
+  created_at: Time.now,
+  updated_at: Time.now,
+  entry_id: "https://www.marca.com/futbol/mirandes/2023/07/10/64abb52c22601de30f8b45b1.html",
+  public_id: "c77fe94f8b28418c7c663904b275de28bc673ed8",
+  old_public_id: nil,
+  starred_entries_count: 0,
+  data: {"public_id_alt"=>"d847a4470b675262203350cacde262a76139cbbc"},
+  original: nil,
+  source: nil,
+  image_url: nil,
+  processed_image_url: nil,
+  image: nil,
+  recently_played_entries_count: 0,
+  thread_id: nil,
+  settings: {},
+  main_tweet_id: nil,
+  queued_entries_count: 0,
+  fingerprint: "5c3a641e-4802-cd5f-ac6c-92c58b3d0bbc",
+  guid: "4f0fa545-3b0d-3cb6-373b-271e2b3d034d",
+  provider: nil,
+  provider_id: nil,
+  provider_parent_id: nil
+)
+
+Entry.create!(
+  feed_id: Feed.find_by(title:"RCD Mallorca").id,
   title: "Goleada del Mallorca en la segunda prueba de la pretemporada",
   url: "https://www.marca.com/futbol/mallorca/2023/07/17/64b582c422601d3f268b458d.html",
   author: "JUAN MIGUEL SÁNCHEZ",
@@ -99,7 +203,7 @@ Entry.create!(
 
 Subscription.create!(
   user_id: 1,
-  feed_id: 1,
+  feed_id: Feed.find_by(title:"RCD Mallorca").id,
   created_at: Time.now,
   updated_at: Time.now,
   title: "RCD Mallorca",
@@ -115,11 +219,11 @@ Subscription.create!(
 )
 
 Subscription.create!(
-  user_id: 2,
-  feed_id: 1,
+  user_id: 1,
+  feed_id: Feed.find_by(title:"Albacete // marca").id,
   created_at: Time.now,
   updated_at: Time.now,
-  title: "RCD Mallorca",
+  title: "Albacete // marca",
   view_inline: false,
   active: true,
   push: false,
@@ -128,68 +232,98 @@ Subscription.create!(
   show_retweets: true,
   media_only: nil,
   kind: "default",
-  view_mode: "article"
+  view_mode: "article",
+  show_status: "not_show"
 )
 
+
+#Subscription.create!(
+#  user_id: 2,
+#  feed_id: Feed.find_by(title:"RCD Mallorca").id,
+#  created_at: Time.now,
+#  updated_at: Time.now,
+#  title: "RCD Mallorca",
+#  view_inline: false,
+#  active: true,
+#  push: false,
+#  show_updates: true,
+#  muted: false,
+#  show_retweets: true,
+#  media_only: nil,
+#  kind: "default",
+#  view_mode: "article"
+#)
+
+
 Tagging.create!(
-  feed_id: 1,
+  feed_id: Feed.find_by(title:"RCD Mallorca").id,
   user_id: 1,
-  tag_id: 1,
+  tag_id: Tag.find_by(name:"La liga").id,
   created_at: Time.now,
   updated_at: Time.now
 )
 
 Tagging.create!(
-  feed_id: 1,
-  user_id: 2,
-  tag_id: 1,
+  feed_id: Feed.find_by(title:"Albacete // marca").id,
+  user_id: 1,
+  tag_id: Tag.find_by(name:"La liga").id,
   created_at: Time.now,
   updated_at: Time.now
 )
 
-Profile.create!(profile_name: "Biotech")
-Profile.create!(profile_name: "Cancer")
-Profile.create!(profile_name: "Motor")
+RUsersProfile.create!(user_id: 1, profile_id: Profile.find_by(profile_name:"Periodista").id)
 
-Tag.create!(name: "Biomaterials")
-Tag.create!(name: "Stem Cell")
-Tag.create!(name: "Nanobiotechnology")
+#Tagging.create!(
+#  feed_id: 1,
+#  user_id: 2,
+#  tag_id: Tag.find_by(name:"La liga").id,
+#  created_at: Time.now,
+#  updated_at: Time.now
+#)
 
+#Profile.create!(profile_name: "Biotech")
+#Profile.create!(profile_name: "Cancer")
+#Profile.create!(profile_name: "Motor")
 
-Tag.create!(name: "Cancer Advances")
-Tag.create!(name: "Prostate Cancer")
-Tag.create!(name: "Breast Cancer")
-
-Tag.create!(name: "Formula 1")
-Tag.create!(name: "Le Mans")
-Tag.create!(name: "GT")
-
-biotech_id = Profile.find_by(profile_name: "Biotech").id
-
-RUsersProfile.create!(user_id: 1, profile_id: biotech_id)
-
-RProfilesTag.create!(profile_id: biotech_id, tag_id: Tag.find_by(name: "Biomaterials").id)
-RProfilesTag.create!(profile_id: biotech_id, tag_id: Tag.find_by(name: "Stem Cell").id)
-RProfilesTag.create!(profile_id: biotech_id, tag_id: Tag.find_by(name: "Nanobiotechnology").id)
+#Tag.create!(name: "Biomaterials")
+#Tag.create!(name: "Stem Cell")
+#Tag.create!(name: "Nanobiotechnology")
 
 
-cancer_id = Profile.find_by(profile_name: "Cancer").id
+#Tag.create!(name: "Cancer Advances")
+#Tag.create!(name: "Prostate Cancer")
+#Tag.create!(name: "Breast Cancer")
 
-RUsersProfile.create!(user_id: 1, profile_id: cancer_id)
+#Tag.create!(name: "Formula 1")
+#Tag.create!(name: "Le Mans")
+#Tag.create!(name: "GT")
 
-RProfilesTag.create!(profile_id: cancer_id, tag_id: Tag.find_by(name: "Cancer Advances").id)
-RProfilesTag.create!(profile_id: cancer_id, tag_id: Tag.find_by(name: "Prostate Cancer").id)
-RProfilesTag.create!(profile_id: cancer_id, tag_id: Tag.find_by(name: "Breast Cancer").id)
+#biotech_id = Profile.find_by(profile_name: "Biotech").id
 
-motor_id = Profile.find_by(profile_name: "Motor").id
+#RUsersProfile.create!(user_id: 1, profile_id: biotech_id)
 
-RUsersProfile.create!(user_id: 1, profile_id: motor_id)
-
-RProfilesTag.create!(profile_id: motor_id, tag_id: Tag.find_by(name: "Formula 1").id)
-RProfilesTag.create!(profile_id: motor_id, tag_id: Tag.find_by(name: "Le Mans").id)
-RProfilesTag.create!(profile_id: motor_id, tag_id: Tag.find_by(name: "GT").id)
+#RProfilesTag.create!(profile_id: biotech_id, tag_id: Tag.find_by(name: "Biomaterials").id)
+#RProfilesTag.create!(profile_id: biotech_id, tag_id: Tag.find_by(name: "Stem Cell").id)
+#RProfilesTag.create!(profile_id: biotech_id, tag_id: Tag.find_by(name: "Nanobiotechnology").id)
 
 
-periodista_id = Profile.find_by(profile_name: "Periodista").id
-RUsersProfile.create!(user_id: 1, profile_id: periodista_id)
+#cancer_id = Profile.find_by(profile_name: "Cancer").id
+
+#RUsersProfile.create!(user_id: 1, profile_id: cancer_id)
+
+#RProfilesTag.create!(profile_id: cancer_id, tag_id: Tag.find_by(name: "Cancer Advances").id)
+#RProfilesTag.create!(profile_id: cancer_id, tag_id: Tag.find_by(name: "Prostate Cancer").id)
+#RProfilesTag.create!(profile_id: cancer_id, tag_id: Tag.find_by(name: "Breast Cancer").id)
+
+#motor_id = Profile.find_by(profile_name: "Motor").id
+
+#RUsersProfile.create!(user_id: 1, profile_id: motor_id)
+
+#RProfilesTag.create!(profile_id: motor_id, tag_id: Tag.find_by(name: "Formula 1").id)
+#RProfilesTag.create!(profile_id: motor_id, tag_id: Tag.find_by(name: "Le Mans").id)
+#RProfilesTag.create!(profile_id: motor_id, tag_id: Tag.find_by(name: "GT").id)
+
+
+#periodista_id = Profile.find_by(profile_name: "Periodista").id
+#RUsersProfile.create!(user_id: 1, profile_id: periodista_id)
 
