@@ -39,16 +39,43 @@ u.save
 
 Profile.create!(profile_name: "Periodista", created_at: Time.now, updated_at: Time.now)
 Tag.create!(name: "La liga", created_at: Time.now, updated_at: Time.now)
-#Tag.create!(name: "La liga 123", created_at: Time.now, updated_at: Time.now)
 Tag.create!(name: "Motor", created_at: Time.now, updated_at: Time.now)
-#Tag.create!(name: "Baloncesto", created_at: Time.now, updated_at: Time.now)
+Tag.create!(name: "Basket", created_at: Time.now, updated_at: Time.now)
 
-# subscriptions_controller create
-#RUsersProfile.create!(user_id: 2, profile_id: 1)
 RProfilesTag.create!(profile_id: Profile.find_by(profile_name:"Periodista").id, tag_id: Tag.find_by(name:"La liga").id)
-#RProfilesTag.create!(profile_id: Profile.find_by(profile_name:"Periodista").id, tag_id: Tag.find_by(name:"La liga 123").id)
 RProfilesTag.create!(profile_id: Profile.find_by(profile_name:"Periodista").id, tag_id: Tag.find_by(name:"Motor").id)
-#RProfilesTag.create!(profile_id: Profile.find_by(profile_name:"Periodista").id, tag_id: Tag.find_by(name:"Baloncesto").id)
+RProfilesTag.create!(profile_id: Profile.find_by(profile_name:"Periodista").id, tag_id: Tag.find_by(name:"Basket").id)
+
+Feed.create!(
+  title: "ACB Liga Endesa // marca",
+  feed_url: "https://e00-marca.uecdn.es/rss/baloncesto/acb.xml",
+  site_url: "http://www.marca.com",
+  created_at: Time.now,
+  updated_at: Time.now,
+  subscriptions_count: 1,
+  protected: false,
+  push_expiration: nil,
+  last_published_entry: Time.now,
+  host: "www.marca.com",
+  self_url: "https://e00-marca.uecdn.es/rss/baloncesto/acb.xml",
+  feed_type: "xml",
+  active: true,
+  options:
+   {"description"=>"ACB Liga Endesa // marca",
+    "itunes_categories"=>[],
+    "itunes_owners"=>[],
+    "image"=>
+     {"url"=>"http://estaticos.marca.com/imagen/canalima144.gif",
+      "description"=>"marca.com",
+      "height"=>"24",
+      "link"=>"https://www.marca.com",
+      "title"=>"ACB Liga Endesa // marca",
+      "width"=>"144"}},
+  hubs: [],
+  settings: {},
+  standalone_request_at: nil,
+  last_change_check: nil
+)
 
 Feed.create!(
   title: "Fórmula 1 // marca",
@@ -136,6 +163,41 @@ Feed.create!(
   settings: {},
   standalone_request_at: nil,
   last_change_check: nil
+)
+
+Entry.create!(
+  feed_id: Feed.find_by(title:"ACB Liga Endesa // marca").id,
+  title: "Willy y Brizuela dan el estirón definitivo del Barcelona ante un combativo Joventut",
+  url: "https://www.marca.com/baloncesto/acb/2023/09/24/6510522c46163f2ab78b4582.html",
+  author: "José Luis Martínez",
+  summary:
+   "Willy Hernangómez (10) y Brizuela (10), dos de los fichajes azulgranas, aparecen entre el tercer y el último cuarto para romper el partido. Leer",
+  content:
+   "Willy Hernangómez (10) y Brizuela (10), dos de los fichajes azulgranas, aparecen entre el tercer y el último cuarto para romper el partido.&nbsp;<a href=\"https://www.marca.com/baloncesto/acb/2023/09/24/6510522c46163f2ab78b4582.html\"> Leer </a><img src=\"http://secure-uk.imrworldwide.com/cgi-bin/m?cid=es-widgetueditorial&amp;cg=rss-marca&amp;ci=es-widgetueditorial&amp;si=https://e00-marca.uecdn.es/rss/baloncesto/acb.xml\" alt=\"\"/>",
+  published: Time.now,
+  updated: nil,
+  created_at: Time.now,
+  updated_at: Time.now,
+  entry_id: "https://www.marca.com/baloncesto/acb/2023/09/24/6510522c46163f2ab78b4582.html",
+  public_id: "38c9ceda27ac3d9e53e6e88b2fbdc57061187033",
+  old_public_id: nil,
+  starred_entries_count: 0,
+  data: {"public_id_alt"=>"1bd0683729d9b62d7b746e2062f37dd87a692f48"},
+  original: nil,
+  source: nil,
+  image_url: nil,
+  processed_image_url: nil,
+  image: nil,
+  recently_played_entries_count: 0,
+  thread_id: nil,
+  settings: {},
+  main_tweet_id: nil,
+  queued_entries_count: 0,
+  fingerprint: "f4cdc273-9c01-4f8f-d759-b12394d184b6",
+  guid: "4744f1a4-5fed-3ec5-a8fc-58d48323d3fb",
+  provider: nil,
+  provider_id: nil,
+  provider_parent_id: nil
 )
 
 Entry.create!(
@@ -235,6 +297,24 @@ Entry.create!(
 )
 
 Subscription.create!(
+  user_id: 1,
+  feed_id: Feed.find_by(title:"ACB Liga Endesa // marca").id,
+  created_at: Time.now,
+  updated_at: Time.now,
+  title: "ACB Liga Endesa // marca",
+  view_inline: false,
+  active: true,
+  push: false,
+  show_updates: true,
+  muted: false,
+  show_retweets: true,
+  media_only: nil,
+  kind: "default",
+  view_mode: "article",
+  show_status: "not_show"
+)
+
+Subscription.create!(
  user_id: 1,
  feed_id: Feed.find_by(title:"Fórmula 1 // marca").id,
  created_at: Time.now,
@@ -287,6 +367,13 @@ Subscription.create!(
   show_status: "not_show"
 )
 
+Tagging.create!(
+  feed_id: Feed.find_by(title:"ACB Liga Endesa // marca").id,
+  user_id: 1,
+  tag_id: Tag.find_by(name:"Basket").id,
+  created_at: Time.now,
+  updated_at: Time.now
+)
 
 Tagging.create!(
   feed_id: Feed.find_by(title:"Fórmula 1 // marca").id,
@@ -313,58 +400,3 @@ Tagging.create!(
 )
 
 RUsersProfile.create!(user_id: 1, profile_id: Profile.find_by(profile_name:"Periodista").id)
-
-#Tagging.create!(
-#  feed_id: 1,
-#  user_id: 2,
-#  tag_id: Tag.find_by(name:"La liga").id,
-#  created_at: Time.now,
-#  updated_at: Time.now
-#)
-
-#Profile.create!(profile_name: "Biotech")
-#Profile.create!(profile_name: "Cancer")
-#Profile.create!(profile_name: "Motor")
-
-#Tag.create!(name: "Biomaterials")
-#Tag.create!(name: "Stem Cell")
-#Tag.create!(name: "Nanobiotechnology")
-
-
-#Tag.create!(name: "Cancer Advances")
-#Tag.create!(name: "Prostate Cancer")
-#Tag.create!(name: "Breast Cancer")
-
-#Tag.create!(name: "Formula 1")
-#Tag.create!(name: "Le Mans")
-#Tag.create!(name: "GT")
-
-#biotech_id = Profile.find_by(profile_name: "Biotech").id
-
-#RUsersProfile.create!(user_id: 1, profile_id: biotech_id)
-
-#RProfilesTag.create!(profile_id: biotech_id, tag_id: Tag.find_by(name: "Biomaterials").id)
-#RProfilesTag.create!(profile_id: biotech_id, tag_id: Tag.find_by(name: "Stem Cell").id)
-#RProfilesTag.create!(profile_id: biotech_id, tag_id: Tag.find_by(name: "Nanobiotechnology").id)
-
-
-#cancer_id = Profile.find_by(profile_name: "Cancer").id
-
-#RUsersProfile.create!(user_id: 1, profile_id: cancer_id)
-
-#RProfilesTag.create!(profile_id: cancer_id, tag_id: Tag.find_by(name: "Cancer Advances").id)
-#RProfilesTag.create!(profile_id: cancer_id, tag_id: Tag.find_by(name: "Prostate Cancer").id)
-#RProfilesTag.create!(profile_id: cancer_id, tag_id: Tag.find_by(name: "Breast Cancer").id)
-
-#motor_id = Profile.find_by(profile_name: "Motor").id
-
-#RUsersProfile.create!(user_id: 1, profile_id: motor_id)
-
-#RProfilesTag.create!(profile_id: motor_id, tag_id: Tag.find_by(name: "Formula 1").id)
-#RProfilesTag.create!(profile_id: motor_id, tag_id: Tag.find_by(name: "Le Mans").id)
-#RProfilesTag.create!(profile_id: motor_id, tag_id: Tag.find_by(name: "GT").id)
-
-
-#periodista_id = Profile.find_by(profile_name: "Periodista").id
-#RUsersProfile.create!(user_id: 1, profile_id: periodista_id)
-
