@@ -1,6 +1,6 @@
 <% cache ["profile_#{profile.id}_#{profile.profile_name}", "v4"] do %>
-    <% if profile.tags.size > 0 %>
     <% tags = profile.tags.order(:name) %>
+    <% if profile.tags.size > 0 %>
         <details class="profile">
             <summary class="feed-link profile-link tag-link" >
                 <span class="link-inner">
@@ -17,7 +17,7 @@
                 </span>
             </summary>
             <% tags.each do |tag| %>
-                    <div class="drawer-open feed-drawer">
+                    <div class="drawer-profile feed-drawer">
                         <ul>
                             <%= render partial: "tags/profile_tag", locals: { tag: tag } %>
                         </ul>

@@ -5,16 +5,18 @@
   profiles.forEach((profile) => {
     profile.addEventListener("toggle", () => {
       const iconCaret = profile.querySelector(".icon-caret")
-      const drawer =
-        profile.querySelector(".drawer-profile") ||
-        profile.querySelector(".drawer-open")
+      const drawers = profile.querySelectorAll(".drawer-profile, .drawer-open")
 
-      if (profile.open && drawer) {
+      if (profile.open) {
         iconCaret.classList.add("profile-open")
-        drawer.classList.replace("drawer-profile", "drawer-open")
+        drawers.forEach((drawer) => {
+          drawer.classList.replace("drawer-profile", "drawer-open")
+        })
       } else {
         iconCaret.classList.remove("profile-open")
-        drawer && drawer.classList.replace("drawer-open", "drawer-profile")
+        drawers.forEach((drawer) => {
+          drawer.classList.replace("drawer-open", "drawer-profile")
+        })
       }
     })
   })
