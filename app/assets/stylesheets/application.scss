@@ -650,7 +650,7 @@ Structure
   overflow-y: auto;
   display: flex; 
   flex-direction: column; 
-  height: 90vh;
+  height: 85vh;
 }
 
 .no-content-message {
@@ -1672,7 +1672,7 @@ $hamburger-dot: 4px;
   .drawer-open {
     height: auto;
     opacity: 1;
-    transition: opacity 0.2s linear;
+    transition: opacity 0.3s linear;
   }
   .profile-open {
     transform: rotate(0deg) !important;

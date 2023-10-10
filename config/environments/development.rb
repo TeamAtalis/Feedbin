@@ -84,5 +84,9 @@ Rails.application.configure do
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
 
+  config.assets.debug = true
+  config.assets.quiet = true
+
+
   config.action_mailer.default_url_options = {host: ENV.fetch("DEFAULT_URL_OPTIONS_HOST", "feedbin.dev")}
 end
