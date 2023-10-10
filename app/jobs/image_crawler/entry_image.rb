@@ -1,7 +1,8 @@
 module ImageCrawler
   class EntryImage
     include Sidekiq::Worker
-    sidekiq_options retry: false
+    #sidekiq_options retry: false
+    sidekiq_options queue: :temp_queue, retry: false
 
     def perform(public_id, image = nil)
       @entry = Entry.find_by_public_id!(public_id)
