@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize, only: [:new, :create]
+  include SubscriptionConcern
 
+  skip_before_action :authorize, only: [:new, :create]
   before_action :set_user, only: [:update, :destroy]
   before_action :ensure_permission, only: [:update, :destroy]
 
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
       Librato.increment("user.trial.signup")
       flash[:one_time_content] = render_to_string(partial: "shared/register_protocol_handlers")
       sign_in @user
+      first_subcription # Subscribed to default profile
       if session[:feed_wrangler_token].present?
         @user.account_migrations.create(api_token: session.delete(:feed_wrangler_token))
         redirect_to account_migrations_url
@@ -74,5 +76,11 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :stripe_token, :coupon_code, :plan_id)
+  end
+  
+  # By default, upon user creation, they will be 
+  # automatically subscribed to a profile (Periodista).
+  def first_subcription
+    subscribe_profile(Profile.find_by(profile_name:"Periodista").id)
   end
 end
