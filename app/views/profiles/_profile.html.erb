@@ -1,5 +1,6 @@
 <% cache ["profile_#{profile.id}_#{profile.profile_name}", "v4"] do %>
     <% if profile.tags.size > 0 %>
+    <% tags = profile.tags.order(:name) %>
         <details class="profile">
             <summary class="feed-link profile-link tag-link" >
                 <span class="link-inner">
@@ -10,25 +11,17 @@
                     <span class="collection-label-wrap profile-label-color">
                         <span class="collection-label" ><%= profile.profile_name %></span>
                     </span>
-                    <span class="count-wrap">
+                    <%# <span class="count-wrap">
                         <%= content_tag :span, '', class: 'count', data: {behavior: 'needs_count', count_group: 'byTag', count_group_id: profile.id } %>
-                    </span>
+                    <%# </span> %>
                 </span>
             </summary>
-            <% profile.tags.order(:name).each do |tag|%>
-                <% if tag.feeds.size > 0 %>
-                    <div class="drawer-profile feed-drawer">
+            <% tags.each do |tag| %>
+                    <div class="drawer-open feed-drawer">
                         <ul>
                             <%= render partial: "tags/profile_tag", locals: { tag: tag } %>
                         </ul>
-                    </div>
-                <% else %>
-                    <div class="drawer-profile feed-drawer">
-                        <ul>
-                            <%= render partial: "tags/empty_tag", locals: { tag: tag } %>
-                        </ul>
-                    </div>
-                <% end %>    
+                    </div>   
             <% end %>
         </details>
     <% else %>
