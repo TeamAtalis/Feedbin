@@ -85,11 +85,11 @@ module Shared
               ))
               render(::SettingsNav::NavComponent.new(
                 title: "Import & Export",
-          subtitle: "Bring your OPML",
-          url: helpers.settings_import_export_path,
-          selected: helpers.is_active?(["settings/imports"], %w[index show]),
-          icon: "menu-icon-import-export"
-        ))
+                subtitle: "Bring your OPML",
+                url: helpers.settings_import_export_path,
+                selected: helpers.is_active?(["settings/imports"], %w[index show]),
+                icon: "menu-icon-import-export"
+                ))
         if @user.try(:account_migrations)&.exists?
           render(::SettingsNav::NavComponent.new(
             title: "Account Migration",
@@ -105,76 +105,75 @@ module Shared
         render ::SettingsNav::HeaderComponent.new do
           plain "Admin and management"
         end
-      end  
-
-      div(class: "px-4 pl-10 tw-hidden group-data-[nav=dropdown]:block") do
-        hr(class: "m-0")
-      end
-
-      ul 
-        if @user.try(:admin?)
-          render(::SettingsNav::NavComponent.new(
-            title: "Manage Profiles",
-            subtitle: "Manage profiles and user profiles",
-            url: helpers.settings_profiles_path,
-            icon: "menu-icon-subscriptions",
-            selected: helpers.is_active?(["settings/profiles"], %w[index edit])
+        
+        div(class: "px-4 pl-10 tw-hidden group-data-[nav=dropdown]:block") do
+          hr(class: "m-0")
+        end
+        
+        ul 
+        
+        render(::SettingsNav::NavComponent.new(
+          title: "Manage Profiles",
+          subtitle: "Manage profiles",
+          url: helpers.settings_profiles_path,
+          icon: "menu-icon-subscriptions",
+          selected: helpers.is_active?(["settings/profiles"], %w[index edit])
           ))
           render(::SettingsNav::NavComponent.new(
             title: "Manage Tags",
-            subtitle: "Manage and associate tags with profiles",
+            subtitle: "Manage tags",
             url: helpers.settings_tags_path,
             icon: "menu-icon-subscriptions",
             selected: helpers.is_active?(["settings/tags"], %w[index edit])
-          ))
-          render(::SettingsNav::NavComponent.new(
-            title: "Customers",
-            subtitle: "Manage customers",
-            url: helpers.admin_users_path,
-            selected: helpers.is_active?("admin/users", "index"),
-            icon: "menu-icon-customers"
-          ))
-          render(::SettingsNav::NavComponent.new(
-            title: "Sidekiq",
-            subtitle: "Background jobs",
-            url: helpers.sidekiq_web_path,
-            icon: "menu-icon-sidekiq"
-          ))
-          render(::SettingsNav::NavComponent.new(
-            title: "Lookbook",
-            subtitle: "Feedkit components",
-            url: "/lookbook",
-            icon: "menu-icon-lookbook"
-          ))
-        end
-
-      div(class: "px-4 pl-10 tw-hidden group-data-[nav=dropdown]:block") do
-        hr(class: "m-0")
-      end
-
-      ul(class: "tw-hidden group-data-[nav=dropdown]:block") do
-        render(::SettingsNav::NavComponent.new(
-          title: "Log Out",
-          url: [helpers.logout_path, { method: :delete }],
-          icon: "menu-icon-log-out"
-        ))
-      end
-
-      div(class: "group-data-[nav=dropdown]:hidden") do
-        div(class: "p-4 group-data-[nav=modal]:py-0") { hr }
-        ul do
-          render ::SettingsNav::NavSmallComponent.new url: "/home" do
-            "Home"
-          end
-          render ::SettingsNav::NavSmallComponent.new url: "/blog" do
-            "Blog"
-          end
-          render ::SettingsNav::NavSmallComponent.new url: "/apps" do
-            "Apps"
-          end
-          render ::SettingsNav::NavSmallComponent.new url: "/help" do
-            "Help"
-          end
+            ))
+            render(::SettingsNav::NavComponent.new(
+              title: "Customers",
+              subtitle: "Manage customers",
+              url: helpers.admin_users_path,
+              selected: helpers.is_active?("admin/users", "index"),
+              icon: "menu-icon-customers"
+              ))
+              render(::SettingsNav::NavComponent.new(
+                title: "Sidekiq",
+                subtitle: "Background jobs",
+                url: helpers.sidekiq_web_path,
+                icon: "menu-icon-sidekiq"
+                ))
+                render(::SettingsNav::NavComponent.new(
+                  title: "Lookbook",
+                  subtitle: "Feedkit components",
+                  url: "/lookbook",
+                  icon: "menu-icon-lookbook"
+                  ))
+              end  
+                
+                div(class: "px-4 pl-10 tw-hidden group-data-[nav=dropdown]:block") do
+                  hr(class: "m-0")
+                end
+                
+                ul(class: "tw-hidden group-data-[nav=dropdown]:block") do
+                  render(::SettingsNav::NavComponent.new(
+                    title: "Log Out",
+                    url: [helpers.logout_path, { method: :delete }],
+                    icon: "menu-icon-log-out"
+                    ))
+                  end
+                  
+                  div(class: "group-data-[nav=dropdown]:hidden") do
+                    div(class: "p-4 group-data-[nav=modal]:py-0") { hr }
+                    ul do
+                      render ::SettingsNav::NavSmallComponent.new url: "/home" do
+                        "Home"
+                      end
+                      render ::SettingsNav::NavSmallComponent.new url: "/blog" do
+                        "Blog"
+                      end
+                      render ::SettingsNav::NavSmallComponent.new url: "/apps" do
+                        "Apps"
+                      end
+                      render ::SettingsNav::NavSmallComponent.new url: "/help" do
+                        "Help"
+                      end
           render ::SettingsNav::NavSmallComponent.new url: "https://github.com/feedbin/feedbin-api#readme" do
             "API"
           end
