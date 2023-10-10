@@ -647,6 +647,8 @@ Structure
 }
 
 .settings-menu-main-page {
+  @include font-size(14);
+  padding: 0 4px 0 4px;
   overflow-y: auto;
   display: flex; 
   flex-direction: column; 
@@ -3136,7 +3138,7 @@ $feed-title-width: 115px;
     list-style: none;
     li {
       margin: 0;
-      padding: 0 base-units(0.5);
+      // padding: 0 base-units(0.5);
       > a,
       > span,
       > button {
