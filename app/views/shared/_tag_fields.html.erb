@@ -6,20 +6,32 @@
 <% if current_user.try(:admin?) %>
   <%= render Settings::ControlGroupComponent.new class: "group [&_[data-item-container]]:!border-0 [&_[data-item]]:!border-0" do |group| %>
     <% user_profiles.each do |profile|%>
-      <% profile.tags.each do |tag| %>
+      <% group.item do %>
+        <div >
+          <hr class="mt-3" />
+        </div>
+        <%= content_tag :h2, style: "font-weight: bold;" do %>
+          <%= profile.profile_name %>
+        <% end %>
+      <% end %>
+      <% unique_tags = profile.tags.distinct.order(:name) %>
+      <% unique_tags.each do |tag| %>
         <% group.item do %>
           <%= check_box_tag "tag_id[#{tag.id}]", tag.name, tag_editor.checked?(tag), class: "peer" %>
+          <div style="margin-left: 15px;">
           <%= label_tag "tag_id[#{tag.id}]", class: "group" do %>
               <%= render Settings::ControlRowComponent.new do |row| %>
                 <% row.title { tag.name } %>
                 <% row.control { render Form::SwitchComponent.new } %>
               <% end %>
           <% end %>
+          </div>
         <% end %>
       <% end %>
     <%end%>
   <% end %>
 <% end %>
+<% if orphan_tags.size > 0 %>
 <%= render Settings::H2Component.new do %>
     My stuff
 <% end %>
@@ -35,4 +47,5 @@
         <% end %>
       <% end %>
     <% end %>
+<% end %>
 <% end %>
