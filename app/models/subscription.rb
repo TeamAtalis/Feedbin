@@ -38,6 +38,24 @@ class Subscription < ApplicationRecord
     }
   end
 
+  # Desc: This method is used by a user to subscribe to a 
+  # particular feed while also specifying the tags in which 
+  # this feed will be featured.
+  #
+  # input parameters: 
+  #       @params[:feed_id] [int]: id of the Feed
+  #       @params[:user_id] [int]: id of the User to subcribe this new feed
+  #       @params[:tags] [array]: list of tag_ids that the feed will be present.
+  #
+  def self.subscribe(feed_id, user_id, tags)
+    # Subscribe the user to the new feed
+    User.find(user_id).subscriptions.find_or_create_by(feed: Feed.find(feed_id))
+    # Connect the feed with all tags
+    for tag_id in tags
+      Tagging.create(feed_id, user_id, tag_id)
+    end
+  end
+
   def title
     self[:title] || feed.title
   end

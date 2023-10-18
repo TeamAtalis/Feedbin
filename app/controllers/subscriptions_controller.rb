@@ -28,6 +28,12 @@ class SubscriptionsController < ApplicationController
       end
       @click_feed = @subscriptions.first.feed_id
     end
+    # If user is admin, may he want update the profile
+    if user.admin 
+      params[:feeds].to_unsafe_h.each do |feed_id, _|
+        system("rake \"feedbin:update_profile[ #{feed_id}, #{user.id}]\" ") # call rake task
+      end
+    end
     get_feeds_list
   end
 
