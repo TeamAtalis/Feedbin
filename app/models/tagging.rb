@@ -5,6 +5,18 @@ class Tagging < ApplicationRecord
 
   after_commit :update_actions, on: [:create, :destroy]
 
+  # Desc: Create a new instance of Tagging. 
+  #
+  # input parameters: 
+  #       @params[:feed_id] [int]: id of the Feed
+  #       @params[:user_id] [int]: id of the User to subcribe this new feed
+  #       @params[:tag_id] [int]: id of Tag that the feed will be present.
+  #
+  def self.create(feed_id, user_id, tag_id)
+    Tagging.new(feed_id: feed_id, user_id: user_id, tag_id: tag_id,
+      created_at: Time.now, updated_at: Time.now ).save
+  end
+
   def update_actions
     actions = user.actions.where("? = ANY (tag_ids)", tag_id).pluck(:id)
     Search::TouchActions.perform_async(actions)
