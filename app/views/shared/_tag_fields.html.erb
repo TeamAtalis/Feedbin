@@ -4,21 +4,9 @@
     <%# Select Tag %>
 <%# <% end %>
 <% if current_user.try(:admin?) %>
-  <%= render Settings::H2Component.new do %>
-      Subscription tags
-  <% end %>
   <%= render Settings::ControlGroupComponent.new class: "group [&_[data-item-container]]:!border-0 [&_[data-item]]:!border-0" do |group| %>
     <% user_profiles.each do |profile|%>
-      <% group.item do %>
-        <%# <div>
-          <hr class="mt-3" />
-        </div> %>
-        <%= content_tag :h4, style: "font-weight: 500; margin-top: 30px;" do %>
-          <%= profile.profile_name %>
-        <% end %>
-      <% end %>
-      <% unique_tags = profile.tags.distinct.order(:name) %>
-      <% unique_tags.each do |tag| %>
+      <% profile.tags.each do |tag| %>
         <% group.item do %>
           <%= check_box_tag "tag_id[#{tag.id}]", tag.name, tag_editor.checked?(tag), class: "peer" %>
           <%= label_tag "tag_id[#{tag.id}]", class: "group" do %>

@@ -9,7 +9,7 @@ module Settings
           div class: "inset-y-0 self-stretch shrink-0 flex items-center", &@icon
         end
         div class: "grow overflow-hidden" do
-          div class: "text-600 text-sm", &@title
+          div class: "text-600", &@title
           if @description
             div class: "text-500 text-sm max-w-[500px]", &@description
           end
