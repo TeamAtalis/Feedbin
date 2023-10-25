@@ -32,8 +32,10 @@ class SubscriptionsController < ApplicationController
     if user.admin 
       params[:feeds].to_unsafe_h.each do |feed_id, _|
         # Calls the rake task as a separate thread
+        # The rake task can be benchmarcable or not
         Thread.new do
-          system("rake \"feedbin:update_profile[ #{feed_id}, #{user.id}]\" ") # call rake task
+          #system("rake \"feedbin:update_profile[ #{feed_id}, #{user.id}]\" ") # Call rake task
+          MyBenchmark.admin_update_profile_rake_task(feed_id, user.id) # This is used to benchmark
         end
       end
     end
