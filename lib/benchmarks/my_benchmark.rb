@@ -12,10 +12,12 @@ class MyBenchmark
   #
   def self.admin_update_profile_rake_task(feed_id, user_id)
     # Measure the rake task
-    benchmark = Benchmark.measure { system("rake \"feedbin:update_profile[ #{feed_id}, #{user_id}]\" ") }
+    benchmark = Benchmark.measure { system("rake \"feedbin:update_profile[ #{feed_id}, #{user_id}]\"")}
     # Write Benchmark on log file
+    #byebug
     file = File.open("#{Rails.root}/lib/benchmarks/reports/admin_update_profile_rake_task.log", 'a')
-    file.puts("***-----------------------------------------------------***\n#{Time.now}")
+    file.puts("***-----------------------------------------------------***")
+    file.puts("[Log created at #{Time.now}], [TOTAL USERS: #{User.all.size}], [TOTAL PROFILES: #{Profile.all.size}] ")
     file.puts("  USER_TIME  SYSTEM_TIME  TOTAL     (REAL)")
     file.puts(benchmark, "\n\n")
     file.close
