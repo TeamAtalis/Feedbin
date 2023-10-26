@@ -29,6 +29,9 @@ class FeedsController < ApplicationController
 
     # GET USER PROFILES
     @user_profiles = @user.profiles.order(:profile_name)
+
+    # get all tags that are inside one or more profiles by name desc (without duplicates)
+    @all_profile_tags = Tag.joins(:r_profiles_tags).distinct.order(:name)
    
     @orphan_tags = @user.tags.left_outer_joins(:r_profiles_tags).where(r_profiles_tags: {tag_id: nil}).distinct.order(:name)
 
