@@ -8,6 +8,7 @@ module Api
       skip_before_action :valid_user
 
       def create
+        byebug
         @user = User.new(user_params)
         @user.plan = Plan.find_by_stripe_id("trial")
         @user.password_confirmation = user_params.try(:user).try(:password)
