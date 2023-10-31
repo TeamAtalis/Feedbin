@@ -1,7 +1,5 @@
 class MyBenchmark
   require 'benchmark/ips'
-  #require "#{Rails.root}/test/support/login_helper"
-  #require "#{Rails.root}/test/test_helper"
 
   # Desc: This method is used to benchmark the feedbin:update_profile
   #       rake task. This method will generate a report
@@ -32,7 +30,7 @@ class MyBenchmark
     u.plan = plan
     u.update_auth_token = true
     u.save
-    #Profile.find('1').assign_profile_to_user(u.id)
+    Profile.find(1).assign_profile_to_user(u.id) # First profile
     StripeMock.stop
   end
 end
