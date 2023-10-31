@@ -16,7 +16,7 @@
               <%= render Settings::H2Component.new do %>
                 Tags
               <% end %>
-              <%= render partial: "shared/tag_fields", locals: {tag_editor: tag_editor, user_profiles: user_profiles, orphan_tags: orphan_tags} %>
+              <%= render partial: "shared/tag_fields", locals: {tag_editor: tag_editor, user_profiles: user_profiles, all_profile_tags: all_profile_tags, orphan_tags: orphan_tags} %>
             <% end %>
 
             <% content_for :modal_footer do %>

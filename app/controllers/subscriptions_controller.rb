@@ -47,6 +47,9 @@ class SubscriptionsController < ApplicationController
     @subscription = @user.subscriptions.find_by_feed_id(params[:id])
     @tag_editor = TagEditor.new(@user, @subscription.feed)
     @user_profiles = @user.profiles.order(:profile_name)
+
+    @all_profile_tags = Tag.joins(:r_profiles_tags).distinct.order(:name)
+
     #WE PASS ORPHAN TAGS TO FORM
     @orphan_tags = @user.tags.left_outer_joins(:r_profiles_tags).where(r_profiles_tags: {tag_id: nil}).distinct.order(:name)
   end
