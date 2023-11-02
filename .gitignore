@@ -32,4 +32,4 @@ dump.rdb
 /config
 
 # Ignore all reports
-lib/benchmarks/reports/admin_update_profile_rake_task.log
+lib/benchmarks/reports/
