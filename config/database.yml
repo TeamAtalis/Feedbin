@@ -1,17 +1,6 @@
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
-  database: feedbin_development
-  pool: <%= ENV['DB_POOL'] || 5 %>
-  username: <%= Rails.application.credentials.username_database %>
-  password: <%= Rails.application.credentials.password_database %>
-  host: localhost
-  port: <%= Rails.application.credentials.port_database %>
-
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: feedbin_test
   pool: <%= ENV['DB_POOL'] || 5 %>
   username: <%= Rails.application.credentials.username_database %>
   password: <%= Rails.application.credentials.password_database %>
@@ -19,11 +8,13 @@ test:
   port: <%= Rails.application.credentials.port_database %>
 
 production:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: feedbin_production
-  pool: <%= ENV['DB_POOL'] || 5 %>
-  username: <%= Rails.application.credentials.username_database %>
-  password: <%= Rails.application.credentials.password_database %>
-  host: localhost
-  port: <%= Rails.application.credentials.port_database %>
+
+development:
+  <<: *default
+  database: feedbin_development 
+
+test:
+  <<: *default
+  database: feedbin_test
