@@ -1284,7 +1284,7 @@ $hamburger-dot: 4px;
         border-radius: 0;
         text-overflow: ellipsis;
         cursor: text;
-        @include color($color-contrast-700);
+        @include color($color-contrast-300);
         &.disabled {
           cursor: pointer;
           pointer-events: none;
@@ -1468,7 +1468,7 @@ $hamburger-dot: 4px;
         .feed-link .link-inner {
           background-color: transparent !important;
           .rename-feed-input {
-            color: white !important;
+            @include color($color-contrast-300);
             &.disabled {
               color: white !important;
             }
@@ -1517,7 +1517,7 @@ $hamburger-dot: 4px;
   @include background-color($color-selected-off);
   color: white !important;
   .rename-feed-input {
-    color: map-get($color-contrast-700, day);
+    @include color($color-contrast-300);
     &.disabled {
       color: white;
     }
