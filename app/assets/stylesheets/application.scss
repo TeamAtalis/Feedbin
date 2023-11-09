@@ -1633,10 +1633,7 @@ $hamburger-dot: 4px;
       cursor: pointer;
       transition: max-height 0.3s ease;
       .link-inner {
-        @media (prefers-color-scheme: dark) {
-          color: $theme-color-base;
-        }
-        color: $theme-color-700;
+        @include color($color-contrast-600);
         @include font-size(14);
         background-color: transparent;
         display: flex;
@@ -1652,10 +1649,7 @@ $hamburger-dot: 4px;
         }
         .tag-visibility-control {
           .icon-caret {
-            @media (prefers-color-scheme: dark) {
-              fill: $theme-color-base;
-            }
-            fill: $theme-color-700;
+            @include fill($color-contrast-600);
             transform: rotate(-90deg);
             transition: all 0.2s ease;
           }
