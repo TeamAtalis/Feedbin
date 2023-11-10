@@ -63,7 +63,7 @@ module Shared
         
         ul do
           render(::SettingsNav::NavComponent.new(
-            title: "Subscriptions",
+            title: "Feeds",
             subtitle: "Manage feeds",
             url: helpers.settings_subscriptions_path,
             icon: "menu-icon-subscriptions",
@@ -113,17 +113,17 @@ module Shared
         ul 
         
         render(::SettingsNav::NavComponent.new(
-          title: "Manage Profiles",
-          subtitle: "Manage profiles",
+          title: "Subscriptions",
+          subtitle: "Manage subscriptions",
           url: helpers.settings_profiles_path,
-          icon: "menu-icon-subscriptions",
+          icon: "manage-profiles",
           selected: helpers.is_active?(["settings/profiles"], %w[index edit])
           ))
           render(::SettingsNav::NavComponent.new(
-            title: "Manage Tags",
+            title: "Tags",
             subtitle: "Manage tags",
             url: helpers.settings_tags_path,
-            icon: "menu-icon-subscriptions",
+            icon: "manage-tags",
             selected: helpers.is_active?(["settings/tags"], %w[index edit])
             ))
             render(::SettingsNav::NavComponent.new(
