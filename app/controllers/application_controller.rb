@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authorize
   before_action :set_user
-  before_action :honeybadger_context
+  #before_action :honeybadger_context
   after_action :set_csrf_cookie
 
   etag { current_user.try :id }
@@ -272,9 +272,9 @@ class ApplicationController < ActionController::Base
     @append = params[:page].present?
   end
 
-  def honeybadger_context
-    ErrorService.context(user_id: current_user.id) if current_user
-  end
+  #def honeybadger_context
+  #  ErrorService.context(user_id: current_user.id) if current_user
+  #end
 
   def verify_push_token(authentication_token)
     authentication_token = CGI.unescape(authentication_token)

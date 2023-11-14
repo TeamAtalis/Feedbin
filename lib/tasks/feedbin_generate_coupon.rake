@@ -1,5 +1,5 @@
-require_relative "../../config/boot"
-require_relative "../../config/environment"
+#require_relative "../../config/boot"
+#require_relative "../../config/environment"
 
 namespace :feedbin do
   desc "Create a coupon code."
