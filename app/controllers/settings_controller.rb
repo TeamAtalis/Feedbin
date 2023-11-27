@@ -70,8 +70,8 @@ class SettingsController < ApplicationController
     new_settings = user_format_params
     cookies.permanent.signed[:settings] = {
       value: JSON.generate(old_settings.merge(new_settings)),
-      httponly: true,
-      secure: Feedbin::Application.config.force_ssl
+      httponly: true #,
+      #secure: Feedbin::Application.config.force_ssl
     }
     @user = current_user
     @user.update!(new_settings)
