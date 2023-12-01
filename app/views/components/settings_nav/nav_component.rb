@@ -13,7 +13,7 @@ module SettingsNav
     def template(&)
       li(class: %(mb-1 #{@classes})) do
         link_to *[*link_attributes] do
-          span(class: "grid place-items-center shrink-0 w-[16px] h-[17px]") do
+          span(class: "grid place-items-center h-[17px]", style: "width: 20px;") do
             render SvgComponent.new(@icon, inline: true, class: "fill-600 group-data-selected:fill-white")
           end
           span do
