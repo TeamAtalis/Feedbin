@@ -1,13 +1,13 @@
-Feedbin Installation on Fedora
+Curathor Installation on Fedora
 ------------------------------
 
-#### Feedbin Dependencies
+#### Curathor Dependencies
 
 Install a bunch of dependencies:
 
     sudo dnf install gcc gcc-c++ git libcurl-devel libxml2-devel libxslt-devel postgresql postgresql-devel rubygems ruby-devel rubygem-bundler ImageMagick-devel opencv-devel
 
-Get Feedbin:
+Get Curathor:
 
     git clone https://github.com/feedbin/feedbin.git
 
@@ -82,9 +82,9 @@ Start the service:
     # If you want it to auto-start:
     sudo systemctl enable redis
 
-Note: Redis doesn't seem to work on Fedora, but Feedbin works without it.
+Note: Redis doesn't seem to work on Fedora, but Curathor works without it.
 
-#### Run Feedbin
+#### Run Curathor
 
 Run these in the `feedbin` directory:
 
@@ -93,4 +93,4 @@ Run these in the `feedbin` directory:
     # In a separate terminal:
     rackup
 
-You should see Feedbin at [localhost:9292](http://localhost:9292).
+You should see Curathor at [localhost:9292](http://localhost:9292).

@@ -60,7 +60,7 @@ class Share::EvernoteShare < Share::Service
     attributes.subjectDate = entry.published.to_i
     attributes.source = entry.feed.title
     attributes.sourceURL = entry.fully_qualified_url
-    attributes.sourceApplication = "Feedbin"
+    attributes.sourceApplication = "Curathor"
     if entry.author.present?
       attributes.author = entry.author
     end

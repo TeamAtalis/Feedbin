@@ -3,15 +3,15 @@ window.feedbin ?= {}
 feedbin.hideQueue = []
 
 feedbin.updateTitle = () ->
-  title = "Feedbin"
+  title = "Curathor"
   if feedbin.data && feedbin.data.show_unread_count && feedbin.data.viewMode != 'view_starred'
     count = $('[data-behavior~=all_unread]').first().find('.count').text() * 1
     if count == 0
-      title = "Feedbin"
+      title = "Curathor"
     else if count >= 1000
-      title = "Feedbin (1,000+)"
+      title = "Curathor (1,000+)"
     else
-      title = "Feedbin (#{count})"
+      title = "Curathor (#{count})"
 
     docTitle = $('title')
     docTitle.text(title) unless docTitle.text() is title

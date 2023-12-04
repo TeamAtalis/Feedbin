@@ -42,7 +42,7 @@ module Settings
             div do
               p(class: "text-red-600") { "Twitter Not Supported" }
               p(class: "text-500 text-sm") do
-                plain "Feedbin "
+                plain "Curathor "
                 a( href: "https://feedbin.com/blog/2023/03/30/twitter-access-revoked/" ) { "no longer has access" }
                 plain " to the Twitter API."
               end

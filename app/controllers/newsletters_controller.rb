@@ -40,6 +40,6 @@ class NewslettersController < ApplicationController
   end
 
   def authorize
-    http_basic_authenticate_or_request_with name: "newsletters", password: ENV["NEWSLETTER_PASSWORD"], realm: "Feedbin Newsletters"
+    http_basic_authenticate_or_request_with name: "newsletters", password: ENV["NEWSLETTER_PASSWORD"], realm: "Curathor Newsletters"
   end
 end

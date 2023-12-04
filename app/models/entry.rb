@@ -354,7 +354,7 @@ class Entry < ApplicationRecord
   end
 
   def cache_public_id
-    FeedbinUtils.update_public_id_cache(public_id, content, public_id_alt)
+    CurathorUtils.update_public_id_cache(public_id, content, public_id_alt)
   end
 
   def mark_as_unread

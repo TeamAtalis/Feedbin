@@ -138,9 +138,9 @@ module Settings
             f.check_box :view_links_in_app, {checked: @user.setting_on?(:view_links_in_app), class: "peer", data: {behavior: "auto_submit"}}, "1", "0"
             f.label :view_links_in_app, class: "group" do
               render Settings::ControlRowComponent.new do |row|
-                row.title {"Always view links in Feedbin" }
+                row.title {"Always view links in Curathor" }
                 row.description do
-                  plain "Load article links in Feedbin‘s "
+                  plain "Load article links in Curathor‘s "
                   a(href: "/blog/2017/07/25/view-links-in-feedbin/") { "link viewer" }
                   plain " by default."
                 end

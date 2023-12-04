@@ -1411,7 +1411,7 @@ $.extend feedbin,
     if !$('body').hasClass(className)
       feedbin.scrollToPanel('.entries-column', false)
       window.history.replaceState({}, "", "/");
-      document.title = "Feedbin"
+      document.title = "Curathor"
       feedbin.updateTitle()
     feedbin.measureEntryColumn()
     feedbin.setNativeBorders()

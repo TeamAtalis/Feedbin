@@ -1,5 +1,5 @@
 class EntryMailer < ApplicationMailer
-  default from: "Feedbin <#{ENV["NOTIFICATION_EMAIL"]}>"
+  default from: "Curathor <#{ENV["NOTIFICATION_EMAIL"]}>"
 
   self.postmark_settings = { api_key: ENV["POSTMARK_API_KEY_BULK"] || ENV["POSTMARK_API_KEY"] }
 

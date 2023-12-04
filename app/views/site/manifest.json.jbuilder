@@ -1,4 +1,4 @@
-json.name "Feedbin"
+json.name "Curathor"
 json.scope root_path
 json.start_url login_path
 json.display "standalone"

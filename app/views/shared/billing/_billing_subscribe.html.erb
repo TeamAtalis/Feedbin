@@ -1,9 +1,9 @@
 <p class="mb-4">
   <% if @user.plan.stripe_id == "trial" %>
     <% if @user.days_left <= 0 %>
-      Your trial has ended. Subscribe now to continue using Feedbin.
+      Your trial has ended. Subscribe now to continue using Curathor.
     <% else %>
-      Your trial period will end in <strong><%= pluralize(@user.days_left, 'day') %></strong>. Subscribe now to continue using Feedbin uninterrupted.
+      Your trial period will end in <strong><%= pluralize(@user.days_left, 'day') %></strong>. Subscribe now to continue using Curathor uninterrupted.
     <% end %>
   <% end %>
 </p>

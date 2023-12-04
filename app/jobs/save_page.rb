@@ -81,7 +81,7 @@ class SavePage
     {
       author: parsed_result&.author,
       content: parsed_result&.content,
-      title: parsed_result&.title || title&.sub("Sending to Feedbin: ", "")&.strip,
+      title: parsed_result&.title || title&.sub("Sending to Curathor: ", "")&.strip,
       url: url,
       published: parsed_result&.published || Time.now,
       public_id: public_id,

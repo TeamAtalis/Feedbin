@@ -15,7 +15,7 @@ module Shared
       ul do
         # unneccessary code
         # render(::SettingsNav::NavComponent.new(
-        #   title: "Feedbin",
+        #   title: "Curathor",
         #   subtitle: "Back to the app",
         #   url: helpers.root_path,
         #   icon: "menu-icon-app",

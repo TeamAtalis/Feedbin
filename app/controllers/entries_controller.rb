@@ -248,7 +248,7 @@ class EntriesController < ApplicationController
   def entries_by_id(entry_ids)
     entries = Entry.where(id: entry_ids).includes(feed: [:favicon])
     subscriptions = @user.subscriptions.pluck(:feed_id)
-    @title = entries.present? ? "#{entries.first.title} - Feedbin" : "Feedbin"
+    @title = entries.present? ? "#{entries.first.title} - Curathor" : "Curathor"
     entries.each_with_object({}) do |entry, hash|
       locals = {
         entry: entry,

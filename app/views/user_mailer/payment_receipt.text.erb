@@ -1,10 +1,10 @@
 Hi <%= @user.email %>,
 
-This is a receipt for your Feedbin account. Please reply to this email if you have any questions.
+This is a receipt for your Curathor account. Please reply to this email if you have any questions.
 
 You can view a detailed printable receipt here: <%= billing_event_url(@billing_event) %>
 
-Thanks for being a Feedbin customer!
+Thanks for being a Curathor customer!
 
 <%= Time.at(@billing_event.event_object["created"]).to_formatted_s(:date) %>
 -------------------------------------------------
@@ -24,5 +24,5 @@ Applied balance: <%= @billing_event.invoice["currency"].upcase %> <%= number_to_
 Paid: <%= @billing_event.event_object["currency"].upcase %> <%= number_to_currency(@billing_event.event_object["amount"].to_f / 100) %>
 -------------------------------------------------
 
-Feedbin, Inc.
+Curathor, Inc.
 <%= business_address(:text) %>

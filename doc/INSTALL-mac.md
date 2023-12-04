@@ -1,7 +1,7 @@
-Feedbin Installation on Mac OS X
+Curathor Installation on Mac OS X
 ----------------------------------------------
 
-This will get Feedbin running on a fresh install. If you already have a ruby environment configured you can skip most of these steps.
+This will get Curathor running on a fresh install. If you already have a ruby environment configured you can skip most of these steps.
 
 #### Command Line Tools
 
@@ -49,7 +49,7 @@ You may need to open a new terminal to make the `bundle` command available in yo
 
 Make sure to follow post install instructions.
 
-#### Clone Feedbin
+#### Clone Curathor
 
     git clone https://github.com/feedbin/feedbin.git
     cd feedbin

@@ -65,7 +65,7 @@ class SupportedSharingServicesController < ApplicationController
         redirect_to sharing_services_url, notice: "#{supported_sharing_service.label} has been activated!"
       end
     else
-      redirect_to sharing_services_url, alert: "Feedbin needs your permission to activate #{service_info[:label]}."
+      redirect_to sharing_services_url, alert: "Curathor needs your permission to activate #{service_info[:label]}."
     end
   rescue OAuth::Unauthorized => e
     ErrorService.notify(
@@ -92,7 +92,7 @@ class SupportedSharingServicesController < ApplicationController
         redirect_to sharing_services_url, notice: "#{supported_sharing_service.label} has been activated!"
       end
     else
-      redirect_to sharing_services_url, alert: "Feedbin needs your permission to activate #{service_info[:label]}."
+      redirect_to sharing_services_url, alert: "Curathor needs your permission to activate #{service_info[:label]}."
     end
   end
 

@@ -50,7 +50,7 @@ module FeedCrawler
         last_modified: ignore_http_caching? ? nil : @crawl_data.last_modified,
         etag:          ignore_http_caching? ? nil : @crawl_data.etag,
         auto_inflate:  auto_inflate,
-        user_agent:    "Feedbin feed-id:#{@feed_id} - #{@subscribers} subscribers"
+        user_agent:    "Curathor feed-id:#{@feed_id} - #{@subscribers} subscribers"
       )
     end
 

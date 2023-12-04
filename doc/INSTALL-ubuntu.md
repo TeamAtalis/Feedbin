@@ -1,4 +1,4 @@
-Feedbin Installation on Ubuntu 12.04
+Curathor Installation on Ubuntu 12.04
 ------------------------------------
 
 ### Ubuntu 12.04 Dependencies

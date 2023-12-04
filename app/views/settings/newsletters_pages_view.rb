@@ -28,7 +28,7 @@ module Settings
                 plain " Use this address to "
                 plain "receive emails"
                 # a(href: "/blog/2016/02/03/subscribe-to-email-newsletters-in-feedbin/") { "receive emails" }
-                plain " in Feedbin."
+                plain " in Curathor."
               end
               render Form::TextInputComponent.new do |text|
                 text.input do
@@ -85,13 +85,13 @@ module Settings
               # a(href: "/blog/2019/08/20/save-webpages-to-read-later/") do
               #   "save articles from the web"
               # end
-              plain " to Feedbin."
+              plain " to Curathor."
             end
 
             row.control do
               link_to helpers.bookmarklet, onclick: "return false;", class: "button-secondary cursor-move" do
                 render SvgComponent.new "favicon-saved", class: "fill-500"
-                plain " Send to Feedbin "
+                plain " Send to Curathor "
                 render SvgComponent.new "icon-grabber", class: "ml-6 fill-700"
               end
             end
@@ -110,7 +110,7 @@ module Settings
               row.title { "Newsletter Senders" }
 
               row.description do
-                plain " These are the senders of newsletters you have received. Feedbin blocks messages from senders that have been deactivated. Reactivate a sender to resubscribe. "
+                plain " These are the senders of newsletters you have received. Curathor blocks messages from senders that have been deactivated. Reactivate a sender to resubscribe. "
               end
 
               row.control do

@@ -97,7 +97,7 @@ class SupportedSharingServicesControllerTest < ActionController::TestCase
 
     stub_request(:post, "https://#{mastodon_host}/api/v1/apps")
       .with(body: {
-        client_name:   "Feedbin",
+        client_name:   "Curathor",
         redirect_uris: redirect,
         scopes:        "write:statuses",
         website:       ENV["PUSH_URL"]

@@ -51,7 +51,7 @@ class Share::Mastodon < Share::Service
 
     if server.nil?
       data = HTTP.timeout(write: 2, connect: 2, read: 2).post(uri, json: {
-      	client_name: "Feedbin",
+      	client_name: "Curathor",
       	redirect_uris: redirect_uri(uri.host),
       	scopes: "write:statuses",
       	website: ENV["PUSH_URL"]

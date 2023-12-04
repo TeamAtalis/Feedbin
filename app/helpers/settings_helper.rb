@@ -34,7 +34,7 @@ module SettingsHelper
           var script = document.createElement("script");
           var body = document.querySelector("body");
           var title = document.title;
-          document.title = "Sending to Feedbin: " + title;
+          document.title = "Sending to Curathor: " + title;
           script.type = "text/javascript";
           script.async = true;
           script.src = "#{bookmarklet_url(cache_buster: "replace_me")}".replace("replace_me", Date.now());

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= @title || 'Feedbin' %><%= branch_info if Rails.env.development? %></title>
+    <title><%= @title || 'Curathor' %><%= branch_info if Rails.env.development? %></title>
     <meta name="viewport" content="initial-scale=1.0,width=device-width,user-scalable=no,viewport-fit=cover" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link rel="manifest" href="<%= manifest_path(current_user&.theme || "day") %>">
