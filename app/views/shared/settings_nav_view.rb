@@ -162,30 +162,30 @@ module Shared
                   div(class: "group-data-[nav=dropdown]:hidden") do
                     div(class: "p-4 group-data-[nav=modal]:py-0") { hr }
                     ul do
-                      render ::SettingsNav::NavSmallComponent.new url: "/home" do
-                        "Home"
-                      end
-                      render ::SettingsNav::NavSmallComponent.new url: "/blog" do
-                        "Blog"
-                      end
-                      render ::SettingsNav::NavSmallComponent.new url: "/apps" do
-                        "Apps"
-                      end
-                      render ::SettingsNav::NavSmallComponent.new url: "/help" do
-                        "Help"
-                      end
+                      # render ::SettingsNav::NavSmallComponent.new url: "/home" do
+                      #   "Home"
+                      # end
+                      # render ::SettingsNav::NavSmallComponent.new url: "/blog" do
+                      #   "Blog"
+                      # end
+                      # render ::SettingsNav::NavSmallComponent.new url: "/apps" do
+                      #   "Apps"
+                      # end
+                      # render ::SettingsNav::NavSmallComponent.new url: "/help" do
+                      #   "Help"
+                      # end
           render ::SettingsNav::NavSmallComponent.new url: "https://github.com/feedbin/feedbin-api#readme" do
             "API"
           end
-          render ::SettingsNav::NavSmallComponent.new url: "/privacy-policy" do
-            "Privacy Policy"
-          end
-          render ::SettingsNav::NavSmallComponent.new url: "mailto:support@feedbin.com" do
-            "Email"
-          end
-          render ::SettingsNav::NavSmallComponent.new url: "https://feedbin.social/@feedbin" do
-            "Mastodon"
-          end
+          # render ::SettingsNav::NavSmallComponent.new url: "/privacy-policy" do
+          #   "Privacy Policy"
+          # end
+          # render ::SettingsNav::NavSmallComponent.new url: "mailto:support@feedbin.com" do
+          #   "Email"
+          # end
+          # render ::SettingsNav::NavSmallComponent.new url: "https://feedbin.social/@feedbin" do
+          #   "Mastodon"
+          # end
           render ::SettingsNav::NavSmallComponent.new url: helpers.logout_path, method: "delete" do
             "Log Out"
           end

@@ -26,7 +26,8 @@ module Settings
               div(class: "text-600") { " Newsletter Address" }
               div(class: "text-500 text-sm mb-2") do
                 plain " Use this address to "
-                a(href: "/blog/2016/02/03/subscribe-to-email-newsletters-in-feedbin/") { "receive emails" }
+                plain "receive emails"
+                # a(href: "/blog/2016/02/03/subscribe-to-email-newsletters-in-feedbin/") { "receive emails" }
                 plain " in Feedbin."
               end
               render Form::TextInputComponent.new do |text|
@@ -80,9 +81,10 @@ module Settings
 
             row.description do
               plain "Drag this to your bookmarks bar. Use it to "
-              a(href: "/blog/2019/08/20/save-webpages-to-read-later/") do
-                "save articles from the web"
-              end
+              plain "save articles from the web"
+              # a(href: "/blog/2019/08/20/save-webpages-to-read-later/") do
+              #   "save articles from the web"
+              # end
               plain " to Feedbin."
             end
 

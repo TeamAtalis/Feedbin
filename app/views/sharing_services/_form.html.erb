@@ -23,7 +23,8 @@
     </div>
 
     <% if record.new_record? %>
-      <p class="mb-4 text-500">Create your own sharing service. <a href="/help/sharing-read-it-later-services/" target="_blank">How does this work</a>?</p>
+      <%# <p class="mb-4 text-500">Create your own sharing service. <a href="/help/sharing-read-it-later-services/" target="_blank">How does this work</a>?</p> %>
+      <p class="mb-4 text-500">Create your own sharing service.</p>
     <% end %>
 
     <%= render Settings::ButtonRowComponent.new do %>
