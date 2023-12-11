@@ -374,4 +374,8 @@ Rails.application.routes.draw do
     resources :notifications_v2, only: :create
   end
 
+  # Catch-all route for 404 errors
+  # Only able the following code when the app is running on development mode
+  # get '*unmatched_route', to: 'errors#not_found', via: :all
+  
 end
