@@ -1,4 +1,7 @@
 class ExtractsController < ApplicationController
+
+  require 'mercury_parser'
+  
   def entry
     @user = current_user
     @entry = Entry.find params[:id]
