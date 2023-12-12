@@ -9,10 +9,10 @@
                 <button class="entry-button button-full-screen" data-behavior="full_screen" title="Exit full screen" data-toggle="tooltip">
                     <%= svg_tag "icon-close" %>
                 </button>
-                <%= entry_presenter.feed_wrapper(subscriptions) do %>
+                <div class="feed-button">
                     <%= entry_presenter.favicon(entry.feed, entry) %>
-                    <%= entry_presenter.entry_header_title %>
-                <% end %>
+                    <span class="entry-feed-title" ><%= entry.feed.title %></span>
+                </div>
             </div>
             <div class="entry-buttons">
                 <%= render partial: "entries/delete_button", locals: {entry: entry} %>
