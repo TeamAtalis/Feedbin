@@ -58,7 +58,11 @@ module Settings
               row.control do
                 render Form::SelectInputComponent.new do |input|
                   input.input do
-                    f.select :newsletter_tag, helpers.tag_options, {}, { class: "peer", data: { behavior: "auto_submit" } }
+                    if @user.try(:admin?)
+                      f.select :newsletter_tag, helpers.tag_options, {}, { class: "peer", data: { behavior: "auto_submit" } }
+                    else
+                      f.select :newsletter_tag, helpers.orphan_tags_options, {}, { class: "peer", data: { behavior: "auto_submit" } }
+                    end  
                   end
                   input.accessory_leading do
                     render SvgComponent.new "favicon-tag", class: "fill-500"

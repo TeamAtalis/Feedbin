@@ -20,6 +20,13 @@ module SettingsHelper
     tags.unshift ["None", ""]
   end
 
+  def orphan_tags_options
+    @orphan_tags = @user.tags.left_outer_joins(:r_profiles_tags).where(r_profiles_tags: {tag_id: nil}).distinct.order(:name).map { |tag|
+    [tag.name, tag.name]
+  }
+    @orphan_tags.unshift ["None", ""]
+  end
+
   def plan_name
     if @user.plan.stripe_id == "timed"
       "prepaid plan"
