@@ -4,7 +4,7 @@ class Settings::TagsController < ApplicationController
       profile_id = params[:profile_id]
       tag_id = params[:tag_id]
 
-      if(profile_id != "0" || tag_id != "0")
+      if(profile_id != "0" && tag_id != "0")
         if(Profile.find(profile_id).assign_profile_to_tag(tag_id))
           flash[:notice] = "Tag assigned to profile successfully"
         else
