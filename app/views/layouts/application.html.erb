@@ -45,7 +45,7 @@
     </script>
     <%= yield(:head) %>
     <%= csrf_meta_tags %>
-    <%= tag :meta, name: "stripe-key", content: STRIPE_PUBLIC_KEY %>
+    <%= tag :meta, name: "stripe-key", content: "STRIPE_PUBLIC_KEY" %>
 </head>
 <%= tag.body(class: [@class, { native: native?, "standalone-navigator" => native? }], data: { behavior: @behavior }) do %>
     <%= content_for?(:content) ? yield(:content) : yield %>

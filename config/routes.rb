@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   root to: "site#index"
 
-  mount StripeEvent::Engine, at: "/stripe"
+  #mount StripeEvent::Engine, at: "/stripe"
 
   constraints lambda { |request| AuthConstraint.admin?(request) } do
     mount Lookbook::Engine, at: "/lookbook"

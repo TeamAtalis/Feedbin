@@ -61,8 +61,6 @@ gem "sanitize"
 gem "sass-rails"
 gem "sidekiq", "= 6.5.7"
 gem "stimulus-rails"
-gem "stripe", "~> 5.55.0"
-gem "stripe_event"
 gem "strong_migrations"
 gem "tailwindcss-rails"
 gem "twitter-text"
@@ -81,7 +79,6 @@ group :development do
 end
 
 group :development, :test do
-  gem "stripe-ruby-mock", github: "feedbin/stripe-ruby-mock", branch: "feedbin", require: "stripe_mock"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "capybara", github: "teamcapybara/capybara"
   gem "debug"
