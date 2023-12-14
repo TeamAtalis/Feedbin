@@ -1,6 +1,7 @@
 class ExtractsController < ApplicationController
 
-  require 'mercury_parser'
+  require 'nokogiri'
+  require 'open-uri'
   
   def entry
     @user = current_user
@@ -11,8 +12,10 @@ class ExtractsController < ApplicationController
     begin
       if @extract
         url = @entry.fully_qualified_url
-        @content_info = MercuryParser.parse(url)
-        @content = @content_info.content
+        @content = Nokogiri::HTML(URI.open(url)).css('h1, h2, p').to_html.encode("UTF-8")
+        # html = doc.css('body').inner_html
+        @content_info = nil
+        # @content = @content_info.content
       else
         @content = @entry.content
       end
