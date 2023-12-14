@@ -3,7 +3,7 @@ window.feedbin ?= {}
 class feedbin.Payments
 
   constructor: (plans, @defaultPlan) ->
-    @stripe = Stripe("<%= STRIPE_PUBLIC_KEY %>")
+    @stripe = ""
     @elements = @stripe.elements()
     @plans = @formatPlans(plans)
     @paymentForm = document.getElementById("payment-form")

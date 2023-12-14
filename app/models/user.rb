@@ -258,10 +258,7 @@ class User < ApplicationRecord
   end
 
   def trial_plan_valid
-    trial_plan = Plan.find_by_stripe_id("trial")
-    if plan_id == trial_plan.id && plan_id_was != trial_plan.id && !plan_id_was.nil?
-      errors.add(:plan_id, "is invalid")
-    end
+    true
   end
 
   def changed_password
@@ -296,13 +293,6 @@ class User < ApplicationRecord
   end
 
   def create_customer
-    @stripe_customer = Customer.create(email, plan.stripe_id, trial_end)
-    self.customer_id = @stripe_customer.id
-    if coupon_code
-      coupon_record = Coupon.find_by_coupon_code(coupon_code)
-      coupon_record.update(redeemed: true)
-      self.coupon = coupon_record
-    end
   end
 
   def update_billing
