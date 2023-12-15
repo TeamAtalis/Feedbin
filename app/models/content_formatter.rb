@@ -1,4 +1,8 @@
 class ContentFormatter
+
+  require 'nokogiri'
+  require 'open-uri'
+
   ALLOWLIST_BASE = {}.tap do |hash|
     hash[:elements] = %w[
       h1 h2 h3 h4 h5 h6 h7 h8 br b i strong em a pre code img tt div ins del sup sub
@@ -276,6 +280,52 @@ class ContentFormatter
     content = markdown.render(content)
     Sanitize.fragment(content, ALLOWLIST_DEFAULT).html_safe
   rescue
+    content
+  end
+
+  def self.remove_duplicates(*args)
+    new._remove_duplicates(*args)
+  end
+
+  def _remove_duplicates(content)
+    document = Nokogiri::HTML.fragment(content)
+    
+    seen_nodes = Set.new
+    
+    document.traverse do |node|
+
+      node_key = "#{node.name}-#{node.content}"
+      
+      node.remove if seen_nodes.include?(node_key)
+      
+      seen_nodes.add(node_key)
+    end
+
+    document.to_html
+  rescue
+    content
+  end
+
+  def self.get_content(*args)
+    new._get_content(*args)
+  end
+
+  def _get_content(url, entry_title = "")
+    content = ""
+    html = Nokogiri::HTML(URI.open(url))
+        
+    h1 = html.at('h1')
+        
+    if h1 && !h1.text.include?(entry_title)
+      content += h1.to_html.encode("UTF-8")
+    end
+        
+    following_elements = h1&.xpath('./following::*')
+    following_elements = following_elements.uniq { |node| node.name.downcase }
+    following_elements = following_elements.uniq { |node| node.content.downcase }
+
+    content += following_elements.map(&:to_html).join('').encode("UTF-8")
+
     content
   end
 end
