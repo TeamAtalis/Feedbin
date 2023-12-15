@@ -69,7 +69,6 @@ gem "twitter-text"
 gem "uglifier"
 gem "unicorn"
 gem "web-push"
-gem "mercury_parser"
 
 group :development do
   gem "benchmark-ips"

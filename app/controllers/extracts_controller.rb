@@ -12,10 +12,8 @@ class ExtractsController < ApplicationController
     begin
       if @extract
         url = @entry.fully_qualified_url
-        @content = Nokogiri::HTML(URI.open(url)).css('h1, h2, p').to_html.encode("UTF-8")
-        # html = doc.css('body').inner_html
+        @content = ContentFormatter.get_content(url, @entry.title)
         @content_info = nil
-        # @content = @content_info.content
       else
         @content = @entry.content
       end
@@ -24,7 +22,8 @@ class ExtractsController < ApplicationController
     end
 
     begin
-      @content = ContentFormatter.format!(@content, nil, true, url)
+      result = ContentFormatter.format!(@content, nil, true, url)
+      @content = ContentFormatter.remove_duplicates(result)
     rescue
       @content = nil
     end
