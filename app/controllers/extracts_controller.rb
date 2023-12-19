@@ -1,8 +1,5 @@
 class ExtractsController < ApplicationController
 
-  require 'nokogiri'
-  require 'open-uri'
-  
   def entry
     @user = current_user
     @entry = Entry.find params[:id]
@@ -23,7 +20,11 @@ class ExtractsController < ApplicationController
 
     begin
       result = ContentFormatter.format!(@content, nil, true, url)
-      @content = ContentFormatter.remove_duplicates(result)
+      if @content.downcase.include?("<article")
+        @content = result
+      else
+        @content = ContentFormatter.remove_duplicates(result, @content)
+      end  
     rescue
       @content = nil
     end
