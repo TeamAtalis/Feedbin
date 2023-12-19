@@ -43,6 +43,26 @@ class Transformers
     end
   end
 
+
+  def remove_empty_elements
+    lambda do |env|
+      node = env[:node]
+
+      if node.text? && node.parent.nil?
+        node.remove
+      end
+      
+      if node.text? && node.text.to_s.strip.empty?
+        node.remove
+      end
+
+      if node.element? && node.inner_html.strip.empty?
+        node.remove
+      end
+      
+    end
+  end
+
   # Table child elements that are not contained by a <table> are removed.
   def table_elements
     lambda do |env|
