@@ -140,9 +140,7 @@ module Settings
               render Settings::ControlRowComponent.new do |row|
                 row.title {"Always view links in Curathor" }
                 row.description do
-                  plain "Load article links in Curathor‘s "
-                  a(href: "/blog/2017/07/25/view-links-in-feedbin/") { "link viewer" }
-                  plain " by default."
+                  plain "Load article links in Curathor‘s link viewer by default."
                 end
                 row.control { render Form::SwitchComponent.new }
               end
