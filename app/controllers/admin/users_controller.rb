@@ -11,7 +11,10 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.deleted = true
-    UserDeleter.perform_async(@user.id)
+    @user.r_users_profiles.destroy_all
+    @user.destroy
+
+    # UserDeleter.perform_async(@user.id)
   end
 
   def authorize
