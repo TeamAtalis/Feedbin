@@ -1,9 +1,9 @@
 <%= render Settings::ControlRowComponent.new do |row| %>
   <% row.title do %>
     <% if user.deleted? %>
-        <span class="line-through"><%= link_to user.email, user.stripe_url %></span>
+        <span class="line-through"><%= user.email %></span>
     <% else %>
-        <%= link_to user.email, user.stripe_url %>
+        <span><%= user.email %></span>
     <% end %>
   <% end %>
   <% row.control do %>

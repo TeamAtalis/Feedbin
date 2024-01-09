@@ -11,9 +11,11 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.deleted = true
+    # we must delete first, because of foreign key constraints
     @user.r_users_profiles.destroy_all
     @user.destroy
 
+    # old Stripe user deleter
     # UserDeleter.perform_async(@user.id)
   end
 
