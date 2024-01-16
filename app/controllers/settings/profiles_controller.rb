@@ -28,6 +28,13 @@ class Settings::ProfilesController < ApplicationController
 
   def update_profile
     puts params[:profile_name]
+    if(!helpers.input_is_empty?(params[:profile_name].strip))
+      Profile.find(params[:profile_id]).update(profile_name: params[:profile_name])
+      flash[:notice] = "Profile updated successfully"
+    else
+      flash[:alert] = "Profile name cannot be empty"
+    end
+    redirect_to settings_profiles_path
   end
 
   def delete_profile

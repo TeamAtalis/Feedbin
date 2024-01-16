@@ -5,6 +5,7 @@
         </span>
         <div class="flex flex-row gap-2">
             <%= form_with class:"flex flex-row gap-2" , url: settings_update_profile_path, method: :put do |form| %>
+                <%= form.hidden_field :profile_id, value: profile.id %>
                 <%= form.text_field :profile_name, { class: "peer text-input", placeholder: "Rename..." } %>
                 <%= form.submit "Update", {class:"button bg-orange-600", style: "border: none;"} %>
             <% end %>
