@@ -158,6 +158,8 @@ Rails.application.routes.draw do
     get 'profiles', to: 'profiles#index', as: 'profiles'
     post 'profiles/create_profile', to: 'profiles#create_profile', as: 'create_profile'
     post 'profiles/add_profile_to_user', to: 'profiles#add_profile_to_user', as: 'add_profile_to_user'
+    delete 'profiles/delete_profile', to: 'profiles#delete_profile', as: 'delete_profile'
+    put 'profiles/update_profile', to: 'profiles#update_profile', as: 'update_profile'
   end
 
   namespace :settings do

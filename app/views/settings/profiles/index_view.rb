@@ -21,9 +21,11 @@ module Settings
             "Delete a Subscription"
           end
           render(Settings::ControlGroupComponent.new(class: "mb-14")) do |group|
-            group.item do
-              render(partial: "settings/profiles/delete_profile")
-            end
+            @profiles.each do |profile|
+              group.item do
+                render(partial: "settings/profiles/update_profile", locals: { profile: profile })
+              end
+            end  
           end          
           render Settings::H1Component.new do
             "Add Subscriptions to Users"

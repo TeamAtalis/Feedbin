@@ -26,8 +26,12 @@ class Settings::ProfilesController < ApplicationController
     redirect_to settings_profiles_path
   end
 
+  def update_profile
+    puts params[:profile_name]
+  end
+
   def delete_profile
-    
+    puts params[:profile_id]
   end
   
   def index

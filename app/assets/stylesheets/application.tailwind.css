@@ -70,8 +70,8 @@
 
   --color-red-200: #F8E7EA;
   --color-red-600: #BB0B2F;
-
   --color-orange-600: #E96A0E;
+  
 }
 
 .theme-dusk, .theme-midnight, .theme-auto.prefers-dark {
@@ -79,10 +79,11 @@
   --color-sidebar:    var(--color-0);
   --color-shadow-100: rgba(0,0,0,0.5);
   --color-link:       #ffffff;
-
+  
   --color-blue-600:  #0974FF;
   --color-green-600: #08C451;
   --color-red-600:   #D40C35;
+  --color-orange-600: #E96A0E;
 }
 
 /*
@@ -110,6 +111,7 @@ a flash of the default theme before prefers-dark class is applied
     --color-blue-600:  #0974FF;
     --color-green-600: #08C451;
     --color-red-600:   #D40C35;
+    --color-orange-600: #E96A0E;
   }
 }
 
