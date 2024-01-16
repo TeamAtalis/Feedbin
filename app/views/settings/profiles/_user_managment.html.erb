@@ -11,7 +11,7 @@
   <% end %>
   <%= form_with class: "flex gap-2", url: settings_add_profile_to_user_path, method: :post do |form| %>
     <%= form.hidden_field :user_id, value: user.id %>
-    <%= form.select :profile_id, options_for_select([["Select Profile", "0"]] + profiles.map { |profile| [profile.profile_name, profile.id] }), class: "peer" %>
+    <%= form.select :profile_id, options_for_select([["Select a Profile", "0"]] + profiles.map { |profile| [profile.profile_name, profile.id] }), class: "peer" %>
     <%= form.submit "+ Add", class:"button button-submit" %>
   <% end %>
 </section>

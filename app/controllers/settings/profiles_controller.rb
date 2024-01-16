@@ -25,6 +25,10 @@ class Settings::ProfilesController < ApplicationController
     end  
     redirect_to settings_profiles_path
   end
+
+  def delete_profile
+    
+  end
   
   def index
     @user = current_user
