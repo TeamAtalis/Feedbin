@@ -10,7 +10,7 @@ module Settings
       def template
         div(class: "feed-settings", data: {behavior: "spinner"}) do
           render Settings::H1Component.new do
-            "Create a Subscription"
+            "Create a subscription"
           end
           render(Settings::ControlGroupComponent.new(class: "mb-14")) do |group|
             group.item do
@@ -18,7 +18,7 @@ module Settings
             end
           end          
           render Settings::H1Component.new do
-            "Delete a Subscription"
+            "Rename and delete a subscription"
           end
           render(Settings::ControlGroupComponent.new(class: "mb-14")) do |group|
             @profiles.each do |profile|
@@ -28,7 +28,7 @@ module Settings
             end  
           end          
           render Settings::H1Component.new do
-            "Add Subscriptions to Users"
+            "Add subscriptions to users"
           end
           render(Settings::ControlGroupComponent.new(class: "mb-14")) do |group|
             @all_users.each do |user|

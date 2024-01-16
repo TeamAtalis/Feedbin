@@ -1,9 +1,9 @@
 <section class="gap-2 mb-4 mt-4">
-    <div class="flex flex-row gap-4 w-[50vw]">
+    <div class="flex flex-row justify-between flex-wrap gap-4">
         <span class="flex items-center" style="min-width: min-content; width: 50px;">
             <%= profile.profile_name %>
         </span>
-        <div class="ml-auto flex flex-row gap-2">
+        <div class="flex flex-row gap-2">
             <%= form_with class:"flex flex-row gap-2" , url: settings_update_profile_path, method: :put do |form| %>
                 <%= form.text_field :profile_name, { class: "peer text-input", placeholder: "Rename..." } %>
                 <%= form.submit "Update", {class:"button bg-orange-600", style: "border: none;"} %>
