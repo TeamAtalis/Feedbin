@@ -1,18 +1,26 @@
-<section class="gap-2 mb-4 mt-4" style="display: grid; grid-template-columns: repeat(3, 40% 20% 37.5%);">
-  <% if user.deleted? %>
-    <span class="line-through"><%= link_to user.email, user.stripe_url %></span>
-  <% else %>
-    <span class="flex items-center min-w-200">
-      <%= link_to user.email, user.stripe_url %>
-    </span>
-  <% end %>
-  <%= content_tag :select, class: "peer" do %>
-    <%= options_for_select([["User profiles", "0"]] + user_profiles.map { |profile| [profile.profile_name, profile.id] }) %>
-  <% end %>
-  <%= form_with class: "flex gap-2", url: settings_add_profile_to_user_path, method: :post do |form| %>
+<section class="flex flex-row items-center gap-4" >
+  <span class="flex items-center" style="min-width: 250px;">
+    <%= user.email %>
+  </span>
+  <%= form_with class: "flex flex-row ml-auto gap-4", url: settings_add_profile_to_user_path, method: :post do |form| %>
     <%= form.hidden_field :user_id, value: user.id %>
-    <%= form.select :profile_id, options_for_select([["Select a Profile", "0"]] + profiles.map { |profile| [profile.profile_name, profile.id] }), class: "peer" %>
-    <%= form.submit "+ Add", class:"button button-submit" %>
+    <% if profiles.present? %>
+      <div class="p-2" style="min-width: 250px; display: grid; grid-template-columns: repeat(2, 1fr)">
+        <% profiles.each do |profile| %>
+          <div class="flex items-center place-self-center mb-4">
+            <%= form.check_box "selected_profiles[]", { id: "profile_#{profile.id}", style: "clip: auto; width: 15px; height: 15px;", class: "text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" }, profile.id, false %>
+            <%= form.label "profile_#{profile.id}", profile.profile_name, class: "text-sm font-medium text-gray-900 dark:text-gray-300 ml-6" %>
+          </div>
+        <% end %>
+      </div>
+      <div style="place-self: center;">
+        <%= form.submit "+ Add", class:"button button-submit" %>
+      </div>
+    <% else %>
+      <div class="flex items-center" style="height: 75px;">
+        <span style="opacity: 0.7;" >No new subscriptions available</span>
+      </div>
+    <% end %>  
   <% end %>
 </section>
  
