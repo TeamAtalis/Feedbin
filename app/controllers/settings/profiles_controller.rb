@@ -1,19 +1,36 @@
 class Settings::ProfilesController < ApplicationController
 
   def add_profile_to_user
-    profile_id = params[:profile_id]
+    # profile_id = params[:profile_id]
+    selected_profiles = params[:selected_profiles]
     user_id = params[:user_id]
 
-    if(profile_id != "0")
-      if(Profile.find(profile_id).assign_profile_to_user(user_id))
-        flash[:notice] = "Subscriptionm assigned to user successfully"
-      else
-        flash[:alert] = "Subscriptionm already assigned to user"
+    if user_id.present? && selected_profiles.present?
+      selected_profiles.each do |profile_id|
+        if(Profile.find(profile_id).assign_profile_to_user(user_id))
+          flash[:notice] = "Subscription assigned to user successfully"
+        else
+          flash[:alert] = "Subscription already assigned to user"
+        end
       end
     else
       flash[:alert] = "You must select a subscription"
-    end  
+    end
+
     redirect_to settings_profiles_path
+
+
+
+    # if(profile_id != "0")
+    #   if(Profile.find(profile_id).assign_profile_to_user(user_id))
+    #     flash[:notice] = "Subscriptionm assigned to user successfully"
+    #   else
+    #     flash[:alert] = "Subscriptionm already assigned to user"
+    #   end
+    # else
+    #   flash[:alert] = "You must select a subscription"
+    # end  
+    # redirect_to settings_profiles_path
   end
 
   def create_profile
