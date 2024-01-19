@@ -3,4 +3,4 @@ feedbin_jobs: DB_POOL=10 bundle exec sidekiq --config config/sidekiq-development
 #feedbin_css: bin/rails tailwindcss:watch
 #rake: bundle exec rake
 #console: bin/rails console
-web: bin/rails server -p ${PORT:-5000} -e $RAILS_ENV
+web: bin/rails server -p 3000 -b 0.0.0.0 -e development
