@@ -51,7 +51,7 @@ class UserMailer < ApplicationMailer
 
   def mailtest(user_id)
     @user = User.find(user_id)
-    mail to: @user.email, subject: "[Curathor] Starred Items Export Complete", body: ""
+    mail to: @user.email, subject: "[Curathor] Starred Items Export Complete", body: "test body"
   end
 
   def account_closed(user_id, opml)
