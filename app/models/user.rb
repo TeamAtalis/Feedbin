@@ -449,8 +449,10 @@ class User < ApplicationRecord
   end
 
   def deactivate
-    update(suspended: true)
-    subscriptions.update_all(active: false)
+    unless admin
+      update(suspended: true)
+      subscriptions.update_all(active: false)
+    end
   end
 
   def active?
