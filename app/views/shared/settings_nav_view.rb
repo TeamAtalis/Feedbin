@@ -28,7 +28,7 @@ module Shared
           selected: helpers.is_active?("settings", "account"),
           icon: "menu-icon-account"
         ))
-        if ENV["STRIPE_API_KEY"]
+        # if ENV["STRIPE_API_KEY"]
           render(::SettingsNav::NavComponent.new(
             title: "Billing",
             subtitle: "Payment method & plan",
@@ -36,7 +36,7 @@ module Shared
             selected: helpers.is_active?(["settings/billings"], %w[index edit payment_history]),
             icon: "menu-icon-billing"
           ))
-        end
+        # end
         render(::SettingsNav::NavComponent.new(
           title: "Settings",
           subtitle: "General preferences",

@@ -2,7 +2,7 @@
   Billing
 <% end %>
 
-<% if ENV["STRIPE_API_KEY"] %>
+<%# <% if ENV["STRIPE_API_KEY"] %>
   <% if @user.plan.stripe_id == "trial" %>
     <%= render partial: "shared/billing/billing_subscribe", locals: {subscribe_title: "Plan"} %>
   <% else %>
@@ -11,6 +11,6 @@
   <script>
     $.get("<%= payment_details_settings_billing_path %>");
   </script>
-<% else %>
-  <p>Billing disabled. <code>STRIPE_API_KEY</code> and <code>STRIPE_PUBLIC_KEY</code> are missing.</p>
-<% end %>
+<%# <% else %>
+  <%# <p>Billing disabled. <code>STRIPE_API_KEY</code> and <code>STRIPE_PUBLIC_KEY</code> are missing.</p> %>
+<%# <% end %>
