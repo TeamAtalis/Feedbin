@@ -42,6 +42,8 @@
     Plan changes are pro-rated.
   <% end %>
 <% end %>
+<%= button_to "Monthly 45$", { controller: "settings/billings", action: "test_payment", plan_id: MONTHLY_PLAN_ID }, method: :post %>
+<%= button_to "Yearyly 900$", { controller: "settings/billings", action: "test_payment", plan_id: YEARLY_PLAN_ID }, method: :post %>
 
 <%= render partial: "shared/billing/payment_history", locals: {limit: 12} %>
 

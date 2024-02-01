@@ -5,6 +5,8 @@ gem "rails", "= 7.0.6"
 ruby "3.2.2"
 gem "will_paginate"
 
+gem 'stripe'
+
 gem "puma"
 
 gem "http",                github: "feedbin/http",                branch: "feedbin"
@@ -21,6 +23,7 @@ gem "mail", "< 2.8"
 
 gem "activerecord-import"
 gem "addressable", require: "addressable/uri"
+
 gem "apnotic"
 gem "autoprefixer-rails"
 gem "bcrypt"
