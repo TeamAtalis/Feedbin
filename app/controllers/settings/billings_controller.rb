@@ -28,9 +28,10 @@ class Settings::BillingsController < ApplicationController
     render 'shared/billing/_success'
   end
 
-  # def test_failure
-  #   redirect_to settings_billing_url, alert: "Your card was declined, please update your billing information."
-  # end
+  def billing_error
+    flash[:alert] = "Your card was declined, please update your billing information."
+    redirect_to settings_billing_url
+  end
 
   def update_plan
     @user = current_user

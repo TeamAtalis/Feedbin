@@ -12,23 +12,25 @@
   <% group.header do %>
     Plans
   <% end %>
+  <% month = "$5/month" %>
+  <% year = "$50/year" %>
   <% group.item do %>
     <%= render Settings::ControlRowComponent.new do |row| %>
       <% row.title do %>
-        <%= number_to_currency(5, precision: 0) %>/<%= "month"%>
+        <%= month %>
       <% end %>
       <% row.control do %>
-        <%= button_to "Select Plan", { class: "btn btn-primary", controller: "settings/billings", action: "billing_success", plan_id: "monthly" }, method: :post %>
+        <%= button_to "Choose #{month} plan", { controller: "settings/billings", action: "billing_success", plan_id: "monthly" }, method: :get, class: "button" %>
       <% end %>
     <% end %>
   <% end %>
   <% group.item do %>
     <%= render Settings::ControlRowComponent.new do |row| %>
       <% row.title do %>
-        <%= number_to_currency(50, precision: 0) %>/<%= "year"%>
+        <%= year %>
       <% end %>
       <% row.control do %>
-        <%= button_to "Select Plan", { class: "btn btn-primary", controller: "settings/billings", action: "index", plan_id: "monthly" }, method: :post %>
+        <%= button_to "Choose #{year} plan", { controller: "settings/billings", action: "billing_error", plan_id: "yearly" }, method: :get, class: "button" %>
       <% end %>
     <% end %>
   <% end %>  

@@ -193,8 +193,8 @@ Rails.application.routes.draw do
         get :payment_details
         post :update_credit_card
         post :update_plan
-        post :billing_success 
-        # post :test_failure
+        get :billing_success 
+        get :billing_error
       end
     end
 
