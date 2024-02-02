@@ -9,23 +9,9 @@
   <link rel="apple-touch-icon" href="<%= asset_path('icon-manifest.png') %>" sizes="192x192" />
   <link rel="shortcut icon" href="<%= asset_path('favicon.ico') %>" type="image/vnd.microsoft.icon" />
   <%= stylesheet_link_tag "tailwind" %>
-  <%= stylesheet_link_tag "application", media: "all"  %>
-
-  <style>
-    body {
-      background-color: #f3f4f6;
-      margin: 0;
-      width: 100vw;
-      height: 100vh;
-    }
-  </style>  
-
+  <%= stylesheet_link_tag "application", media: "all"  %>  
 </head>
 <body>
-  <main class="flex flex-col justify-center items-center w-full h-full gap-4 text-center">
-    <h2 class="text-4xl font-bold text-balance">Successful payment!</h2>
-    <p class="text-lg text-pretty">Redirecting to home page in 5 seconds... </p>
-    <p class="text-sm text-pretty">If the page does not redirect you, <a href="/">click here</a></p>
-  </main>
+  <%= yield %>
 </body>
 </html>
