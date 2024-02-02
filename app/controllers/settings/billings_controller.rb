@@ -24,6 +24,14 @@ class Settings::BillingsController < ApplicationController
     render layout: "settings"
   end
 
+  def billing_success
+    render 'shared/billing/_success'
+  end
+
+  # def test_failure
+  #   redirect_to settings_billing_url, alert: "Your card was declined, please update your billing information."
+  # end
+
   def update_plan
     @user = current_user
     plan = Plan.find(params[:plan])

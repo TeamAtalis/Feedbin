@@ -167,6 +167,7 @@ Rails.application.routes.draw do
     post 'tags/create_tag', to: 'tags#create_tag', as: 'create_tag'
     post 'tags/add_tag_to_profile', to: 'tags#add_tag_to_profile', as: 'add_tag_to_profile'
   end
+
   
 
   get :settings, to: "settings#index"
@@ -192,6 +193,8 @@ Rails.application.routes.draw do
         get :payment_details
         post :update_credit_card
         post :update_plan
+        post :billing_success 
+        # post :test_failure
       end
     end
 
