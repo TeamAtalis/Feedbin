@@ -23,16 +23,6 @@ class Settings::BillingsController < ApplicationController
     render layout: 'settings'
   end
 
-  def update_plan
-    @user = current_user
-    plan = Plan.find(params[:plan])
-    @user.plan = plan
-    @user.save
-    redirect_to settings_billing_url, notice: 'Plan successfully changed.'
-  rescue Stripe::CardError
-    redirect_to settings_billing_url, alert: 'Your card was declined, please update your billing information.'
-  end
-
   def payment_details
     @message = Rails.cache.fetch(FeedbinUtils.payment_details_key(current_user.id), expires_in: 5.minutes) do
       customer = Customer.retrieve(@user.customer_id)
@@ -66,6 +56,16 @@ class Settings::BillingsController < ApplicationController
 
   def test_payment
     create_checkout
+  end
+
+  def billing_success
+    # update_plann
+    render 'shared/billing/_success'
+  end
+
+  def billing_error
+    flash[:alert] = 'Your card was declined, please update your billing information.'
+    redirect_to settings_billing_url
   end
 
   private
@@ -108,12 +108,12 @@ class Settings::BillingsController < ApplicationController
       customer:,
       payment_method_types: ['card'],
       line_items: [{
-        price: MONTHLY_PLAN_ID,
+        price: params[:plan_id],
         quantity: 1
       }],
       mode: 'subscription',
-      success_url: settings_billing_url
-      cancel_url: settings_billing_url
+      success_url: "#{settings_billing_success_url}?plan_id=#{params[:plan_id]}",
+      cancel_url: settings_billing_error_url
     )
     redirect_to session.url, allow_other_host: true
   end

@@ -182,6 +182,7 @@ Rails.application.routes.draw do
 
     resources :imports, only: %i[create show]
     get :import_export, to: 'imports#index'
+    get :billing_success, to: 'billings#billing_success'
     get :billing_error, to: 'billings#billing_error'
 
     get :billing, to: 'billings#index'
