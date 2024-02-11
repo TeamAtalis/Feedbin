@@ -10,7 +10,7 @@ Plan.create!(stripe_id: "timed", name: "Timed", price: 0, price_tier: 3)
 Plan.create!(stripe_id: "timed", name: "Timed", price: 0, price_tier: 2)
 Plan.create!(stripe_id: "app-subscription", name: "App Subscription", price: 0, price_tier: 3)
 Plan.create!(stripe_id: "podcast-subscription", name: "Podcast Subscription", price: 0, price_tier: 3)
-plan = Plan.create!(stripe_id: "trial", name: "Trial", price: 0, price_tier: 3)
+plan = Plan.create!(stripe_id: FREE_TRIAL_PLAN_ID, name: "Trial", price: 0, price_tier: 3)
 
 SuggestedCategory.create!(name: "Popular")
 SuggestedCategory.create!(name: "Tech")
@@ -23,7 +23,7 @@ SuggestedCategory.create!(name: "News")
 SuggestedCategory.create!(name: "Gaming")
 
 if Rails.env.development?
-  
+
 end
 
 u = User.new(email: "admin@atalisfunding.com", password: "admin", password_confirmation: "admin", admin: true)
