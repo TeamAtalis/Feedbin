@@ -9,83 +9,79 @@ class BillingEvent < ApplicationRecord
   after_commit :process_event, on: :create
 
   def build_event
-    self.event_type = info["type"]
-    self.event_id = info["id"]
+    self.event_type = info['type']
+    self.event_id = info['id']
 
-    customer = event_object.safe_dig("customer")
-    if event_object["object"] == "customer"
-      customer = event_object["id"]
-    end
+    customer = event_object.safe_dig('customer')
+    customer = event_object['id'] if event_object['object'] == 'customer'
 
-    if customer
-      self.billable = User.find_by_customer_id(customer)
-    end
+    return unless customer
+
+    self.billable = User.find_by_customer_id(customer)
   end
 
   def process_event
     if charge_succeeded?
-      #UserMailer.delay(queue: :default_critical).payment_receipt(id)
+      # UserMailer.delay(queue: :default_critical).payment_receipt(id)
       UserMailer.payment_receipt(id).deliver_now
     end
 
     if charge_failed?
-      #UserMailer.delay(queue: :default_critical).payment_failed(id)
+      # UserMailer.delay(queue: :default_critical).payment_failed(id)
       UserMailer.payment_failed(id).deliver_now
     end
 
     if subscription_reminder?
-      #UserMailer.delay(queue: :default_critical).subscription_reminder(id)
+      # UserMailer.delay(queue: :default_critical).subscription_reminder(id)
       UserMailer.subscription_reminder(id).deliver_now
     end
 
-    if subscription_deactivated?
-      billable.deactivate unless billable.plan.stripe_id == "free"
-    end
+    billable.deactivate if subscription_deactivated? && !(billable.plan_id == 'free')
 
-    if subscription_reactivated?
-      billable.activate
-    end
+    return unless subscription_reactivated?
+
+    billable.activate
   end
 
   def charge_succeeded?
-    event_type == "charge.succeeded"
+    event_type == 'charge.succeeded'
   end
 
   def charge_failed?
-    event_type == "invoice.payment_failed"
+    event_type == 'invoice.payment_failed'
   end
 
   def subscription_deactivated?
-    event_type == "customer.subscription.updated" &&
-      event_object["status"] == "unpaid"
+    event_type == 'customer.subscription.updated' &&
+      event_object['status'] == 'unpaid'
   end
 
   def subscription_reactivated?
-    event_type == "customer.subscription.updated" &&
-      event_object["status"] == "active" &&
-      info.safe_dig("data", "previous_attributes", "status") == "unpaid"
+    event_type == 'customer.subscription.updated' &&
+      event_object['status'] == 'active' &&
+      info.safe_dig('data', 'previous_attributes', 'status') == 'unpaid'
   end
 
   def subscription_reminder?
-    event_type == "invoice.upcoming" &&
-      event_object["amount_remaining"].present? &&
-      event_object["amount_remaining"] >= 2_000 &&
+    event_type == 'invoice.upcoming' &&
+      event_object['amount_remaining'].present? &&
+      event_object['amount_remaining'] >= 2_000 &&
       !billable.suspended?
   end
 
   def invoice
-    if event_type == "charge.succeeded" && event_object["invoice"]
-      Rails.cache.fetch(event_object["invoice"].to_s) do
-        JSON.parse(Stripe::Invoice.retrieve(event_object["invoice"]).to_json)
-      end
+    return unless event_type == 'charge.succeeded' && event_object['invoice']
+
+    Rails.cache.fetch(event_object['invoice'].to_s) do
+      JSON.parse(Stripe::Invoice.retrieve(event_object['invoice']).to_json)
     end
   end
 
   def invoice_items
-    if event_type == "charge.succeeded" && event_object["invoice"]
-      Rails.cache.fetch("#{event_object["invoice"]}:lines") do
-        JSON.parse(Stripe::Invoice.retrieve(event_object["invoice"]).lines.list(limit: 10).to_json)
-      end
+    return unless event_type == 'charge.succeeded' && event_object['invoice']
+
+    Rails.cache.fetch("#{event_object['invoice']}:lines") do
+      JSON.parse(Stripe::Invoice.retrieve(event_object['invoice']).lines.list(limit: 10).to_json)
     end
   end
 
@@ -94,30 +90,30 @@ class BillingEvent < ApplicationRecord
   end
 
   def event_object
-    info["data"]["object"]
+    info['data']['object']
   end
 
   def receipt_date
-    Time.at(event_object["created"]).to_formatted_s(:date)
+    Time.at(event_object['created']).to_formatted_s(:date)
   end
 
   def receipt_description
-    ""
+    ''
   end
 
   def receipt_amount
-    event_object["amount"].to_f / 100
+    event_object['amount'].to_f / 100
   end
 
   def currency
-    event_object["currency"].upcase
+    event_object['currency'].upcase
   end
 
   def purchase_date
-    Time.at(event_object["created"])
+    Time.at(event_object['created'])
   end
 
   def period_end
-    Time.at(event_object["period_end"])
+    Time.at(event_object['period_end'])
   end
 end

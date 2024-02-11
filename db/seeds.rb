@@ -28,6 +28,7 @@ end
 
 u = User.new(email: "admin@atalisfunding.com", password: "admin", password_confirmation: "admin", admin: true)
 u.plan = plan
+u.plan_id = FREE_TRIAL_PLAN_ID
 u.update_auth_token = true
 u.save
 
