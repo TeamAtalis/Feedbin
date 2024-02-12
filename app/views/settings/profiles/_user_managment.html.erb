@@ -8,7 +8,7 @@
       <div class="p-2" style="min-width: 250px; display: grid; grid-template-columns: repeat(2, 1fr)">
         <% profiles.each do |profile| %>
           <% random_id = SecureRandom.hex(5) %>
-          <div class="flex items-center place-self-center mb-4">
+          <div class="flex items-center place-self-start mb-4">
             <%= form.check_box "selected_profiles[]", { id: "profile_#{profile.id}#{random_id}", style: "clip: auto; width: 15px; height: 15px;", class: "text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" }, profile.id, false %>
             <%= form.label "profile_#{profile.id}", profile.profile_name, class: "text-sm font-medium text-gray-900 dark:text-gray-300 ml-6" %>
           </div>
