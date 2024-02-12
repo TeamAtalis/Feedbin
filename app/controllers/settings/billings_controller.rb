@@ -59,13 +59,19 @@ class Settings::BillingsController < ApplicationController
   end
 
   def billing_success
-    # update_plann
+    update_plan
     render 'shared/billing/_success'
   end
 
   def billing_error
     flash[:alert] = 'Your card was declined, please update your billing information.'
     redirect_to settings_billing_url
+  end
+
+  def update_plan
+    @user = current_user
+    @user.plan_id = params[:plan_id]
+    @user.save
   end
 
   private

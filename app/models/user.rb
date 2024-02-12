@@ -87,13 +87,13 @@ class User < ApplicationRecord
   after_initialize :set_defaults, if: :new_record?
 
   before_save :strip_email
-  #before_save :activate_subscriptions
+  before_save :activate_subscriptions
   before_save { reset_auth_token }
 
   before_create :create_customer, unless: -> { !ENV["STRIPE_API_KEY"] }
   before_create { generate_tokens }
 
-  before_update :update_billing, unless: -> { !ENV["STRIPE_API_KEY"] }
+  #before_update :update_billing, unless: -> { !ENV["STRIPE_API_KEY"] }
   before_destroy :cancel_billing, unless: -> { !ENV["STRIPE_API_KEY"] }
   before_destroy :create_deleted_user
   before_destroy :record_stats
@@ -315,8 +315,7 @@ class User < ApplicationRecord
     end
 
     if plan_id_changed?
-      #stripe_customer.update_plan(plan.stripe_id, trial_end)
-      stripe_customer.update_plan(plan_id, trial_end)
+      stripe_customer.update_plan(plan.stripe_id, trial_end)
     end
 
     self.stripe_token = nil
