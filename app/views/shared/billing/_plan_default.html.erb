@@ -1,5 +1,5 @@
 <p class="mb-4">
-  <% if @user.plan_id == "trial" %>
+  <% if @user.plan_id == FREE_TRIAL_PLAN_ID %>
     <% if @user.days_left <= 0 %>
       Your trial has ended. Subscribe now to continue using Curathor.
     <% else %>
@@ -20,7 +20,7 @@
         <%= month %>
       <% end %>
       <% row.control do %>
-        <%= button_to "Choose #{month} plan", { controller: "settings/billings", action: "test_payment", plan_id: MONTHLY_PLAN_ID }, method: :post, class: "button" %>
+        <%= button_to "Choose #{month} plan", { controller: "settings/billings", action: "change_plan", plan_id: MONTHLY_PLAN_ID }, method: :post, class: "button" %>
       <% end %>
     <% end %>
   <% end %>
@@ -30,8 +30,9 @@
         <%= year %>
       <% end %>
       <% row.control do %>
-        <%= button_to "Choose #{year} plan", { controller: "settings/billings", action: "test_payment", plan_id: YEARLY_PLAN_ID }, method: :post, class: "button" %>
+        <%= button_to "Choose #{year} plan", { controller: "settings/billings", action: "change_plan", plan_id: YEARLY_PLAN_ID }, method: :post, class: "button" %>
       <% end %>
     <% end %>
   <% end %>  
 <% end %>
+<%= button_to "Cancel subscription", { controller: "settings/billings", action: "cancel_subscription"}, method: :post, class: "button" %>
