@@ -43,8 +43,10 @@ class SiteController < ApplicationController
   private
 
   def check_user
-    # if current_user.suspended && !native?
-    #   redirect_to settings_billing_url, alert: "Please update your billing information to use Curathor."
+    return unless current_user.suspended && !native?
+
+    redirect_to settings_billing_url, alert: 'Please update your billing information to use Curathor.'
+
     # elsif current_user.plan.restricted? && !native?
     #   redirect_to settings_url, alert: "Your subscription does not currently include web access."
     # end
