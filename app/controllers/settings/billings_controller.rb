@@ -54,12 +54,13 @@ class Settings::BillingsController < ApplicationController
     redirect_to edit_settings_billing_url, alert: e.message
   end
 
-  def test_payment
+  def change_plan
     create_checkout
   end
 
   def billing_success
     update_plan
+    cancel_previous_subscriptions
     render 'shared/billing/_success'
   end
 
@@ -72,6 +73,14 @@ class Settings::BillingsController < ApplicationController
     @user = current_user
     @user.plan_id = params[:plan_id]
     @user.save
+  end
+
+  def cancel_subscription
+    subscriptions = Stripe::Subscription.list(customer: @user.customer_id)
+    subscriptions.each do |subscription|
+      subscription.cancel_at_period_end = true
+      subscription.save
+    end
   end
 
   private
@@ -105,6 +114,17 @@ class Settings::BillingsController < ApplicationController
 
   def plan_exists
     render_404 unless Plan.exists?(params[:plan].to_i)
+  end
+
+  def cancel_previous_subscriptions
+    subscriptions = Stripe::Subscription.list(customer: @user.customer_id)
+    sorted_subscriptions = subscriptions.sort_by { |sub| -sub.created }
+
+    sorted_subscriptions.each_with_index do |subscription, index|
+      next if index == 0
+
+      Stripe::Subscription.cancel(subscription.id)
+    end
   end
 
   def create_checkout

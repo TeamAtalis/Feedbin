@@ -196,7 +196,8 @@ Rails.application.routes.draw do
         get :billing_error
       end
       member do
-        post :test_payment
+        post :change_plan
+        post :cancel_subscription
       end
     end
 
