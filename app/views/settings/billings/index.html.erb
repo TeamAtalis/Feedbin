@@ -3,7 +3,7 @@
 <% end %>
 
 <% if ENV["STRIPE_API_KEY"] %>
-  <% if @user.plan.stripe_id == "trial" %>
+  <% if @user.plan_id == "trial" %>
     <%= render partial: "shared/billing/billing_subscribe", locals: {subscribe_title: "Plan"} %>
   <% else %>
     <%= render partial: "shared/billing/billing_status" %>

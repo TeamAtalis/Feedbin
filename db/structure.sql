@@ -1561,7 +1561,6 @@ CREATE TABLE public.users (
     password_digest character varying(255),
     customer_id character varying(255),
     last_4_digits character varying(255),
-    plan_id bigint,
     admin boolean DEFAULT false,
     suspended boolean DEFAULT false,
     created_at timestamp without time zone NOT NULL,
@@ -1577,7 +1576,8 @@ CREATE TABLE public.users (
     newsletter_token character varying,
     price_tier bigint,
     page_token character varying,
-    twitter_auth_failures bigint
+    twitter_auth_failures bigint,
+    plan_id character varying
 );
 
 
@@ -3347,6 +3347,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230510215256'),
 ('20230713083752'),
 ('20230713083843'),
-('20230713083919');
+('20230713083919'),
+('20240204221241');
 
 

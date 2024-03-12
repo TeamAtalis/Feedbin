@@ -93,14 +93,14 @@ class User < ApplicationRecord
   before_create :create_customer, unless: -> { !ENV["STRIPE_API_KEY"] }
   before_create { generate_tokens }
 
-  before_update :update_billing, unless: -> { !ENV["STRIPE_API_KEY"] }
+  #before_update :update_billing, unless: -> { !ENV["STRIPE_API_KEY"] }
   before_destroy :cancel_billing, unless: -> { !ENV["STRIPE_API_KEY"] }
   before_destroy :create_deleted_user
   before_destroy :record_stats
 
   validate :changed_password, on: :update, unless: ->(user) { user.password_reset }
   validate :coupon_code_valid, on: :create, if: ->(user) { user.coupon_code }
-  validate :plan_type_valid, on: :update
+  #validate :plan_type_valid, on: :update
   validate :trial_plan_valid
 
   validates_presence_of :email
@@ -179,13 +179,13 @@ class User < ApplicationRecord
   end
 
   def activate_subscriptions
-    if paid_conversion?
-      subscriptions.update_all(active: true)
-    end
+    #if paid_conversion?
+    #  subscriptions.update_all(active: true)
+    #end
   end
 
   def paid_conversion?
-    plan_id_changed? && plan_id_was == Plan.find_by_stripe_id("trial").id
+    plan_id_changed? && plan_id_was == FREE_TRIAL_PLAN_ID
   end
 
   def strip_email
@@ -234,7 +234,7 @@ class User < ApplicationRecord
   end
 
   def available_plans
-    plan_stripe_id = plan.stripe_id
+    plan_stripe_id = plan_id
     if plan_stripe_id == "trial"
       Plan.where(price_tier: price_tier, stripe_id: ["basic-monthly", "basic-yearly", "basic-monthly-2", "basic-yearly-2", "basic-monthly-3", "basic-yearly-3"]).order("price DESC")
     elsif plan_stripe_id == "free"
@@ -250,11 +250,11 @@ class User < ApplicationRecord
   end
 
   def timed_plan?
-    plan.stripe_id == "timed"
+    plan_id == "timed"
   end
 
   def app_plan?
-    plan.stripe_id == "app-subscription"
+    plan_id == "app-subscription"
   end
 
   def trial_plan_valid
@@ -294,6 +294,13 @@ class User < ApplicationRecord
   end
 
   def create_customer
+    @stripe_customer = Customer.create(email, plan_id, trial_end)
+    self.customer_id = @stripe_customer.id
+    if coupon_code
+      coupon_record = Coupon.find_by_coupon_code(coupon_code)
+      coupon_record.update(redeemed: true)
+      self.coupon = coupon_record
+    end
   end
 
   def update_billing
@@ -429,7 +436,7 @@ class User < ApplicationRecord
   end
 
   def record_stats
-    if plan.stripe_id == "trial"
+    if plan_id == FREE_TRIAL_PLAN_ID
       Librato.increment("user.trial.cancel")
     else
       Librato.increment("user.paid.cancel")
@@ -565,7 +572,7 @@ class User < ApplicationRecord
   end
 
   def trialing?
-    plan == Plan.find_by_stripe_id("trial")
+    plan == Plan.find_by_stripe_id(FREE_TRIAL_PLAN_ID)
   end
 
   def migrate_playlists!

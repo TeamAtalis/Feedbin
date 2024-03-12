@@ -1,5 +1,5 @@
 <p class="mb-4">
-  <% if @user.plan.stripe_id == "trial" %>
+  <% if @user.plan_id == "trial" %>
     <% if @user.days_left <= 0 %>
       Your trial has ended. Subscribe now to continue using Curathor.
     <% else %>
@@ -7,7 +7,6 @@
     <% end %>
   <% end %>
 </p>
-
 <%= form_for @user, html: {id: "payment-form"} do |f| %>
   <%= f.hidden_field :stripe_token, id: 'stripe_token' %>
   <%= hidden_field_tag :redirect_to, settings_billing_url %>
@@ -80,3 +79,7 @@
     <button type="submit" class="button no-margin" id="credit_card_button" disabled data-disable-with="false">Subscribe</button>
   <% end %>
 <% end %>
+
+<h1>Test Payments</h1>
+
+<%= button_to "Click me", { controller: "settings/billings", action: "change_plan", plan_id: MONTHLY_PLAN_ID }, method: :post %>

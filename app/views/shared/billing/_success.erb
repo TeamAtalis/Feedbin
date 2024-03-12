@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Successful payment!</title>  
+  <meta name="viewport" content="initial-scale=1.0,width=device-width,user-scalable=no,viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta http-equiv="refresh" content="5;url=/">
+  <link rel="manifest" href="<%= manifest_path(current_user&.theme || "day") %>">
+  <link rel="apple-touch-icon" href="<%= asset_path('icon-manifest.png') %>" sizes="192x192" />
+  <link rel="shortcut icon" href="<%= asset_path('favicon.ico') %>" type="image/vnd.microsoft.icon" />
+  <%= stylesheet_link_tag "tailwind" %>
+  <%= stylesheet_link_tag "application", media: "all"  %>
+
+  <style>
+    body {
+      background-color: #f3f4f6;
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>  
+
+</head>
+<body>
+  <main class="flex flex-col justify-center items-center w-full h-full gap-4 text-center p-4">
+    <h1 class="text-4xl font-bold text-balance">Successful payment!</h1>
+    <p class="text-lg font-medium text-pretty">Redirecting to home page in 5 seconds... </p>
+    <p class="text-sm text-pretty">If the page does not redirect you, <a href="/">click here</a></p>
+  </main>
+</body>
+</html>

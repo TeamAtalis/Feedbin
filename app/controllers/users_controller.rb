@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   include SubscriptionConcern
 
-  skip_before_action :authorize, only: [:new, :create]
-  before_action :set_user, only: [:update, :destroy]
-  before_action :ensure_permission, only: [:update, :destroy]
+  skip_before_action :authorize, only: %i[new create]
+  before_action :set_user, only: %i[update destroy]
+  before_action :ensure_permission, only: %i[update destroy]
 
   def new
     session[:feed_wrangler_token] = params[:feed_wrangler_token]
@@ -12,9 +12,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params).with_params(user_params)
+    # @user.plan = Plan.find_by(stripe_id: FREE_TRIAL_PLAN_ID)
+    @user.plan_id = FREE_TRIAL_PLAN_ID
     if @user.save
-      Librato.increment("user.trial.signup")
-      flash[:one_time_content] = render_to_string(partial: "shared/register_protocol_handlers")
+      Librato.increment('user.trial.signup')
+      flash[:one_time_content] = render_to_string(partial: 'shared/register_protocol_handlers')
       sign_in @user
       first_subcription # Subscribed to default profile
       if session[:feed_wrangler_token].present?
@@ -24,35 +26,29 @@ class UsersController < ApplicationController
         redirect_to root_url
       end
     else
-      render "new"
+      render 'new'
     end
   end
 
   def update
-    old_plan_name = @user.plan.stripe_id
+    old_plan_name = @user.plan_id
     @user.update_auth_token = true
     @user.old_password_valid = @user.authenticate(params[:user][:old_password])
     @user.attributes = user_params
-    if params[:user] && params[:user][:password]
-      @user.password_confirmation = params[:user][:password]
-    end
+    @user.password_confirmation = params[:user][:password] if params[:user] && params[:user][:password]
     if @user.save
-      new_plan_name = @user.plan.stripe_id
-      if old_plan_name == "trial" && new_plan_name != "trial"
-        Librato.increment("user.paid.signup")
-      end
+      new_plan_name = @user.plan_id
+      Librato.increment('user.paid.signup') if old_plan_name == 'trial' && new_plan_name != 'trial'
       sign_in @user
       if params[:redirect_to]
-        redirect_to params[:redirect_to], notice: "Account updated."
+        redirect_to params[:redirect_to], notice: 'Account updated.'
       else
-        redirect_to settings_account_path, notice: "Account updated."
+        redirect_to settings_account_path, notice: 'Account updated.'
       end
+    elsif params[:redirect_to]
+      redirect_to params[:redirect_to], alert: @user.errors.full_messages.join('. ')
     else
-      if params[:redirect_to]
-        redirect_to params[:redirect_to], alert: @user.errors.full_messages.join(". ")
-      else
-        redirect_to settings_account_path, alert: @user.errors.full_messages.join(". ")
-      end
+      redirect_to settings_account_path, alert: @user.errors.full_messages.join('. ')
     end
   end
 
@@ -69,18 +65,18 @@ class UsersController < ApplicationController
   end
 
   def ensure_permission
-    unless @user.id == current_user.id
-      render_404
-    end
+    return if @user.id == current_user.id
+
+    render_404
   end
 
   def user_params
     params.require(:user).permit(:email, :password, :stripe_token, :coupon_code, :plan_id)
   end
-  
-  # By default, upon user creation, they will be 
+
+  # By default, upon user creation, they will be
   # automatically subscribed to a profile (Periodista).
   def first_subcription
-    subscribe_profile(Profile.find_by(profile_name:"Periodista").id)
+    subscribe_profile(Profile.find_by(profile_name: 'Periodista').id)
   end
 end

@@ -391,7 +391,6 @@ GEM
       snaky_hash (~> 2.0)
       version_gem (~> 1.1)
     openssl (3.1.0)
-    ox (2.14.17)
     parallel (1.23.0)
     parser (3.2.2.3)
       ast (~> 2.4.1)
@@ -547,6 +546,7 @@ GEM
       rubocop-performance (~> 1.18.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    stripe (10.6.0)
     strong_migrations (1.5.0)
       activerecord (>= 5.2)
     tailwindcss-rails (2.0.30-arm64-darwin)
@@ -650,7 +650,6 @@ DEPENDENCIES
   net-http-persistent
   oauth
   oauth2
-  ox
   pg
   phlex-rails
   postmark-rails
@@ -673,6 +672,7 @@ DEPENDENCIES
   sidekiq (= 6.5.7)
   standard
   stimulus-rails
+  stripe
   strong_migrations
   tailwindcss-rails
   twitter!
