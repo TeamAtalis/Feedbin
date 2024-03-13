@@ -29,7 +29,6 @@ coverage
 !/app/assets/builds/.keep
 .nova
 dump.rdb
-/config
 
 # Ignore all reports
 lib/benchmarks/reports/
