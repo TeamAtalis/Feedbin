@@ -13,12 +13,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params).with_params(user_params)
     # @user.plan = Plan.find_by(stripe_id: FREE_TRIAL_PLAN_ID)
-    @user.plan_id = FREE_TRIAL_PLAN_ID
+    @user.plan_id = MONTHLY_PLAN_ID
     if @user.save
       Librato.increment('user.trial.signup')
       flash[:one_time_content] = render_to_string(partial: 'shared/register_protocol_handlers')
       sign_in @user
-      first_subcription # Subscribed to default profile
+      first_subscription # Subscribed to default profile
       if session[:feed_wrangler_token].present?
         @user.account_migrations.create(api_token: session.delete(:feed_wrangler_token))
         redirect_to account_migrations_url
@@ -76,7 +76,12 @@ class UsersController < ApplicationController
 
   # By default, upon user creation, they will be
   # automatically subscribed to a profile (Periodista).
-  def first_subcription
-    subscribe_profile(Profile.find_by(profile_name: 'Periodista').id)
+  def first_subscription
+    default_profiles = ['Periodista']
+
+    default_profiles.each do |profile_name|
+      profile = Profile.find_by(profile_name: profile_name)
+      subscribe_profile(profile.id) if profile.present?
+    end
   end
 end
