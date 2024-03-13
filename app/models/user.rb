@@ -184,10 +184,6 @@ class User < ApplicationRecord
     #end
   end
 
-  def paid_conversion?
-    plan_id_changed? && plan_id_was == FREE_TRIAL_PLAN_ID
-  end
-
   def strip_email
     email.strip!
   end
@@ -436,7 +432,7 @@ class User < ApplicationRecord
   end
 
   def record_stats
-    if plan_id == FREE_TRIAL_PLAN_ID
+    if false # plan_id == FREE_TRIAL_PLAN_ID
       Librato.increment("user.trial.cancel")
     else
       Librato.increment("user.paid.cancel")
@@ -572,7 +568,8 @@ class User < ApplicationRecord
   end
 
   def trialing?
-    plan == Plan.find_by_stripe_id(FREE_TRIAL_PLAN_ID)
+    false
+    #plan == Plan.find_by_stripe_id(FREE_TRIAL_PLAN_ID)
   end
 
   def migrate_playlists!
