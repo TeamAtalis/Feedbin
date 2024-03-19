@@ -90,11 +90,11 @@ class User < ApplicationRecord
   before_save :activate_subscriptions
   before_save { reset_auth_token }
 
-  before_create :create_customer, unless: -> { !ENV["STRIPE_API_KEY"] }
+  before_create :create_customer, unless: -> { !Stripe.api_key }
   before_create { generate_tokens }
 
   #before_update :update_billing, unless: -> { !ENV["STRIPE_API_KEY"] }
-  before_destroy :cancel_billing, unless: -> { !ENV["STRIPE_API_KEY"] }
+  before_destroy :cancel_billing, unless: -> { !Stripe.api_key }
   before_destroy :create_deleted_user
   before_destroy :record_stats
 
@@ -149,7 +149,7 @@ class User < ApplicationRecord
       self.coupon_code = params[:coupon_code]
     end
 
-    if coupon_valid || !ENV["STRIPE_API_KEY"]
+    if coupon_valid || !Stripe.api_key
       self.free_ok = true
       self.plan = Plan.find_by_stripe_id("free")
     else

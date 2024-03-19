@@ -32,3 +32,4 @@ dump.rdb
 
 # Ignore all reports
 lib/benchmarks/reports/
+config/master.key

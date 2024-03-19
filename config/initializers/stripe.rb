@@ -1,11 +1,11 @@
 Rails.configuration.stripe = {
   # TEST ENV
-  publishable_key: ENV['STRIPE_TEST_PUBLIC_KEY'],
-  secret_key: ENV['STRIPE_TEST_API_KEY']
+  secret_key: Rails.application.credentials.stripe.test.api_key,
+  publishable_key: Rails.application.credentials.stripe.test.public_key
 
   # PROD ENV
-  # publishable_key: ENV['STRIPE_PUBLIC_KEY'],
-  # secret_key: ENV['STRIPE_API_KEY']
+  # secret_key: Rails.application.credentials.stripe.production.api_key,
+  # publishable_key: Rails.application.credentials.stripe.production.public_key
 }
 
 Stripe.api_key = Rails.configuration.stripe[:secret_key]

@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: "Curathor <#{ENV["FROM_ADDRESS"]}>", skip_premailer: true
+  default from: "Curathor <noreply@curathor.com>", skip_premailer: true
   include ApplicationHelper
   helper ApplicationHelper
 

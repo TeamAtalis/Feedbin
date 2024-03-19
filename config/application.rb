@@ -24,8 +24,8 @@ module Feedbin
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.action_mailer.delivery_method   = :postmark
-    config.action_mailer.postmark_settings = { api_token: ENV["POSTMARK_API_KEY"] }
-    config.action_mailer.default_options   = { from: ENV["FROM_ADDRESS"] }
+    config.action_mailer.postmark_settings = { api_token: Rails.application.credentials.postmark.api_key }
+    config.action_mailer.default_options   = { from: "noreply@curathor.com" }
 
     config.action_view.sanitized_allowed_tags = "table", "tr", "td", "th", "thead", "tbody"
 

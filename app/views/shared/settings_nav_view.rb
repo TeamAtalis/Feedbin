@@ -28,7 +28,7 @@ module Shared
           selected: helpers.is_active?("settings", "account"),
           icon: "menu-icon-account"
         ))
-        if ENV["STRIPE_API_KEY"]
+        if Stripe.api_key
           render(::SettingsNav::NavComponent.new(
             title: "Billing",
             subtitle: "Payment method & plan",
@@ -52,15 +52,15 @@ module Shared
           selected: helpers.is_active?("settings", "newsletters_pages")
           ))
         end
-        
+
         render ::SettingsNav::HeaderComponent.new do
           plain " Tools"
         end
-        
+
         div(class: "px-4 pl-10 tw-hidden group-data-[nav=dropdown]:block") do
           hr(class: "m-0")
         end
-        
+
         ul do
           render(::SettingsNav::NavComponent.new(
             title: "Feeds",
@@ -105,13 +105,13 @@ module Shared
         render ::SettingsNav::HeaderComponent.new do
           plain "Admin and management"
         end
-        
+
         div(class: "px-4 pl-10 tw-hidden group-data-[nav=dropdown]:block") do
           hr(class: "m-0")
         end
-        
-        ul 
-        
+
+        ul
+
         render(::SettingsNav::NavComponent.new(
           title: "Subscriptions",
           subtitle: "Manage subscriptions",
@@ -145,12 +145,12 @@ module Shared
                   url: "/lookbook",
                   icon: "menu-icon-lookbook"
                   ))
-              end  
-                
+              end
+
                 div(class: "px-4 pl-10 tw-hidden group-data-[nav=dropdown]:block") do
                   hr(class: "m-0")
                 end
-                
+
                 ul(class: "tw-hidden group-data-[nav=dropdown]:block") do
                   render(::SettingsNav::NavComponent.new(
                     title: "Log Out",
@@ -158,7 +158,7 @@ module Shared
                     icon: "menu-icon-log-out"
                     ))
                   end
-                  
+
                   div(class: "group-data-[nav=dropdown]:hidden") do
                     div(class: "p-4 group-data-[nav=modal]:py-0") { hr }
                     ul do

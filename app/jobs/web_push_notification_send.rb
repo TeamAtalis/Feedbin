@@ -125,7 +125,7 @@ class WebPushNotificationSend
       urgency: "high",
       ttl: 1.hour.to_i,
       vapid: {
-        subject: "mailto:#{ENV["FROM_ADDRESS"]}",
+        subject: "mailto:noreply@curathor.com",
         pem: Feedbin::Application.config.vapid_key.to_pem
       }
     )
