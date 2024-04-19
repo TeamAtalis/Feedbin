@@ -20,7 +20,7 @@ WORKDIR /app
 COPY . /app
 RUN rm -rf tmp/*
 RUN rm Gemfile.lock
-RUN gem install twitter
+#RUN gem install twitter
 RUN gem install bundler 
 RUN bundle install
 

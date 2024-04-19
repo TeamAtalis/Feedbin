@@ -5,7 +5,7 @@ development:
   pool: <%= ENV['DB_POOL'] || 5 %>
   username: <%= Rails.application.credentials.username_database %>
   password: <%= Rails.application.credentials.password_database %>
-  host: localhost
+  host: postgres
   port: <%= Rails.application.credentials.port_database %>
 
 test:
@@ -15,7 +15,7 @@ test:
   pool: <%= ENV['DB_POOL'] || 5 %>
   username: <%= Rails.application.credentials.username_database %>
   password: <%= Rails.application.credentials.password_database %>
-  host: localhost
+  host: postgres
   port: <%= Rails.application.credentials.port_database %>
 
 production:
@@ -25,5 +25,5 @@ production:
   pool: <%= ENV['DB_POOL'] || 5 %>
   username: <%= Rails.application.credentials.username_database %>
   password: <%= Rails.application.credentials.password_database %>
-  host: localhost
+  host: postgres
   port: <%= Rails.application.credentials.port_database %>
