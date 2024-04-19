@@ -10,7 +10,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      #- redis
+      redis:
+        condition: service_healthy
       #- elasticsearch
 
   postgres:
@@ -22,8 +23,16 @@ services:
       timeout: 5s
       retries: 5
 
-  #redis:
-  #  image: redis:6
+  redis:
+    image: redis:6.2-alpine
+    command: bash -c "redis-server --bind 0.0.0.0"
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   #elasticsearch:
   #  image: docker.elastic.co/elasticsearch/elasticsearch:8.5.0
