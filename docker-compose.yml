@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  web:
+    command: bash -c " tail -f log/development.log"
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      #- redis
+      #- elasticsearch
+
+  postgres:
+    image: postgres:11
+    env_file: .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  #redis:
+  #  image: redis:6
+
+  #elasticsearch:
+  #  image: docker.elastic.co/elasticsearch/elasticsearch:8.5.0
+  #  environment:
+  #    - discovery.type=single-node
+  #  ports:
+  #    - "9200:9200"
