@@ -15,7 +15,7 @@ services:
       #- elasticsearch
 
   postgres:
-    image: postgres:11
+    image: postgres:12
     env_file: .env
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
