@@ -5,7 +5,7 @@ FROM ruby:3.2.2
 # Debian image, we use apt-get to install those.
 RUN apt-get update && apt-get install -y \
   build-essential \
-  nodejs libldap2-dev libidn11-dev libvips
+  nodejs libldap2-dev libidn11-dev libvips postgresql-client 
 
 # Configure the main working directory. This is the base
 # directory used in any further RUN, COPY, and ENTRYPOINT
