@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    command: bash -c " tail -f log/development.log"
+    command: bash -c "/app/.docker_compose_scripts/init_web_service.sh && tail -f log/development.log"
     build: .
     ports:
       - "3000:3000"
