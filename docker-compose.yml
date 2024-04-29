@@ -14,6 +14,16 @@ services:
         condition: service_healthy
       elasticsearch:
         condition: service_healthy
+      sidekiq:
+        condition: service_started
+        
+  sidekiq:
+    command: bundle exec sidekiq -C config/sidekiq-development.yml
+    build: .
+    env_file: .env
+    depends_on:
+      - redis
+      - postgres
 
   postgres:
     image: postgres:12
