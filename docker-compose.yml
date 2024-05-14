@@ -17,22 +17,30 @@ services:
       sidekiq:
         condition: service_started
         
+  memcached:
+    image: memcached:1.6-alpine
+    restart: unless-stopped
+    ports:
+      - "11211:11211"
+  
   sidekiq:
-    command: bundle exec sidekiq -C config/sidekiq-development.yml
     build: .
+    command: bundle exec sidekiq -C config/sidekiq-development.yml
     env_file: .env
     depends_on:
       - redis
       - postgres
 
   postgres:
-    image: postgres:12
+    image: postgres:14
     env_file: .env
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
       interval: 10s
       timeout: 5s
       retries: 5
+    ports:
+      - "5432:5432"
 
   redis:
     image: redis

@@ -211,6 +211,7 @@ GEM
     crass (1.0.6)
     css_parser (1.14.0)
       addressable
+    dalli (3.2.8)
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
@@ -618,6 +619,7 @@ DEPENDENCIES
   clockwork
   coffee-rails
   connection_pool
+  dalli
   debug
   dotenv-rails
   down

@@ -9,6 +9,8 @@ gem 'stripe'
 
 gem "puma"
 
+gem 'dalli'
+
 gem "http",                github: "feedbin/http",                branch: "feedbin"
 gem "carrierwave",         github: "feedbin/carrierwave",         branch: "feedbin"
 gem "sax-machine",         github: "feedbin/sax-machine",         branch: "feedbin"
